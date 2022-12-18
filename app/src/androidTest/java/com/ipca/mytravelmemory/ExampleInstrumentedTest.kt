@@ -1,4 +1,4 @@
-package com.luispereiralabs.mytravelmemory
+package com.ipca.mytravelmemory
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

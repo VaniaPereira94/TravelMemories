@@ -1,4 +1,4 @@
-package com.luispereiralabs.mytravelmemory
+package com.ipca.mytravelmemory
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

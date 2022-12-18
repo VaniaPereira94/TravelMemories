@@ -1,4 +1,4 @@
-package com.luispereiralabs.mytravelmemory
+package com.ipca.mytravelmemory
 
 import org.junit.Test
 
