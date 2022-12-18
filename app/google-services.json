@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "263426106593",
+    "project_id": "my-travel-memory-497e2",
+    "storage_bucket": "my-travel-memory-497e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263426106593:android:33111e896b8150d6a1c3a0",
+        "android_client_info": {
+          "package_name": "com.ipca.mytravelmemory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263426106593-ae785diunt5g0qoi2j5g8165c8613arh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqqfBBcQuO3Xbhkb-EwL99qEIb68b2-2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263426106593-ae785diunt5g0qoi2j5g8165c8613arh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
