@@ -20,7 +20,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
             // quando concluir os 4 segundos
             launch {
-                // inicializar autenticação
+                // acessar autenticação
                 val auth = FirebaseAuth.getInstance()
 
                 // se existe utilizador logado ao iniciar aplicação
@@ -34,7 +34,8 @@ class SplashScreenActivity : AppCompatActivity() {
                     finish()
                 } else {
                     // ir para a página de autenticação
-                    val intent = Intent(this@SplashScreenActivity, AuthenticationActivity::class.java)
+                    val intent =
+                        Intent(this@SplashScreenActivity, AuthenticationActivity::class.java)
                     startActivity(intent)
 
                     finish()

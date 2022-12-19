@@ -16,7 +16,7 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
 
-        // inicializar autenticação
+        // acessar autenticação
         auth = FirebaseAuth.getInstance()
 
         // ao clicar no botão de login
