@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory
+package com.ipca.mytravelmemory.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.ipca.mytravelmemory.R
 
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -27,7 +28,7 @@ class AuthenticationActivity : AppCompatActivity() {
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
 
-            // fazer login com os dados inseridos nas caixas de texto
+            // fazer login com os dados inseridos pelo utilizador
             login(email, password)
         }
     }
@@ -38,9 +39,8 @@ class AuthenticationActivity : AppCompatActivity() {
                 // se login com sucesso
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    println(user)
 
-                    // ir para a página principal
+                    // ir para a página inicial
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
