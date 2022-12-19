@@ -19,35 +19,41 @@ class AuthenticationActivity : AppCompatActivity() {
         // acessar autenticação
         auth = FirebaseAuth.getInstance()
 
-        // ao clicar no botão de login
-        val buttonLogin = findViewById<Button>(R.id.buttonLogin)
-        buttonLogin.setOnClickListener {
-            val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
-            val editTextPassword = findViewById<EditText>(R.id.editTextPassword)
+        // ao clicar no botão de iniciar sessão
+        val buttonSignIn = findViewById<Button>(R.id.buttonSignIn)
+        buttonSignIn.setOnClickListener {
+            val editTextEmail = findViewById<EditText>(R.id.editTextEmailAuthentication)
+            val editTextPassword = findViewById<EditText>(R.id.editTextPasswordAuthentication)
 
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
 
-            // fazer login com os dados inseridos pelo utilizador
-            login(email, password)
+            // iniciar sessão com os dados inseridos pelo utilizador
+            signIn(email, password)
+        }
+
+        // ao clicar no botão de criar conta
+        val buttonSignUp = findViewById<Button>(R.id.buttonSignUpAuthentication)
+        buttonSignUp.setOnClickListener {
+            // ir para a página de criar conta
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
 
-    private fun login(email: String, password: String) {
+    private fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
-                // se login com sucesso
+                // se iniciar sessão com sucesso
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-
                     // ir para a página inicial
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
-                // se login falhou
+                // se iniciar sessão falhou
                 else {
                     // mostrar erro
-                    Toast.makeText(baseContext, "Autenticação falhou.", Toast.LENGTH_SHORT)
+                    Toast.makeText(baseContext, "Erro ao iniciar sessão.", Toast.LENGTH_SHORT)
                         .show()
                 }
             }

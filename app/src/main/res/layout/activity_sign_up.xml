@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AuthenticationActivity">
+    tools:context=".activities.SignUpActivity">
 
     <EditText
-        android:id="@+id/editTextEmailAuthentication"
+        android:id="@+id/editTextEmailSignUp"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextPasswordAuthentication"
+        android:id="@+id/editTextPasswordSignUp"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -28,25 +28,15 @@
         android:text="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAuthentication" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailSignUp" />
 
     <Button
-        android:id="@+id/buttonSignIn"
+        android:id="@+id/buttonSignUp"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Iniciar sessão"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordAuthentication" />
-
-    <Button
-        android:id="@+id/buttonSignUpAuthentication"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="Criar conta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordSignUp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

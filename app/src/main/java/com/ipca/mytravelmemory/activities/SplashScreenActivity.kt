@@ -10,9 +10,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
+        // acessar autenticação
+        auth = FirebaseAuth.getInstance()
 
         // iniciar thread secundária
         lifecycleScope.launch() {
@@ -20,10 +25,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
             // quando concluir os 4 segundos
             launch {
-                // acessar autenticação
-                val auth = FirebaseAuth.getInstance()
-
-                // se existe utilizador logado ao iniciar aplicação
+                // se existir utilizador logado ao iniciar aplicação
                 val currentUser = auth.currentUser
                 if (currentUser != null) {
                     // ir para a página inicial

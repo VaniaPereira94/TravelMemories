@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import com.ipca.mytravelmemory.R
 
@@ -18,10 +17,10 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         // ao clicar no botão de terminar sessão
-        val buttonLogin = findViewById<Button>(R.id.buttonLogout)
-        buttonLogin.setOnClickListener {
+        val buttonLogOut = findViewById<Button>(R.id.buttonLogOut)
+        buttonLogOut.setOnClickListener {
             // terminar sessão do utilizador
-            logout()
+            signOut()
 
             // ir para a página de autenticação
             val intent = Intent(this, AuthenticationActivity::class.java)
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun logout() {
+    private fun signOut() {
         auth.signOut()
     }
 }
