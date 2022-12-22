@@ -50,6 +50,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     // Firebase Authentication
     implementation 'com.google.firebase:firebase-auth-ktx'
+    // Firebase Database
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 
     // LifecycleScope
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
