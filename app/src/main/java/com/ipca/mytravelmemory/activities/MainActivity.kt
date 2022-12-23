@@ -2,6 +2,7 @@ package com.ipca.mytravelmemory.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -14,18 +15,23 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.models.TripModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
-    var travels = arrayListOf<TripModel>()
-    val adapter = TravelsAdapter()
+    var trips = arrayListOf<TripModel>()
+    val adapter = TipsAdapter()
 
     var resultLauncher: ActivityResultLauncher<Intent>? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,18 +49,28 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val localDate = LocalDate.now()
+
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val current = LocalDate.now().format(formatter)
+
+        println("localDate: $localDate")
+        println("current: $current")
+
         // lista das viagens
-        findViewById<ListView>(R.id.listViewTravels).adapter = adapter
+        val listViewTrips = findViewById<ListView>(R.id.listViewTrips)
+        listViewTrips.adapter = adapter
 
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                val countryName = it.data?.getStringExtra("countryName")
-                val cityName = it.data?.getStringExtra("cityName")
-                val startDate = it.data?.getStringExtra("StartDate")
-                val endDate = it.data?.getStringExtra("EndDate")
-                travels.add(
+                val countryName = it.data?.getStringExtra("country")
+                val cityName = it.data?.getStringExtra("city")
+                val startDate = it.data?.getStringExtra("startDate")
+                val endDate = it.data?.getStringExtra("endDate")
+
+                trips.add(
                     TripModel(
                         countryName ?: "",
                         cityName ?: "",
@@ -82,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.buttonAdd -> {
                 //add
-                resultLauncher?.launch(Intent(this@MainActivity, TravelCreateActivity::class.java))
+                resultLauncher?.launch(Intent(this@MainActivity, TripCreateActivity::class.java))
                 return true
             }
             else -> {
@@ -91,30 +107,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class TravelsAdapter : BaseAdapter() {
+    inner class TipsAdapter : BaseAdapter() {
         override fun getCount(): Int {
-            return travels.size
+            return trips.size
         }
 
-        override fun getItem(p0: Int): Any {
-            return travels[p0]
+        override fun getItem(position: Int): Any {
+            return trips[position]
         }
 
         override fun getItemId(p0: Int): Long {
             return 0L
         }
 
-        override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-            val rootView = layoutInflater.inflate(R.layout.row_travel, p2, false)
+        override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
+            val rootView = layoutInflater.inflate(R.layout.row_trips, parent, false)
 
             val textViewName = rootView.findViewById<TextView>(R.id.textViewCountryMain)
-
-            textViewName.text = travels[p0].countryName
+            textViewName.text = trips[position].countryName
 
             rootView.setOnClickListener {
-                val intent = Intent(this@MainActivity, TravelDetailsActivity::class.java)
-                intent.putExtra("country", travels[p0].countryName)
-                intent.putExtra("city", travels[p0].cityName)
+                val intent = Intent(this@MainActivity, TripDetailsActivity::class.java)
+                intent.putExtra("country", trips[position].countryName)
+                intent.putExtra("city", trips[position].cityName)
                 startActivity(intent)
             }
 

@@ -7,7 +7,7 @@
     tools:context=".activities.MainActivity">
 
     <ListView
-        android:id="@+id/listViewTravels"
+        android:id="@+id/listViewTrips"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

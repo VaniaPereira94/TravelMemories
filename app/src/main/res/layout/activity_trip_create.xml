@@ -5,13 +5,13 @@
     android:id="@+id/textViewCapa"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.TravelCreateActivity">
+    tools:context=".activities.TripCreateActivity">
 
     <EditText
         android:id="@+id/editTextCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="Nome do País"
         android:inputType="textPersonName"
@@ -24,7 +24,7 @@
         android:id="@+id/editTextCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Cidades visitadas"
         android:inputType="textPersonName"
@@ -33,53 +33,64 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCountry" />
 
-    <EditText
-        android:id="@+id/editTextStart"
+    <TextView
+        android:id="@+id/textViewStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:hint="Data de ínicio"
-        android:inputType="date"
+        android:layout_marginTop="32dp"
+        android:text="Data de ínicio"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
 
-    <EditText
-        android:id="@+id/editTextEnd"
+    <Button
+        android:id="@+id/buttonStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Data de término"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextStart"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewStartDate" />
+
+    <TextView
+        android:id="@+id/textViewEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Data de fim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartDate" />
 
     <Button
-        android:id="@+id/buttonSave"
+        android:id="@+id/buttonEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Salvar"
+        android:layout_marginTop="16dp"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEnd" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEndDate" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEnd"
-        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEndDate"
         app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/buttonCreateTrip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Criar viagem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
