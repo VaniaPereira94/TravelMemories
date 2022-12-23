@@ -63,8 +63,7 @@ class SignUpActivity : AppCompatActivity() {
                 // se criar utilizador falhou
                 else {
                     // mostrar erro
-                    Toast.makeText(baseContext, "Erro ao criar conta.", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(baseContext, "Erro ao criar conta.", Toast.LENGTH_SHORT).show()
                 }
             }
     }

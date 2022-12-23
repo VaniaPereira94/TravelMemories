@@ -2,7 +2,6 @@ package com.ipca.mytravelmemory.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -15,13 +14,10 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.models.TripModel
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
+import com.ipca.mytravelmemory.utils.ParserUtil
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -31,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     var resultLauncher: ActivityResultLauncher<Intent>? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,14 +44,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val localDate = LocalDate.now()
-
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val current = LocalDate.now().format(formatter)
-
-        println("localDate: $localDate")
-        println("current: $current")
-
         // lista das viagens
         val listViewTrips = findViewById<ListView>(R.id.listViewTrips)
         listViewTrips.adapter = adapter
@@ -65,17 +52,14 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                val countryName = it.data?.getStringExtra("country")
-                val cityName = it.data?.getStringExtra("city")
-                val startDate = it.data?.getStringExtra("startDate")
-                val endDate = it.data?.getStringExtra("endDate")
+                val trip = it.data?.getSerializableExtra("EXTRA_TRIP") as TripModel
 
                 trips.add(
                     TripModel(
-                        countryName ?: "",
-                        cityName ?: "",
-                        startDate ?: "",
-                        endDate ?: ""
+                        trip.country,
+                        trip.city ?: "",
+                        trip.startDate,
+                        trip.endDate
                     )
                 )
 
@@ -116,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             return trips[position]
         }
 
-        override fun getItemId(p0: Int): Long {
+        override fun getItemId(position: Int): Long {
             return 0L
         }
 
@@ -124,12 +108,10 @@ class MainActivity : AppCompatActivity() {
             val rootView = layoutInflater.inflate(R.layout.row_trips, parent, false)
 
             val textViewName = rootView.findViewById<TextView>(R.id.textViewCountryMain)
-            textViewName.text = trips[position].countryName
+            textViewName.text = trips[position].country
 
             rootView.setOnClickListener {
                 val intent = Intent(this@MainActivity, TripDetailsActivity::class.java)
-                intent.putExtra("country", trips[position].countryName)
-                intent.putExtra("city", trips[position].cityName)
                 startActivity(intent)
             }
 

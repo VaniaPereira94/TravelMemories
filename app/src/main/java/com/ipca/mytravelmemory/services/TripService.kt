@@ -2,27 +2,28 @@ package com.ipca.mytravelmemory.services
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.ipca.mytravelmemory.models.UserModel
 import kotlinx.coroutines.tasks.await
+import java.util.HashMap
 
-class UserService {
-    // acessar base de dados
+class TripService {
+    // acesso à base de dados
     private val db = Firebase.firestore
 
-    fun create(userID: String, user: UserModel): Boolean {
+    suspend fun create(userID: String, trip: HashMap<String, Any?>): Boolean {
         var isCreated = false
 
         db.collection("users")
             .document(userID)
-            .set(user.convertToHashMap())
+            .collection("trips")
+            .document()
+            .set(trip)
             .addOnSuccessListener {
                 isCreated = true
-                print("SUCESSO")
             }
             .addOnFailureListener { e ->
                 isCreated = false
-                print("ERRO: $e")
             }
+            .await()
 
         return isCreated
     }

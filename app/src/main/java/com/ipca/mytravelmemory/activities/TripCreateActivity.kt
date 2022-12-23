@@ -7,30 +7,24 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import com.google.firebase.Timestamp
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.ipca.mytravelmemory.R
-import java.text.SimpleDateFormat
-import java.time.LocalDate
+import com.ipca.mytravelmemory.models.TripModel
+import com.ipca.mytravelmemory.services.TripService
+import com.ipca.mytravelmemory.utils.ParserUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class TripCreateActivity : AppCompatActivity() {
-    var country: String? = null
-    var city: String? = null
-    var startDate: String? = null
-    var endDate: String? = null
+    private lateinit var trip: TripModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trip_create)
-
-        country = intent.getStringExtra("country")
-        city = intent.getStringExtra("city")
-        startDate = intent.getStringExtra("startDate")
-        endDate = intent.getStringExtra("endDate")
 
         // UI
         val editTextCountry = findViewById<EditText>(R.id.editTextCountry)
@@ -41,11 +35,7 @@ class TripCreateActivity : AppCompatActivity() {
         val buttonEndDate = findViewById<Button>(R.id.buttonEndDate)
         val buttonCreateTrip = findViewById<Button>(R.id.buttonCreateTrip)
 
-        editTextCountry.setText(country)
-        editTextCity.setText(city)
-        textViewStartDate.text = startDate
-        textViewEndDate.text = endDate
-
+        // dados dos selecionadores de datas
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -56,7 +46,7 @@ class TripCreateActivity : AppCompatActivity() {
             DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, y, m, d ->
-                    textViewStartDate.text = " $d-${m + 1}-$y "
+                    textViewStartDate.text = "$d-${m + 1}-$y"
                 },
                 year,
                 month,
@@ -69,7 +59,7 @@ class TripCreateActivity : AppCompatActivity() {
             DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, y, m, d ->
-                    textViewEndDate.text = " $d-${m + 1}-$y "
+                    textViewEndDate.text = "$d-${m + 1}-$y"
                 },
                 year,
                 month,
@@ -79,40 +69,36 @@ class TripCreateActivity : AppCompatActivity() {
 
         // ao clicar no botão de criar viagem
         buttonCreateTrip.setOnClickListener {
-            // firebase
+            // id do utilizador
             val auth = FirebaseAuth.getInstance()
-            val db = Firebase.firestore
-
             val userID = auth.currentUser!!.uid
 
-            val startDateParse = SimpleDateFormat("dd-MM-yyyy").parse(textViewStartDate.text.toString())
-            val endDateParse = SimpleDateFormat("dd-MM-yyyy").parse(textViewEndDate.text.toString())
-
-            val trip = hashMapOf(
-                "country" to editTextCountry.text.toString(),
-                "city" to editTextCity.text.toString(),
-                "startDate" to Timestamp(startDateParse),
-                "endDate" to Timestamp(endDateParse)
+            // definir viagem
+            trip = TripModel(
+                editTextCountry.text.toString(),
+                editTextCity.text.toString(),
+                ParserUtil.convertStringToDate(textViewStartDate.text.toString()),
+                ParserUtil.convertStringToDate(textViewEndDate.text.toString())
             )
 
-            db.collection("users")
-                .document(userID)
-                .collection("trips")
-                .document()
-                .set(trip)
-                .addOnSuccessListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                // criar viagem na base de dados
+                val tripService = TripService()
+                var isCreated = tripService.create(userID, trip.convertToHashMap())
+
+                // se viagem criada com sucesso
+                if (isCreated) {
+                    // enviar dados da viagem criada para a página principal
                     val intent = Intent()
-                    intent.putExtra("country", editTextCountry.text.toString())
-                    intent.putExtra("city", editTextCity.text.toString())
-                    intent.putExtra("StartDate", textViewStartDate.text.toString())
-                    intent.putExtra("EndDate", textViewEndDate.text.toString())
+                    intent.putExtra("EXTRA_TRIP", trip);
 
                     setResult(RESULT_OK, intent)
                     finish()
+                } else {
+                    // mostrar erro
+                    Toast.makeText(baseContext, "Erro ao criar viagem.", Toast.LENGTH_SHORT).show()
                 }
-                .addOnFailureListener { e ->
-                    print("Falha ao comunicar com o servidor.")
-                }
+            }
         }
     }
 }
