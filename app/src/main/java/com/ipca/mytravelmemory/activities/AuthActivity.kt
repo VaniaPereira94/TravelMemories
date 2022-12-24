@@ -6,18 +6,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.lifecycleScope
 import com.ipca.mytravelmemory.R
+import com.ipca.mytravelmemory.services.AuthService
 
-class AuthenticationActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
+class AuthActivity : AppCompatActivity() {
+    private lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_authentication)
-
-        // acessar autenticação
-        auth = FirebaseAuth.getInstance()
+        setContentView(R.layout.activity_auth)
 
         // ao clicar no botão de iniciar sessão
         val buttonSignIn = findViewById<Button>(R.id.buttonSignIn)
@@ -28,8 +26,19 @@ class AuthenticationActivity : AppCompatActivity() {
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
 
-            // iniciar sessão com os dados inseridos pelo utilizador
-            signIn(email, password)
+            // iniciar sessão do utilizador
+            authService = AuthService()
+            authService.signIn(email, password, lifecycleScope) { isLogged ->
+                if (isLogged) {
+                    // ir para a página inicial
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    // mostrar erro
+                    Toast.makeText(baseContext, "Erro ao iniciar sessão.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
         }
 
         // ao clicar no botão de criar conta
@@ -39,23 +48,5 @@ class AuthenticationActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun signIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                // se iniciar sessão com sucesso
-                if (task.isSuccessful) {
-                    // ir para a página inicial
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                // se iniciar sessão falhou
-                else {
-                    // mostrar erro
-                    Toast.makeText(baseContext, "Erro ao iniciar sessão.", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
     }
 }
