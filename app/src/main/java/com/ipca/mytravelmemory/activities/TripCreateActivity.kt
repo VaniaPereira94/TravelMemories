@@ -9,17 +9,15 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.models.TripModel
+import com.ipca.mytravelmemory.services.AuthService
 import com.ipca.mytravelmemory.services.TripService
 import com.ipca.mytravelmemory.utils.ParserUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 
 class TripCreateActivity : AppCompatActivity() {
+    private lateinit var authService: AuthService
     private lateinit var trip: TripModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +26,7 @@ class TripCreateActivity : AppCompatActivity() {
 
         // UI
         val editTextCountry = findViewById<EditText>(R.id.editTextCountry)
-        val editTextCity = findViewById<EditText>(R.id.editTextCity)
+        val editTextCities = findViewById<EditText>(R.id.editTextCities)
         val textViewStartDate = findViewById<TextView>(R.id.textViewStartDate)
         val buttonStartDate = findViewById<Button>(R.id.buttonStartDate)
         val textViewEndDate = findViewById<TextView>(R.id.textViewEndDate)
@@ -70,35 +68,36 @@ class TripCreateActivity : AppCompatActivity() {
         // ao clicar no botão de criar viagem
         buttonCreateTrip.setOnClickListener {
             // id do utilizador
-            val auth = FirebaseAuth.getInstance()
-            val userID = auth.currentUser!!.uid
+            authService = AuthService()
+            val userID = authService.getUserID()
 
             // definir viagem
             trip = TripModel(
                 editTextCountry.text.toString(),
-                editTextCity.text.toString(),
+                editTextCities.text.toString(),
                 ParserUtil.convertStringToDate(textViewStartDate.text.toString()),
                 ParserUtil.convertStringToDate(textViewEndDate.text.toString())
             )
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                // criar viagem na base de dados
-                val tripService = TripService()
-                var isCreated = tripService.create(userID, trip.convertToHashMap())
-
-                // se viagem criada com sucesso
-                if (isCreated) {
-                    // enviar dados da viagem criada para a página principal
-                    val intent = Intent()
-                    intent.putExtra("EXTRA_TRIP", trip);
-
-                    setResult(RESULT_OK, intent)
-                    finish()
-                } else {
-                    // mostrar erro
+            // criar viagem na base de dados
+            val tripService = TripService()
+            tripService.create(userID, trip.convertToHashMap(), lifecycleScope) { isCreated ->
+                if (!isCreated) {
                     Toast.makeText(baseContext, "Erro ao criar viagem.", Toast.LENGTH_SHORT).show()
+                    return@create
                 }
+
+                // enviar dados da viagem criada para a página inicial
+                val intent = Intent()
+                intent.putExtra("EXTRA_TRIP_CREATE", trip)
+
+                setResult(RESULT_OK, intent)
+                finish()
             }
         }
+    }
+
+    companion object {
+        const val EXTRA_TRIP_CREATE = "EXTRA_TRIP_CREATE"
     }
 }

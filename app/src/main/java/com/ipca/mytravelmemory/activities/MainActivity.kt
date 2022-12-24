@@ -14,35 +14,39 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.google.firebase.auth.FirebaseAuth
 import com.ipca.mytravelmemory.R
+import com.ipca.mytravelmemory.activities.TripCreateActivity.Companion.EXTRA_TRIP_CREATE
 import com.ipca.mytravelmemory.models.TripModel
-import com.ipca.mytravelmemory.utils.ParserUtil
+import com.ipca.mytravelmemory.services.AuthService
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
+    private lateinit var authService: AuthService
 
-    var trips = arrayListOf<TripModel>()
-    val adapter = TipsAdapter()
+    private var trips = arrayListOf<TripModel>()
+    private val adapter = TipsAdapter()
 
-    var resultLauncher: ActivityResultLauncher<Intent>? = null
+    private var resultLauncher: ActivityResultLauncher<Intent>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        auth = FirebaseAuth.getInstance()
+        authService = AuthService()
 
         // ao clicar no botão de terminar sessão
         val buttonLogOut = findViewById<Button>(R.id.buttonLogOut)
         buttonLogOut.setOnClickListener {
             // terminar sessão do utilizador
-            signOut()
+            authService.signOut()
 
             // ir para a página de autenticação
-            val intent = Intent(this, AuthenticationActivity::class.java)
+            val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
         }
+
+        trips.add(TripModel("País 1", "Cidade 1", Date(), Date()))
+        trips.add(TripModel("País 2", "Cidade 2", Date(), Date()))
 
         // lista das viagens
         val listViewTrips = findViewById<ListView>(R.id.listViewTrips)
@@ -52,24 +56,12 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                val trip = it.data?.getSerializableExtra("EXTRA_TRIP") as TripModel
-
-                trips.add(
-                    TripModel(
-                        trip.country,
-                        trip.city ?: "",
-                        trip.startDate,
-                        trip.endDate
-                    )
-                )
+                val trip = it.data?.getSerializableExtra(EXTRA_TRIP_CREATE) as TripModel
+                trips.add(trip)
 
                 adapter.notifyDataSetChanged()
             }
         }
-    }
-
-    private fun signOut() {
-        auth.signOut()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -112,10 +104,15 @@ class MainActivity : AppCompatActivity() {
 
             rootView.setOnClickListener {
                 val intent = Intent(this@MainActivity, TripDetailsActivity::class.java)
+                intent.putExtra(EXTRA_TRIP_MAIN, trips[position])
                 startActivity(intent)
             }
 
             return rootView
         }
+    }
+
+    companion object {
+        const val EXTRA_TRIP_MAIN = "EXTRA_TRIP_MAIN"
     }
 }

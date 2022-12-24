@@ -6,13 +6,13 @@ import java.util.*
 
 class TripModel : Serializable {
     var country: String
-    var city: String? = null
+    var cities: String? = null
     var startDate: Date
     var endDate: Date
 
-    constructor(country: String, city: String?, startDate: Date, endDate: Date) {
+    constructor(country: String, cities: String?, startDate: Date, endDate: Date) {
         this.country = country
-        this.city = city
+        this.cities = cities
         this.startDate = startDate
         this.endDate = endDate
     }
@@ -20,7 +20,7 @@ class TripModel : Serializable {
     fun convertToHashMap(): HashMap<String, Any?> {
         return hashMapOf(
             "country" to country,
-            "city" to city,
+            "cities" to cities,
             "startDate" to Timestamp(startDate),
             "endDate" to Timestamp(endDate)
         )
