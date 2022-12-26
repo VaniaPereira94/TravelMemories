@@ -18,9 +18,9 @@ class SplashScreenActivity : AppCompatActivity() {
 
         // iniciar thread secundária
         lifecycleScope.launch {
-            delay(4000)
+            delay(3000)
 
-            // quando concluir os 4 segundos
+            // após concluir os 3 segundos
             launch {
                 authService = AuthService()
 

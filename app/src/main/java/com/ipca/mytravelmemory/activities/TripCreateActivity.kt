@@ -42,7 +42,7 @@ class TripCreateActivity : AppCompatActivity() {
         // ao clicar no botão de selecionar data de início
         buttonStartDate.setOnClickListener {
             DatePickerDialog(
-                this,
+                this@TripCreateActivity,
                 DatePickerDialog.OnDateSetListener { view, y, m, d ->
                     textViewStartDate.text = "$d-${m + 1}-$y"
                 },
@@ -55,7 +55,7 @@ class TripCreateActivity : AppCompatActivity() {
         // ao clicar no botão de selecionar data de fim
         buttonEndDate.setOnClickListener {
             DatePickerDialog(
-                this,
+                this@TripCreateActivity,
                 DatePickerDialog.OnDateSetListener { view, y, m, d ->
                     textViewEndDate.text = "$d-${m + 1}-$y"
                 },
@@ -89,7 +89,7 @@ class TripCreateActivity : AppCompatActivity() {
 
                 // enviar dados da viagem criada para a página inicial
                 val intent = Intent()
-                intent.putExtra("EXTRA_TRIP_CREATE", trip)
+                intent.putExtra(EXTRA_TRIP_CREATE, trip)
 
                 setResult(RESULT_OK, intent)
                 finish()

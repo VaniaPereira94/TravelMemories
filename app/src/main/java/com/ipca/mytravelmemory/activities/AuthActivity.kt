@@ -31,7 +31,7 @@ class AuthActivity : AppCompatActivity() {
             authService.signIn(email, password, lifecycleScope) { isLogged ->
                 if (isLogged) {
                     // ir para a página inicial
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this@AuthActivity, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     // mostrar erro
@@ -45,7 +45,7 @@ class AuthActivity : AppCompatActivity() {
         val buttonSignUp = findViewById<Button>(R.id.buttonSignUpAuthentication)
         buttonSignUp.setOnClickListener {
             // ir para a página de criar conta
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this@AuthActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
     }

@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
+            // quando uma viagem é criada com sucesso no ecrã de criar viagem
             if (it.resultCode == Activity.RESULT_OK) {
                 val trip = it.data?.getSerializableExtra(EXTRA_TRIP_CREATE) as TripModel
                 trips.add(trip)
@@ -72,9 +73,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         return when (item.itemId) {
+            // ao clicar no botão de criar viagem
             R.id.buttonAdd -> {
-                //add
-                resultLauncher?.launch(Intent(this@MainActivity, TripCreateActivity::class.java))
+                resultLauncher?.launch(Intent(this, TripCreateActivity::class.java))
                 return true
             }
             else -> {
@@ -97,13 +98,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-            val rootView = layoutInflater.inflate(R.layout.row_trips, parent, false)
+            val rootView = layoutInflater.inflate(R.layout.row_trip, parent, false)
 
             val textViewName = rootView.findViewById<TextView>(R.id.textViewCountryMain)
             textViewName.text = trips[position].country
 
             rootView.setOnClickListener {
-                val intent = Intent(this@MainActivity, TripDetailsActivity::class.java)
+                val intent = Intent(this@MainActivity, TripDetailActivity::class.java)
                 intent.putExtra(EXTRA_TRIP_MAIN, trips[position])
                 startActivity(intent)
             }

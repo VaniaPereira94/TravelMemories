@@ -61,7 +61,7 @@ class SignUpActivity : AppCompatActivity() {
                     }
 
                     // ir para a página principal
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                     startActivity(intent)
                 }
             }

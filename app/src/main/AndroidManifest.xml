@@ -13,6 +13,20 @@
         android:theme="@style/Theme.MyTravelMemory"
         tools:targetApi="31">
         <activity
+            android:name=".activities.DiaryDayAllActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.DiaryDayCreateActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.TripCreateActivity"
             android:exported="false">
             <meta-data
@@ -20,7 +34,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.TripDetailsActivity"
+            android:name=".activities.TripDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
