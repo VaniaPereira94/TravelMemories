@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         authService = AuthService()
 
         // ao clicar no botão de terminar sessão
-        val buttonLogOut = findViewById<Button>(R.id.buttonLogOut)
+        val buttonLogOut = findViewById<Button>(R.id.button_main_logOut)
         buttonLogOut.setOnClickListener {
             // terminar sessão do utilizador
             authService.signOut()
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         trips.add(TripModel("País 2", "Cidade 2", Date(), Date()))
 
         // lista das viagens
-        val listViewTrips = findViewById<ListView>(R.id.listViewTrips)
+        val listViewTrips = findViewById<ListView>(R.id.listView_main_trips)
         listViewTrips.adapter = adapter
 
         resultLauncher = registerForActivityResult(
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         super.onOptionsItemSelected(item)
         return when (item.itemId) {
             // ao clicar no botão de criar viagem
-            R.id.buttonAdd -> {
+            R.id.button_menuMain_Add -> {
                 resultLauncher?.launch(Intent(this, TripCreateActivity::class.java))
                 return true
             }
@@ -100,12 +100,12 @@ class MainActivity : AppCompatActivity() {
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             val rootView = layoutInflater.inflate(R.layout.row_trip, parent, false)
 
-            val textViewName = rootView.findViewById<TextView>(R.id.textViewCountryMain)
+            val textViewName = rootView.findViewById<TextView>(R.id.textView_main_title)
             textViewName.text = trips[position].country
 
             rootView.setOnClickListener {
                 val intent = Intent(this@MainActivity, TripDetailActivity::class.java)
-                intent.putExtra(EXTRA_TRIP_MAIN, trips[position])
+                intent.putExtra(EXTRA_TRIP_SAVED, trips[position])
                 startActivity(intent)
             }
 
@@ -114,6 +114,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_TRIP_MAIN = "EXTRA_TRIP_MAIN"
+        const val EXTRA_TRIP_SAVED = "EXTRA_TRIP_SAVED"
     }
 }

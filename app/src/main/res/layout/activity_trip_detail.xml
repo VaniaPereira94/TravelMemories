@@ -7,7 +7,7 @@
     tools:context=".activities.TripDetailActivity">
 
     <TextView
-        android:id="@+id/textViewCountry"
+        android:id="@+id/textView_tripDetail_country"
         android:layout_width="256dp"
         android:layout_height="55dp"
         android:layout_marginTop="76dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewCities"
+        android:id="@+id/textView_tripDetail_cities"
         android:layout_width="256dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
@@ -27,11 +27,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCountry"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_country"
         app:layout_constraintVertical_bias="0.014" />
 
     <Button
-        android:id="@+id/buttonDiario"
+        android:id="@+id/button_tripDetail_diary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
@@ -39,20 +39,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCities" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_cities" />
 
     <Button
-        android:id="@+id/buttonGastos"
+        android:id="@+id/button_tripDetail_expenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="Despesas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDiario" />
+        app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_diary" />
 
     <Button
-        android:id="@+id/buttonFotos"
+        android:id="@+id/button_tripDetail_photos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -60,5 +60,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGastos" />
+        app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_expenses" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,10 +18,10 @@ class AuthActivity : AppCompatActivity() {
         setContentView(R.layout.activity_auth)
 
         // ao clicar no botão de iniciar sessão
-        val buttonSignIn = findViewById<Button>(R.id.buttonSignIn)
+        val buttonSignIn = findViewById<Button>(R.id.button_auth_signIn)
         buttonSignIn.setOnClickListener {
-            val editTextEmail = findViewById<EditText>(R.id.editTextEmailAuthentication)
-            val editTextPassword = findViewById<EditText>(R.id.editTextPasswordAuthentication)
+            val editTextEmail = findViewById<EditText>(R.id.editText_auth_email)
+            val editTextPassword = findViewById<EditText>(R.id.editText_auth_password)
 
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
@@ -42,7 +42,7 @@ class AuthActivity : AppCompatActivity() {
         }
 
         // ao clicar no botão de criar conta
-        val buttonSignUp = findViewById<Button>(R.id.buttonSignUpAuthentication)
+        val buttonSignUp = findViewById<Button>(R.id.button_auth_signUp)
         buttonSignUp.setOnClickListener {
             // ir para a página de criar conta
             val intent = Intent(this@AuthActivity, SignUpActivity::class.java)

@@ -51,7 +51,7 @@ class DiaryDayCreateActivity : AppCompatActivity() {
             diaryDay = DiaryDayModel(
                 editTextTitle.text.toString(),
                 editTextBody.text.toString(),
-                ParserUtil.convertStringToDate("30-12-2022")
+                ParserUtil.convertStringToDate("30-12-2022", "dd-MM-yyyy")
             )
 
             // enviar dados do diário criado para a página dos diários

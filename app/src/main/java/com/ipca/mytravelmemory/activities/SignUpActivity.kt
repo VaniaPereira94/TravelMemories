@@ -21,11 +21,11 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         // ao clicar no botão de criar conta
-        val buttonSignUp = findViewById<Button>(R.id.buttonSignUp)
+        val buttonSignUp = findViewById<Button>(R.id.button_signUp_signUp)
         buttonSignUp.setOnClickListener {
-            val editTextName = findViewById<EditText>(R.id.editTextNameSignUp)
-            val editTextEmail = findViewById<EditText>(R.id.editTextEmailSignUp)
-            val editTextPassword = findViewById<EditText>(R.id.editTextPasswordSignUp)
+            val editTextName = findViewById<EditText>(R.id.editText_signUp_name)
+            val editTextEmail = findViewById<EditText>(R.id.editText_signUp_email)
+            val editTextPassword = findViewById<EditText>(R.id.editText_signUp_password)
 
             val name = editTextName.text.toString()
             val email = editTextEmail.text.toString()

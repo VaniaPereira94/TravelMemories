@@ -25,13 +25,13 @@ class TripCreateActivity : AppCompatActivity() {
         setContentView(R.layout.activity_trip_create)
 
         // UI
-        val editTextCountry = findViewById<EditText>(R.id.editTextCountry)
-        val editTextCities = findViewById<EditText>(R.id.editTextCities)
-        val textViewStartDate = findViewById<TextView>(R.id.textViewStartDate)
-        val buttonStartDate = findViewById<Button>(R.id.buttonStartDate)
-        val textViewEndDate = findViewById<TextView>(R.id.textViewEndDate)
-        val buttonEndDate = findViewById<Button>(R.id.buttonEndDate)
-        val buttonCreateTrip = findViewById<Button>(R.id.buttonCreateTrip)
+        val editTextCountry = findViewById<EditText>(R.id.editText_tripCreate_country)
+        val editTextCities = findViewById<EditText>(R.id.editText_tripCreate_cities)
+        val textViewStartDate = findViewById<TextView>(R.id.textView_tripCreate_startDate)
+        val buttonStartDate = findViewById<Button>(R.id.button_tripCreate_startDate)
+        val textViewEndDate = findViewById<TextView>(R.id.textView_tripCreate_endDate)
+        val buttonEndDate = findViewById<Button>(R.id.button_tripCreate_endDate)
+        val buttonCreateTrip = findViewById<Button>(R.id.button_tripCreate_save)
 
         // dados dos selecionadores de datas
         val calendar = Calendar.getInstance()
@@ -75,8 +75,8 @@ class TripCreateActivity : AppCompatActivity() {
             trip = TripModel(
                 editTextCountry.text.toString(),
                 editTextCities.text.toString(),
-                ParserUtil.convertStringToDate(textViewStartDate.text.toString()),
-                ParserUtil.convertStringToDate(textViewEndDate.text.toString())
+                ParserUtil.convertStringToDate(textViewStartDate.text.toString(), "dd-MM-yyyy"),
+                ParserUtil.convertStringToDate(textViewEndDate.text.toString(), "dd-MM-yyyy")
             )
 
             // criar viagem na base de dados

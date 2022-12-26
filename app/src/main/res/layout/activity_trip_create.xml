@@ -8,7 +8,7 @@
     tools:context=".activities.TripCreateActivity">
 
     <EditText
-        android:id="@+id/editTextCountry"
+        android:id="@+id/editText_tripCreate_country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextCities"
+        android:id="@+id/editText_tripCreate_cities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -31,66 +31,66 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCountry" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_tripCreate_country" />
 
     <TextView
-        android:id="@+id/textViewStartDate"
+        android:id="@+id/textView_tripCreate_startDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Data de ínicio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCities" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_tripCreate_cities" />
 
     <Button
-        android:id="@+id/buttonStartDate"
+        android:id="@+id/button_tripCreate_startDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Selecionar data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewStartDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_tripCreate_startDate" />
 
     <TextView
-        android:id="@+id/textViewEndDate"
+        android:id="@+id/textView_tripCreate_endDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Data de fim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartDate" />
+        app:layout_constraintTop_toBottomOf="@+id/button_tripCreate_startDate" />
 
     <Button
-        android:id="@+id/buttonEndDate"
+        android:id="@+id/button_tripCreate_endDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Selecionar data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEndDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_tripCreate_endDate" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_tripCreate_cover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEndDate"
+        app:layout_constraintTop_toBottomOf="@+id/button_tripCreate_endDate"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <Button
-        android:id="@+id/buttonCreateTrip"
+        android:id="@+id/button_tripCreate_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Criar viagem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_tripCreate_cover" />
 </androidx.constraintlayout.widget.ConstraintLayout>
