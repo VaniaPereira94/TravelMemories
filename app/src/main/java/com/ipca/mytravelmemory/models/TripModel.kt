@@ -1,6 +1,7 @@
 package com.ipca.mytravelmemory.models
 
 import com.google.firebase.Timestamp
+import com.ipca.mytravelmemory.utils.ParserUtil
 import java.io.Serializable
 import java.util.*
 
@@ -24,5 +25,16 @@ class TripModel : Serializable {
             "startDate" to Timestamp(startDate),
             "endDate" to Timestamp(endDate)
         )
+    }
+
+    companion object {
+        fun convertToTripModel(hashMap: MutableMap<String, Any>): TripModel {
+            return TripModel(
+                hashMap["country"] as String,
+                hashMap["cities"] as String?,
+                ParserUtil.convertTimestampToString(hashMap["startDate"] as Timestamp),
+                ParserUtil.convertTimestampToString(hashMap["endDate"] as Timestamp),
+            )
+        }
     }
 }

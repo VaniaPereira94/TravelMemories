@@ -14,14 +14,16 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.activities.TripCreateActivity.Companion.EXTRA_TRIP_CREATE
 import com.ipca.mytravelmemory.models.TripModel
 import com.ipca.mytravelmemory.services.AuthService
-import java.util.*
+import com.ipca.mytravelmemory.services.TripService
 
 class MainActivity : AppCompatActivity() {
     private lateinit var authService: AuthService
+    private lateinit var tripService: TripService
 
     private var trips = arrayListOf<TripModel>()
     private val adapter = TipsAdapter()
@@ -45,12 +47,22 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        trips.add(TripModel("País 1", "Cidade 1", Date(), Date()))
-        trips.add(TripModel("País 2", "Cidade 2", Date(), Date()))
+        //trips.add(TripModel("País 1", "Cidade 1", Date(), Date()))
+        //trips.add(TripModel("País 2", "Cidade 2", Date(), Date()))
 
-        // lista das viagens
         val listViewTrips = findViewById<ListView>(R.id.listView_main_trips)
         listViewTrips.adapter = adapter
+
+        // lista das viagens
+        tripService = TripService()
+        tripService.getAll(authService.getUserID(), lifecycleScope) { data ->
+            if (data == null) {
+                return@getAll
+            }
+
+            trips = data
+            adapter.notifyDataSetChanged()
+        }
 
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
