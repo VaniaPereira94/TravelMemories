@@ -1,70 +1,61 @@
-package com.ipca.mytravelmemory.activities
+package com.ipca.mytravelmemory.fragments.diary_day
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
+import com.ipca.mytravelmemory.databinding.FragmentDiaryDayAllBinding
 import com.ipca.mytravelmemory.models.DiaryDayModel
 
-class DiaryDayAllActivity : AppCompatActivity() {
+class DiaryDayAllFragment : Fragment() {
+    private var _binding: FragmentDiaryDayAllBinding? = null
+    private val binding get() = _binding!!
+
     private var diaryDays = arrayListOf<DiaryDayModel>()
     private val adapter = DiaryDaysAdapter()
 
     private var resultLauncher: ActivityResultLauncher<Intent>? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_diary_day_all)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentDiaryDayAllBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        // lista dos diários
-        val listViewDiaryDays = findViewById<ListView>(R.id.listView_diaryDayAll_diaryDays)
-        listViewDiaryDays.adapter = adapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // obter lista dos diários da base de dados
 
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
             // quando um diário é criado com sucesso no ecrã de criar diário
             if (it.resultCode == Activity.RESULT_OK) {
-                val diaryDay =
-                    it.data?.getSerializableExtra(DiaryDayCreateActivity.EXTRA_DIARY_DAY_SAVED) as DiaryDayModel
+                val diaryDay = it.data?.getSerializableExtra(EXTRA_DIARY_DAY_CREATE) as DiaryDayModel
                 diaryDays.add(diaryDay)
 
                 adapter.notifyDataSetChanged()
             }
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_diary_day_all, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+        binding.listViewDiaryDayAllDiaryDays.adapter = adapter
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-        return when (item.itemId) {
-            // ao clicar no botão de criar dia do diário
-            R.id.button_menuDiaryDayAll_add -> {
-                resultLauncher?.launch(
-                    Intent(
-                        this@DiaryDayAllActivity,
-                        DiaryDayCreateActivity::class.java
-                    )
-                )
-                return true
-            }
-            else -> {
-                return false
-            }
+        // ao clicar no botão de adicionar dia ao diário
+        binding.buttonDiaryDayAllAddDiaryDay.setOnClickListener {
+            // ir para a tela de adicionar dia ao diário
+            findNavController().navigate(R.id.action_diaryDayAllFragment_to_diaryDayCreateFragment)
         }
     }
 
@@ -89,5 +80,9 @@ class DiaryDayAllActivity : AppCompatActivity() {
 
             return rootView
         }
+    }
+
+    companion object {
+        const val EXTRA_DIARY_DAY_CREATE = "EXTRA_DIARY_DAY_CREATE"
     }
 }

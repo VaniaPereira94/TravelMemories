@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DiaryDayCreateActivity">
+    tools:context=".fragments.diary_day.DiaryDayCreateFragment">
 
     <EditText
         android:id="@+id/editText_diaryDayCreate_title"
@@ -54,5 +54,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_diaryDayCreate_date"
         app:layout_constraintVertical_bias="0.502" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

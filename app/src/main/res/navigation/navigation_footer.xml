@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_footer"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.ipca.mytravelmemory.fragments.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_tripCreateFragment"
+            app:destination="@id/tripCreateFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripCreateFragment"
+        android:name="com.ipca.mytravelmemory.fragments.trip.TripCreateFragment"
+        android:label="Trip Create"
+        tools:layout="@layout/fragment_trip_create" >
+        <action
+            android:id="@+id/action_tripCreateFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDetailFragment"
+        android:name="com.ipca.mytravelmemory.fragments.trip.TripDetailFragment"
+        android:label="fragment_trip_detail"
+        tools:layout="@layout/fragment_trip_detail" >
+        <argument
+            android:name="trip"
+            app:argType="com.ipca.mytravelmemory.models.TripModel" />
+        <action
+            android:id="@+id/action_tripDetailFragment_to_diaryDayAllFragment"
+            app:destination="@id/diaryDayAllFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diaryDayAllFragment"
+        android:name="com.ipca.mytravelmemory.fragments.diary_day.DiaryDayAllFragment"
+        android:label="fragment_diary_day_all"
+        tools:layout="@layout/fragment_diary_day_all" >
+        <action
+            android:id="@+id/action_diaryDayAllFragment_to_diaryDayCreateFragment"
+            app:destination="@id/diaryDayCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diaryDayCreateFragment"
+        android:name="com.ipca.mytravelmemory.fragments.diary_day.DiaryDayCreateFragment"
+        android:label="fragment_diary_day_create"
+        tools:layout="@layout/fragment_diary_day_create" >
+        <action
+            android:id="@+id/action_diaryDayCreateFragment_to_diaryDayAllFragment"
+            app:destination="@id/diaryDayAllFragment" />
+    </fragment>
+</navigation>
