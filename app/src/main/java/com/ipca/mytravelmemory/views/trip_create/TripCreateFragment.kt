@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory.fragments.trip
+package com.ipca.mytravelmemory.views.trip_create
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -8,24 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentTripCreateBinding
-import com.ipca.mytravelmemory.fragments.home.HomeFragment
+import com.ipca.mytravelmemory.views.home.HomeFragment
 import com.ipca.mytravelmemory.models.TripModel
-import com.ipca.mytravelmemory.services.AuthService
-import com.ipca.mytravelmemory.services.TripService
-import com.ipca.mytravelmemory.utils.ParserUtil
 import java.util.*
 
 class TripCreateFragment : Fragment() {
     private var _binding: FragmentTripCreateBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TripViewModel by viewModels()
+    private val viewModel: TripCreateViewModel by viewModels()
 
-    private lateinit var authService: AuthService
     private lateinit var trip: TripModel
 
     override fun onCreateView(
@@ -50,7 +45,8 @@ class TripCreateFragment : Fragment() {
         binding.buttonTripCreateStartDate.setOnClickListener {
             DatePickerDialog(
                 this@TripCreateFragment.requireContext(),
-                DatePickerDialog.OnDateSetListener { view, y, m, d ->
+                // ao selecionar data
+                { view, y, m, d ->
                     binding.textViewTripCreateStartDate.text = "$d-${m + 1}-$y"
                 },
                 year,
@@ -63,7 +59,8 @@ class TripCreateFragment : Fragment() {
         binding.buttonTripCreateEndDate.setOnClickListener {
             DatePickerDialog(
                 this@TripCreateFragment.requireContext(),
-                DatePickerDialog.OnDateSetListener { view, y, m, d ->
+                // ao selecionar data
+                { view, y, m, d ->
                     binding.textViewTripCreateEndDate.text = "$d-${m + 1}-$y"
                 },
                 year,
@@ -74,38 +71,29 @@ class TripCreateFragment : Fragment() {
 
         // ao clicar no botão de criar viagem
         binding.buttonTripCreateSave.setOnClickListener {
-            // id do utilizador
-            authService = AuthService()
-            val userID = authService.getUserID()
+            val country = binding.editTextTripCreateCountry.text.toString()
+            val cities = binding.editTextTripCreateCities.text.toString()
+            val startDate = binding.textViewTripCreateStartDate.text.toString()
+            val endDate = binding.textViewTripCreateEndDate.text.toString()
 
-            // definir viagem
-            trip = TripModel(
-                binding.editTextTripCreateCountry.text.toString(),
-                binding.editTextTripCreateCities.text.toString(),
-                ParserUtil.convertStringToDate(
-                    binding.textViewTripCreateStartDate.text.toString(),
-                    "dd-MM-yyyy"
-                ),
-                ParserUtil.convertStringToDate(
-                    binding.textViewTripCreateEndDate.text.toString(),
-                    "dd-MM-yyyy"
-                )
-            )
-
-            """
-            // criar viagem na base de dados
-            tripService.create(userID, trip.convertToHashMap(), lifecycleScope) { isCreated ->
-                if (!isCreated) {
-                    Toast.makeText(context, "Erro ao criar viagem.", Toast.LENGTH_SHORT).show()
-                    return@create
+            // adicionar viagem na base de dados
+            viewModel.addTripToFirebase(country, cities, startDate, endDate)
+                .observe(viewLifecycleOwner) { response ->
+                    // ir para a tela das viagens e enviar os dados da viagem criada
+                    response.onSuccess {
+                        val bundle = Bundle()
+                        bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATE, it)
+                        findNavController().navigate(
+                            R.id.action_tripCreateFragment_to_homeFragment,
+                            bundle
+                        )
+                    }
+                    // mostrar erro
+                    response.onFailure {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        return@observe
+                    }
                 }
-
-                // ir para a tela das viagens e enviar os dados da viagem criada
-                val bundle = Bundle()
-                bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATE, trip)
-                findNavController().navigate(R.id.action_tripCreateFragment_to_homeFragment, bundle)
-            }
-            """
         }
     }
 }

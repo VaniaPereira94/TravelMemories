@@ -1,36 +1,28 @@
-package com.ipca.mytravelmemory.fragments.home
+package com.ipca.mytravelmemory.views.home
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.BaseAdapter
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
-import com.ipca.mytravelmemory.activities.AuthActivity
 import com.ipca.mytravelmemory.databinding.FragmentHomeBinding
-import com.ipca.mytravelmemory.fragments.trip.TripDetailFragment
-import com.ipca.mytravelmemory.fragments.trip.TripViewModel
 import com.ipca.mytravelmemory.models.TripModel
-import com.ipca.mytravelmemory.services.AuthService
+import com.ipca.mytravelmemory.views.auth.AuthActivity
+import com.ipca.mytravelmemory.views.trip_detail.TripDetailFragment
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TripViewModel by viewModels()
-
-    private lateinit var authService: AuthService
+    private val viewModel: HomeViewModel by viewModels()
 
     private var trips = arrayListOf<TripModel>()
-    private val adapter = TipsAdapter()
-
-    private var resultLauncher: ActivityResultLauncher<Intent>? = null
+    private val adapter = TripsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,66 +36,35 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        authService = AuthService()
-
         // atualizar view com a lista das viagens
-        viewModel.getTrips().observe(viewLifecycleOwner) { data ->
-            """
-            if (data == null) {
-                return@observe
+        viewModel.getTripsFromFirebase().observe(viewLifecycleOwner) { response ->
+            response.onSuccess {
+                trips = it as ArrayList<TripModel>
+                adapter.notifyDataSetChanged()
             }
-            """
-
-            trips = data as ArrayList<TripModel>
-            adapter.notifyDataSetChanged()
-        }
-
-        """
-        tripService = TripService()
-        tripService.getAll(authService.getUserID(), lifecycleScope) { data ->
-            if (data == null) {
-                return@getAll
+            response.onFailure {
+                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             }
-
-            // atualizar view
-            trips = data
-            adapter.notifyDataSetChanged()
         }
-        """
 
         binding.listViewHomeTrips.adapter = adapter
 
-        resultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            // quando uma viagem é criada com sucesso no ecrã de criar viagem
-            if (it.resultCode == Activity.RESULT_OK) {
-                val trip = it.data?.getSerializableExtra(EXTRA_TRIP_CREATE) as TripModel
-                trips.add(trip)
-
-                adapter.notifyDataSetChanged()
-            }
-        }
-
-        // ao clicar no botão de adicionar viagem
+        // ao clicar no botão de adicionar viagem, ir para a página de adicionar viagem
         binding.buttonHomeAddTrip.setOnClickListener {
-            // ir para a página de adicionar viagem
             findNavController().navigate(R.id.action_homeFragment_to_tripCreateFragment)
         }
 
-        // ao clicar no botão de terminar sessão
+        // ao clicar no botão de terminar sessão, terminar sessão do utilizador e ir para a tela de autenticação
         binding.buttonHomeLogOut.setOnClickListener {
-            // terminar sessão do utilizador
-            authService.signOut()
+            viewModel.signOutFromFirebase()
 
-            // ir para a página de autenticação
             val intent = Intent(this@HomeFragment.requireContext(), AuthActivity::class.java)
             startActivity(intent)
             activity?.finish();
         }
     }
 
-    inner class TipsAdapter : BaseAdapter() {
+    inner class TripsAdapter : BaseAdapter() {
         override fun getCount(): Int {
             return trips.size
         }
@@ -122,9 +83,8 @@ class HomeFragment : Fragment() {
             val textViewName = rootView.findViewById<TextView>(R.id.textView_main_title)
             textViewName.text = trips[position].country
 
-            // ao clicar numa viagem
+            // ao clicar numa viagem, ir para a tela da viagem e enviar os dados dessa viagem atual
             rootView.setOnClickListener {
-                // ir para a tela da viagem e enviar os dados da viagem atual
                 val bundle = Bundle()
                 bundle.putSerializable(TripDetailFragment.EXTRA_TRIP_DETAIL, trips[position])
                 findNavController().navigate(R.id.action_homeFragment_to_tripDetailFragment, bundle)

@@ -1,6 +1,7 @@
 package com.ipca.mytravelmemory.models
 
 import com.google.firebase.Timestamp
+import com.ipca.mytravelmemory.utils.ParserUtil
 import java.io.Serializable
 import java.util.*
 
@@ -21,5 +22,15 @@ class DiaryDayModel : Serializable {
             "body" to body,
             "date" to Timestamp(Date())
         )
+    }
+
+    companion object {
+        fun convertToDiaryDayModel(hashMap: MutableMap<String, Any>): DiaryDayModel {
+            return DiaryDayModel(
+                hashMap["title"] as String?,
+                hashMap["body"] as String,
+                ParserUtil.convertTimestampToString(hashMap["date"] as Timestamp),
+            )
+        }
     }
 }

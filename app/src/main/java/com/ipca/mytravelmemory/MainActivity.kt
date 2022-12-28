@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory.activities
+package com.ipca.mytravelmemory
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

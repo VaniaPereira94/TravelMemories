@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.trip.TripCreateFragment">
+    tools:context=".views.trip_create.TripCreateFragment">
 
     <EditText
         android:id="@+id/editText_tripCreate_country"

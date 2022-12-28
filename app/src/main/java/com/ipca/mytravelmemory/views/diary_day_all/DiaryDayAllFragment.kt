@@ -1,6 +1,5 @@
-package com.ipca.mytravelmemory.fragments.diary_day
+package com.ipca.mytravelmemory.views.diary_day_all
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentDiaryDayAllBinding
@@ -20,15 +20,15 @@ class DiaryDayAllFragment : Fragment() {
     private var _binding: FragmentDiaryDayAllBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: DiaryDayAllViewModel by viewModels()
+
     private var diaryDays = arrayListOf<DiaryDayModel>()
     private val adapter = DiaryDaysAdapter()
-
-    private var resultLauncher: ActivityResultLauncher<Intent>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDiaryDayAllBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,17 +36,14 @@ class DiaryDayAllFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // obter lista dos diários da base de dados
-
-        resultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            // quando um diário é criado com sucesso no ecrã de criar diário
-            if (it.resultCode == Activity.RESULT_OK) {
-                val diaryDay = it.data?.getSerializableExtra(EXTRA_DIARY_DAY_CREATE) as DiaryDayModel
-                diaryDays.add(diaryDay)
-
+        // atualizar view com a lista dos dias do diário
+        viewModel.getDiaryDaysFromFirebase().observe(viewLifecycleOwner) { response ->
+            response.onSuccess {
+                diaryDays = it as ArrayList<DiaryDayModel>
                 adapter.notifyDataSetChanged()
+            }
+            response.onFailure {
+                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             }
         }
 

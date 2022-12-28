@@ -1,16 +1,13 @@
-package com.ipca.mytravelmemory.fragments.trip
+package com.ipca.mytravelmemory.views.trip_detail
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentTripDetailBinding
-import com.ipca.mytravelmemory.fragments.diary_day.DiaryDayAllFragment
 import com.ipca.mytravelmemory.models.TripModel
 
 class TripDetailFragment : Fragment() {
@@ -28,9 +25,10 @@ class TripDetailFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTripDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,8 +40,7 @@ class TripDetailFragment : Fragment() {
         binding.textViewTripDetailCities.text = trip?.cities
 
         // ao clicar no botão de ir para o ecrã do diário
-        val buttonClick = view.findViewById<Button>(R.id.button_tripDetail_diary)
-        buttonClick.setOnClickListener {
+        binding.buttonTripDetailDiary.setOnClickListener {
             findNavController().navigate(R.id.action_tripDetailFragment_to_diaryDayAllFragment)
         }
     }
