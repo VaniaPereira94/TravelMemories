@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
 
         // ao clicar no botão de adicionar viagem, ir para a página de adicionar viagem
         binding.buttonHomeAddTrip.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_tripCreateFragment)
+            findNavController().navigate(R.id.action_home_to_tripCreate)
         }
 
         // ao clicar no botão de terminar sessão, terminar sessão do utilizador e ir para a tela de autenticação
@@ -87,11 +87,16 @@ class HomeFragment : Fragment() {
             rootView.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putSerializable(TripDetailFragment.EXTRA_TRIP_DETAIL, trips[position])
-                findNavController().navigate(R.id.action_homeFragment_to_tripDetailFragment, bundle)
+                findNavController().navigate(R.id.action_home_to_tripDetail, bundle)
             }
 
             return rootView
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

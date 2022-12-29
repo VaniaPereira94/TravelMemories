@@ -1,6 +1,5 @@
 package com.ipca.mytravelmemory.views.diary_day_all
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
@@ -52,7 +50,7 @@ class DiaryDayAllFragment : Fragment() {
         // ao clicar no botão de adicionar dia ao diário
         binding.buttonDiaryDayAllAddDiaryDay.setOnClickListener {
             // ir para a tela de adicionar dia ao diário
-            findNavController().navigate(R.id.action_diaryDayAllFragment_to_diaryDayCreateFragment)
+            findNavController().navigate(R.id.action_diaryDayAll_to_diaryDayCreate)
         }
     }
 
@@ -77,6 +75,11 @@ class DiaryDayAllFragment : Fragment() {
 
             return rootView
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

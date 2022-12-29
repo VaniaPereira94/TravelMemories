@@ -65,7 +65,12 @@ class DiaryDayCreateFragment : Fragment() {
             // ir para a tela do diário e enviar os dados do dia criado
             val bundle = Bundle()
             bundle.putSerializable(DiaryDayAllFragment.EXTRA_DIARY_DAY_CREATE, diaryDay)
-            findNavController().navigate(R.id.action_diaryDayCreateFragment_to_diaryDayAllFragment, bundle)
+            findNavController().navigate(R.id.action_diaryDayCreate_to_diaryDayAll, bundle)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

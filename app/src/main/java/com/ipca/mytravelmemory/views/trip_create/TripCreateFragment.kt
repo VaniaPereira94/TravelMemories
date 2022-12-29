@@ -84,7 +84,7 @@ class TripCreateFragment : Fragment() {
                         val bundle = Bundle()
                         bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATE, it)
                         findNavController().navigate(
-                            R.id.action_tripCreateFragment_to_homeFragment,
+                            R.id.action_tripCreate_to_home,
                             bundle
                         )
                     }
@@ -95,5 +95,10 @@ class TripCreateFragment : Fragment() {
                     }
                 }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
