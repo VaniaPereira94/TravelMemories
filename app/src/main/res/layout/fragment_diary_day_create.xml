@@ -32,17 +32,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_diaryDayCreate_title" />
 
-    <EditText
-        android:id="@+id/editText_diaryDayCreate_date"
+    <TextView
+        android:id="@+id/textView_diaryDayCreate_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:ems="10"
-        android:hint="Data"
-        android:inputType="date"
+        android:layout_marginTop="32dp"
+        android:text="Data do dia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_diaryDayCreate_body" />
+
+    <Button
+        android:id="@+id/button_diaryDayCreate_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Selecionar data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_diaryDayCreate_date" />
 
     <Button
         android:id="@+id/button_diaryDayCreate_save"
@@ -52,6 +60,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_diaryDayCreate_date"
+        app:layout_constraintTop_toBottomOf="@+id/button_diaryDayCreate_date"
         app:layout_constraintVertical_bias="0.502" />
 </androidx.constraintlayout.widget.ConstraintLayout>

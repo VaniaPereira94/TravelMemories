@@ -1,12 +1,9 @@
 package com.ipca.mytravelmemory.views.diary_day_create
 
 import androidx.lifecycle.*
-import com.google.firebase.firestore.EventListener
 import com.ipca.mytravelmemory.models.DiaryDayModel
-import com.ipca.mytravelmemory.models.TripModel
 import com.ipca.mytravelmemory.repositories.AuthRepository
 import com.ipca.mytravelmemory.repositories.DiaryDayRepository
-import com.ipca.mytravelmemory.repositories.TripRepository
 import com.ipca.mytravelmemory.utils.ParserUtil
 
 class DiaryDayCreateViewModel : ViewModel() {
@@ -21,5 +18,25 @@ class DiaryDayCreateViewModel : ViewModel() {
             body,
             ParserUtil.convertStringToDate(date, "dd-MM-yyyy")
         )
+    }
+
+    fun addDiaryDayToFirebase(
+        tripID: String,
+        title: String?,
+        body: String,
+        date: String
+    ): LiveData<Result<Boolean>> {
+        val userID = authRepository.getUserID()
+        val diaryDay = setDiaryDay(title, body, date)
+
+        diaryDayRepository.create(userID, tripID, diaryDay.convertToHashMap())
+            .addOnSuccessListener {
+                result.value = Result.success(true)
+            }
+            .addOnFailureListener {
+                result.value = Result.failure(Throwable("Erro ao adicionar dia ao diário."))
+            }
+
+        return result
     }
 }

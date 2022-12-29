@@ -6,12 +6,14 @@ import java.io.Serializable
 import java.util.*
 
 class TripModel : Serializable {
-    var country: String
+    var id: String? = null
+    var country: String? = null
     var cities: String? = null
-    var startDate: Date
-    var endDate: Date
+    var startDate: Date? = null
+    var endDate: Date? = null
 
-    constructor(country: String, cities: String?, startDate: Date, endDate: Date) {
+    constructor(id: String?, country: String?, cities: String?, startDate: Date?, endDate: Date?) {
+        this.id = id
         this.country = country
         this.cities = cities
         this.startDate = startDate
@@ -22,14 +24,15 @@ class TripModel : Serializable {
         return hashMapOf(
             "country" to country,
             "cities" to cities,
-            "startDate" to Timestamp(startDate),
-            "endDate" to Timestamp(endDate)
+            "startDate" to Timestamp(startDate!!),
+            "endDate" to Timestamp(endDate!!)
         )
     }
 
     companion object {
-        fun convertToTripModel(hashMap: MutableMap<String, Any>): TripModel {
+        fun convertToTripModel(id: String, hashMap: MutableMap<String, Any>): TripModel {
             return TripModel(
+                id,
                 hashMap["country"] as String,
                 hashMap["cities"] as String?,
                 ParserUtil.convertTimestampToString(hashMap["startDate"] as Timestamp),

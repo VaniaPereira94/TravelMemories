@@ -1,10 +1,10 @@
 package com.ipca.mytravelmemory.models
 
 class UserModel {
-    private var name: String
+    private var name: String? = null
     private var country: String? = null
 
-    constructor(name: String, country: String?) {
+    constructor(name: String?, country: String?) {
         this.name = name
         this.country = country
     }

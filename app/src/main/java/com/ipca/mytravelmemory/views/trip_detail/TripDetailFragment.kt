@@ -14,13 +14,13 @@ class TripDetailFragment : Fragment() {
     private var _binding: FragmentTripDetailBinding? = null
     private val binding get() = _binding!!
 
-    private var trip: TripModel? = null
+    private lateinit var trip: TripModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            trip = it.getSerializable(EXTRA_TRIP_DETAIL) as TripModel
+            trip = it.getSerializable(EXTRA_TRIP_DETAILS) as TripModel
         }
     }
 
@@ -36,8 +36,8 @@ class TripDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textViewTripDetailCountry.text = trip?.country
-        binding.textViewTripDetailCities.text = trip?.cities
+        binding.textViewTripDetailCountry.text = trip.country
+        binding.textViewTripDetailCities.text = trip.cities
 
         // ao clicar no botão de ir para o ecrã do diário
         binding.buttonTripDetailDiary.setOnClickListener {
@@ -51,6 +51,6 @@ class TripDetailFragment : Fragment() {
     }
 
     companion object {
-        const val EXTRA_TRIP_DETAIL = "trip"
+        const val EXTRA_TRIP_DETAILS = "EXTRA_TRIP_DETAILS"
     }
 }

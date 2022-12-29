@@ -30,9 +30,6 @@
         android:name="com.ipca.mytravelmemory.views.trip_detail.TripDetailFragment"
         android:label="fragment_trip_detail"
         tools:layout="@layout/fragment_trip_detail">
-        <argument
-            android:name="trip"
-            app:argType="com.ipca.mytravelmemory.models.TripModel" />
         <action
             android:id="@+id/action_tripDetail_to_diaryDayAll"
             app:destination="@id/fragment_navigationFooter_diaryDayAll" />

@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentTripCreateBinding
 import com.ipca.mytravelmemory.views.home.HomeFragment
-import com.ipca.mytravelmemory.models.TripModel
 import java.util.*
 
 class TripCreateFragment : Fragment() {
@@ -20,8 +19,6 @@ class TripCreateFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: TripCreateViewModel by viewModels()
-
-    private lateinit var trip: TripModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +79,7 @@ class TripCreateFragment : Fragment() {
                     // ir para a tela das viagens e enviar os dados da viagem criada
                     response.onSuccess {
                         val bundle = Bundle()
-                        bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATE, it)
+                        bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
                         findNavController().navigate(
                             R.id.action_tripCreate_to_home,
                             bundle

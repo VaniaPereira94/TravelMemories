@@ -49,7 +49,7 @@ class DiaryDayAllFragment : Fragment() {
 
         // ao clicar no botão de adicionar dia ao diário
         binding.buttonDiaryDayAllAddDiaryDay.setOnClickListener {
-            // ir para a tela de adicionar dia ao diário
+            // ir para a tela de adicionar dia ao diário e enviar o ID da viagem
             findNavController().navigate(R.id.action_diaryDayAll_to_diaryDayCreate)
         }
     }
@@ -71,7 +71,7 @@ class DiaryDayAllFragment : Fragment() {
             val rootView = layoutInflater.inflate(R.layout.row_diary, parent, false)
 
             val textViewName = rootView.findViewById<TextView>(R.id.textView_diaryAll_title)
-            textViewName.text = diaryDays[position].title
+            textViewName.text = diaryDays[position].body
 
             return rootView
         }
@@ -83,6 +83,6 @@ class DiaryDayAllFragment : Fragment() {
     }
 
     companion object {
-        const val EXTRA_DIARY_DAY_CREATE = "EXTRA_DIARY_DAY_CREATE"
+        const val EXTRA_DIARY_DAY_CREATED = "EXTRA_DIARY_DAY_CREATED"
     }
 }

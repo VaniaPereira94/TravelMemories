@@ -1,8 +1,11 @@
 package com.ipca.mytravelmemory.views.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import android.widget.Toast
@@ -85,8 +88,9 @@ class HomeFragment : Fragment() {
 
             // ao clicar numa viagem, ir para a tela da viagem e enviar os dados dessa viagem atual
             rootView.setOnClickListener {
+                shareTripID(trips[position].id!!)
                 val bundle = Bundle()
-                bundle.putSerializable(TripDetailFragment.EXTRA_TRIP_DETAIL, trips[position])
+                bundle.putSerializable(TripDetailFragment.EXTRA_TRIP_DETAILS, trips[position])
                 findNavController().navigate(R.id.action_home_to_tripDetail, bundle)
             }
 
@@ -99,7 +103,15 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    private fun shareTripID(tripID: String) {
+        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPreference.edit()) {
+            putString(getString(R.string.shared_trip_id), tripID)
+            apply()
+        }
+    }
+
     companion object {
-        const val EXTRA_TRIP_CREATE = "EXTRA_TRIP_CREATE"
+        const val EXTRA_TRIP_CREATED = "EXTRA_TRIP_CREATED"
     }
 }

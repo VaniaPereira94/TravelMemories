@@ -24,7 +24,7 @@ class HomeViewModel : ViewModel() {
 
                 val trips: MutableList<TripModel> = mutableListOf()
                 for (document in documents!!) {
-                    val trip = TripModel.convertToTripModel(document.data)
+                    val trip = TripModel.convertToTripModel(document.id, document.data)
                     trips.add(trip)
                 }
 

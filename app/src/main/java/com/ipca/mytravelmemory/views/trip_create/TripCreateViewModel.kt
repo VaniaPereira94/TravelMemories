@@ -19,6 +19,7 @@ class TripCreateViewModel : ViewModel() {
         endDate: String
     ): TripModel {
         return TripModel(
+            null,
             country,
             cities,
             ParserUtil.convertStringToDate(startDate, "dd-MM-yyyy"),
