@@ -43,6 +43,11 @@ class TripDetailFragment : Fragment() {
         binding.buttonTripDetailDiary.setOnClickListener {
             findNavController().navigate(R.id.action_tripDetail_to_diaryDayAll)
         }
+
+        // ao clicar no botão de ir para o ecrã das despesas
+        binding.buttonTripDetailExpenses.setOnClickListener {
+            findNavController().navigate(R.id.action_tripDetailFragment_to_expenseAllFragment)
+        }
     }
 
     override fun onDestroyView() {

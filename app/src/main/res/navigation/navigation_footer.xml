@@ -33,6 +33,27 @@
         <action
             android:id="@+id/action_tripDetail_to_diaryDayAll"
             app:destination="@id/fragment_navigationFooter_diaryDayAll" />
+        <action
+            android:id="@+id/action_tripDetailFragment_to_expenseAllFragment"
+            app:destination="@id/fragment_navigationFooter_expenseAll" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_navigationFooter_expenseCreate"
+        android:name="com.ipca.mytravelmemory.views.expense_create.ExpenseCreateFragment"
+        android:label="fragment_expense_create"
+        tools:layout="@layout/fragment_expense_create">
+        <action
+            android:id="@+id/action_expenseCreate_to_expenseAll"
+            app:destination="@id/fragment_navigationFooter_expenseAll" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_navigationFooter_expenseAll"
+        android:name="com.ipca.mytravelmemory.views.expenses_all.ExpenseAllFragment"
+        android:label="fragment_expense_all"
+        tools:layout="@layout/fragment_expense_all">
+        <action
+            android:id="@+id/action_expenseAll_to_expenseCreate"
+            app:destination="@id/fragment_navigationFooter_expenseCreate" />
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayAll"
