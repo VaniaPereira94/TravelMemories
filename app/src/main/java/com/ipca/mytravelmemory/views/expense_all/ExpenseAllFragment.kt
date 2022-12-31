@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory.views.expenses_all
+package com.ipca.mytravelmemory.views.expense_all
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -36,7 +36,6 @@ class ExpenseAllFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // atualizar view com a lista das despesas
-
         viewModel.getExpensesFromFirebase().observe(viewLifecycleOwner) { response ->
             response.onSuccess {
                 expenses = it as ArrayList<ExpenseModel>
@@ -72,7 +71,7 @@ class ExpenseAllFragment : Fragment() {
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             val rootView = layoutInflater.inflate(R.layout.row_expense, parent, false)
 
-            val textViewName = rootView.findViewById<TextView>(R.id.textView_TitleExpense)
+            val textViewName = rootView.findViewById<TextView>(R.id.textView_expenseAll_title)
             textViewName.text = expenses[position].category
 
             return rootView

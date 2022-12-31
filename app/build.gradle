@@ -56,6 +56,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     // Firebase Database
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    // Firebase Storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     // Lifecycles
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'

@@ -39,14 +39,19 @@ class TripDetailFragment : Fragment() {
         binding.textViewTripDetailCountry.text = trip.country
         binding.textViewTripDetailCities.text = trip.cities
 
-        // ao clicar no botão de ir para o ecrã do diário
-        binding.buttonTripDetailDiary.setOnClickListener {
-            findNavController().navigate(R.id.action_tripDetail_to_diaryDayAll)
+        // ao clicar no botão de ir para o ecrã das fotos
+        binding.buttonTripDetailPhotos.setOnClickListener {
+            findNavController().navigate(R.id.action_tripDetail_to_photoAll)
         }
 
         // ao clicar no botão de ir para o ecrã das despesas
         binding.buttonTripDetailExpenses.setOnClickListener {
-            findNavController().navigate(R.id.action_tripDetailFragment_to_expenseAllFragment)
+            findNavController().navigate(R.id.action_tripDetail_to_expenseAll)
+        }
+
+        // ao clicar no botão de ir para o ecrã do diário
+        binding.buttonTripDetailDiary.setOnClickListener {
+            findNavController().navigate(R.id.action_tripDetail_to_diaryDayAll)
         }
     }
 

@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentExpenseCreateBinding
-import com.ipca.mytravelmemory.views.expenses_all.ExpenseAllFragment
+import com.ipca.mytravelmemory.views.expense_all.ExpenseAllFragment
 import java.util.*
 
 class ExpenseCreateFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory.views.expenses_all
+package com.ipca.mytravelmemory.views.expense_all
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
