@@ -79,7 +79,6 @@ class ExpenseCreateFragment : Fragment() {
                     // mostrar erro
                     response.onFailure {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                        return@observe
                     }
                 }
         }

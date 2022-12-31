@@ -20,7 +20,7 @@ class DiaryDayModel : Serializable {
         return hashMapOf(
             "title" to title,
             "body" to body,
-            "date" to Timestamp(Date())
+            "date" to Timestamp(date!!)
         )
     }
 

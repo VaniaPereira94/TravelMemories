@@ -15,7 +15,6 @@ import com.ipca.mytravelmemory.databinding.FragmentExpenseAllBinding
 import com.ipca.mytravelmemory.models.ExpenseModel
 
 class ExpenseAllFragment : Fragment() {
-
     private var _binding: FragmentExpenseAllBinding? = null
     private val binding get() = _binding!!
 

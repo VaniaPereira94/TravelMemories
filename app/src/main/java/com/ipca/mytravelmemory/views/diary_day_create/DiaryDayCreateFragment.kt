@@ -3,11 +3,11 @@ package com.ipca.mytravelmemory.views.diary_day_create
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
@@ -74,19 +74,18 @@ class DiaryDayCreateFragment : Fragment() {
                     // mostrar erro
                     response.onFailure {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                        return@observe
                     }
                 }
         }
     }
 
-    private fun getSharedTripID(): String? {
-        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
-        return sharedPreference.getString(getString(R.string.shared_trip_id), "")
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getSharedTripID(): String? {
+        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
+        return sharedPreference.getString(getString(R.string.shared_trip_id), "")
     }
 }

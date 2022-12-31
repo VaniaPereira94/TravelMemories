@@ -12,24 +12,24 @@ class DiaryDayAllViewModel : ViewModel() {
     private var diaryDayRepository = DiaryDayRepository()
     private var authRepository = AuthRepository()
 
-    fun getDiaryDaysFromFirebase(): LiveData<Result<List<DiaryDayModel>>> {
+    fun getDiaryDaysFromFirebase(tripID: String): LiveData<Result<List<DiaryDayModel>>> {
         val userID = authRepository.getUserID()
 
-        //diaryDayRepository.selectAll(userID)
-        //.addSnapshotListener(EventListener { documents, error ->
-        //if (error != null) {
-        //result.value = Result.failure(Throwable("Erro ao obter as viagens."))
-        //return@EventListener
-        //}
+        diaryDayRepository.selectAll(userID, tripID)
+            .addSnapshotListener(EventListener { documents, error ->
+                if (error != null) {
+                    result.value = Result.failure(Throwable("Erro ao obter o diário."))
+                    return@EventListener
+                }
 
-        //val diaryDays: MutableList<DiaryDayModel> = mutableListOf()
-        //for (document in documents!!) {
-        //val diaryDay = DiaryDayModel.convertToDiaryDayModel(document.data)
-        //diaryDays.add(diaryDay)
-        //}
+                val diaryDays: MutableList<DiaryDayModel> = mutableListOf()
+                for (document in documents!!) {
+                    val diaryDay = DiaryDayModel.convertToDiaryDayModel(document.data)
+                    diaryDays.add(diaryDay)
+                }
 
-        //result.value = Result.success(diaryDays)
-        //})
+                result.value = Result.success(diaryDays)
+            })
 
         return result
     }

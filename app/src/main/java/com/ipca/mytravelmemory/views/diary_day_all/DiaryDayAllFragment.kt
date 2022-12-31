@@ -1,5 +1,6 @@
 package com.ipca.mytravelmemory.views.diary_day_all
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -35,7 +36,9 @@ class DiaryDayAllFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // atualizar view com a lista dos dias do diário
-        viewModel.getDiaryDaysFromFirebase().observe(viewLifecycleOwner) { response ->
+        val tripID = getSharedTripID()
+
+        viewModel.getDiaryDaysFromFirebase(tripID!!).observe(viewLifecycleOwner) { response ->
             response.onSuccess {
                 diaryDays = it as ArrayList<DiaryDayModel>
                 adapter.notifyDataSetChanged()
@@ -80,6 +83,11 @@ class DiaryDayAllFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getSharedTripID(): String? {
+        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
+        return sharedPreference.getString(getString(R.string.shared_trip_id), "")
     }
 
     companion object {
