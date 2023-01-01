@@ -60,10 +60,8 @@ class ProfileViewModel : ViewModel() {
 
     fun editUserEmailFromFirebase(email: String): LiveData<Result<Boolean>> {
         authRepository.updateEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    resultStatus.value = Result.success(true)
-                }
+            .addOnSuccessListener {
+                resultStatus.value = Result.success(true)
             }
             .addOnFailureListener {
                 resultStatus.value =
@@ -75,14 +73,25 @@ class ProfileViewModel : ViewModel() {
 
     fun editUserPasswordFromFirebase(newPassword: String): LiveData<Result<Boolean>> {
         authRepository.updatePassword(newPassword)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    resultStatus.value = Result.success(true)
-                }
+            .addOnSuccessListener {
+                resultStatus.value = Result.success(true)
             }
             .addOnFailureListener {
                 resultStatus.value =
                     Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+            }
+
+        return resultStatus
+    }
+
+    fun removerUserFromFirebase(): LiveData<Result<Boolean>> {
+        authRepository.delete()
+            .addOnSuccessListener {
+                resultStatus.value = Result.success(true)
+            }
+            .addOnFailureListener {
+                resultStatus.value =
+                    Result.failure(Throwable("Erro ao apagar conta do utilizador."))
             }
 
         return resultStatus

@@ -2,7 +2,6 @@ package com.ipca.mytravelmemory.repositories
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -42,7 +41,8 @@ class AuthRepository {
         return user!!.updatePassword(newPassword)
     }
 
-    fun delete() {
-
+    fun delete(): Task<Void> {
+        val user = getUser()
+        return user!!.delete()
     }
 }
