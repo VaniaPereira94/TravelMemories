@@ -9,7 +9,7 @@ import com.ipca.mytravelmemory.repositories.AuthRepository
 import com.ipca.mytravelmemory.repositories.PhotoRepository
 
 class PhotoAllViewModel : ViewModel() {
-    private var resultPhotosData: MutableLiveData<Result<List<PhotoModel>>> = MutableLiveData()
+    private var result: MutableLiveData<Result<List<PhotoModel>>> = MutableLiveData()
 
     private var photoRepository = PhotoRepository()
     private var authRepository = AuthRepository()
@@ -20,7 +20,7 @@ class PhotoAllViewModel : ViewModel() {
         photoRepository.selectAll(userID, tripID)
             .addSnapshotListener(EventListener { documents, error ->
                 if (error != null) {
-                    resultPhotosData.value = Result.failure(Throwable("Erro ao obter fotos."))
+                    result.value = Result.failure(Throwable("Erro ao obter fotos."))
                     return@EventListener
                 }
 
@@ -30,10 +30,10 @@ class PhotoAllViewModel : ViewModel() {
                     photos.add(photo)
                 }
 
-                resultPhotosData.value = Result.success(photos)
+                result.value = Result.success(photos)
             })
 
-        return resultPhotosData
+        return result
     }
 
     fun getPhotoURI(filePath: String, callback: (Result<String>?) -> Unit) {

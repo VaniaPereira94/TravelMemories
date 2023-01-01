@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentHomeBinding
 import com.ipca.mytravelmemory.models.TripModel
@@ -83,8 +85,21 @@ class HomeFragment : Fragment() {
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             val rootView = layoutInflater.inflate(R.layout.row_trip, parent, false)
 
-            val textViewName = rootView.findViewById<TextView>(R.id.textView_main_title)
-            textViewName.text = trips[position].country
+            val textViewCountry = rootView.findViewById<TextView>(R.id.textView_home_country)
+            textViewCountry.text = trips[position].country
+
+            // fazer download da foto e visualizá-la na imageView
+            val imageViewPhoto = rootView.findViewById<ImageView>(R.id.imageView_home_cover)
+            viewModel.getPhotoURI(trips[position].coverPath!!) { response ->
+                response!!.onSuccess { uri ->
+                    Glide.with(requireContext())
+                        .load(uri)
+                        .into(imageViewPhoto)
+                }
+                response!!.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
 
             // ao clicar numa viagem, ir para a tela da viagem e enviar os dados dessa viagem atual
             rootView.setOnClickListener {

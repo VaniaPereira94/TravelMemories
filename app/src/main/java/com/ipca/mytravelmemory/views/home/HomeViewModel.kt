@@ -2,6 +2,8 @@ package com.ipca.mytravelmemory.views.home
 
 import androidx.lifecycle.*
 import com.google.firebase.firestore.EventListener
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.ipca.mytravelmemory.models.TripModel
 import com.ipca.mytravelmemory.repositories.AuthRepository
 import com.ipca.mytravelmemory.repositories.TripRepository
@@ -32,6 +34,18 @@ class HomeViewModel : ViewModel() {
             })
 
         return result
+    }
+
+    fun getPhotoURI(filePath: String, callback: (Result<String>?) -> Unit) {
+        val photoReference = Firebase.storage.reference.child(filePath)
+
+        photoReference.downloadUrl
+            .addOnSuccessListener { uri ->
+                callback(Result.success(uri.toString()))
+            }
+            .addOnFailureListener {
+                callback(Result.failure(Throwable("Erro ao visualizar foto.")))
+            }
     }
 
     fun signOutFromFirebase() {
