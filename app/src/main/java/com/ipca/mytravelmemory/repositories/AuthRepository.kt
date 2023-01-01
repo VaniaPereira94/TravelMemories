@@ -2,6 +2,7 @@ package com.ipca.mytravelmemory.repositories
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -31,8 +32,9 @@ class AuthRepository {
         return auth.currentUser!!.uid
     }
 
-    fun updateEmail() {
-
+    fun updateEmail(email: String): Task<Void> {
+        val user = getUser()
+        return user!!.updateEmail(email)
     }
 
     fun updatePassword() {

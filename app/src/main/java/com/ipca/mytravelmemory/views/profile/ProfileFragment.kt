@@ -50,7 +50,23 @@ class ProfileFragment : Fragment() {
             val name = binding.editTextProfileName.text.toString()
             val country = binding.editTextProfileCountry.text.toString()
 
-            viewModel.editUserDataFromFirebase(name, country).observe(viewLifecycleOwner) { response ->
+            viewModel.editUserDataFromFirebase(name, country)
+                .observe(viewLifecycleOwner) { response ->
+                    // ir para o ecrã principal
+                    response.onSuccess {
+                        findNavController().navigate(R.id.fragment_navigationFooter_home)
+                    }
+                    response.onFailure {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
+
+        // ao clicar em atualizar email
+        binding.buttonProfileUpdateEmail.setOnClickListener {
+            val email = binding.editTextProfileEmail.text.toString()
+
+            viewModel.editUserEmailFromFirebase(email).observe(viewLifecycleOwner) { response ->
                 // ir para o ecrã principal
                 response.onSuccess {
                     findNavController().navigate(R.id.fragment_navigationFooter_home)
@@ -59,11 +75,6 @@ class ProfileFragment : Fragment() {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        }
-
-        // ao clicar em atualizar email
-        binding.buttonProfileUpdateEmail.setOnClickListener {
-
         }
 
         // ao clicar em atualizar senha

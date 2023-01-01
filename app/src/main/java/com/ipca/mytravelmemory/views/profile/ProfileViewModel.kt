@@ -41,7 +41,7 @@ class ProfileViewModel : ViewModel() {
     fun editUserDataFromFirebase(name: String, country: String?): LiveData<Result<Boolean>> {
         val userID = authRepository.getUserID()
 
-        if (name == "" ) {
+        if (name == "") {
             resultStatus.value =
                 Result.failure(Throwable("O nome é obrigatório."))
         }
@@ -49,6 +49,21 @@ class ProfileViewModel : ViewModel() {
         userRepository.updateData(userID, name, country)
             .addOnSuccessListener {
                 resultStatus.value = Result.success(true)
+            }
+            .addOnFailureListener {
+                resultStatus.value =
+                    Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+            }
+
+        return resultStatus
+    }
+
+    fun editUserEmailFromFirebase(email: String): LiveData<Result<Boolean>> {
+        authRepository.updateEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    resultStatus.value = Result.success(true)
+                }
             }
             .addOnFailureListener {
                 resultStatus.value =
