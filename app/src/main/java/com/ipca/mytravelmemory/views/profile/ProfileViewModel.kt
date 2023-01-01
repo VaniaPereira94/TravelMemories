@@ -72,4 +72,19 @@ class ProfileViewModel : ViewModel() {
 
         return resultStatus
     }
+
+    fun editUserPasswordFromFirebase(newPassword: String): LiveData<Result<Boolean>> {
+        authRepository.updatePassword(newPassword)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    resultStatus.value = Result.success(true)
+                }
+            }
+            .addOnFailureListener {
+                resultStatus.value =
+                    Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+            }
+
+        return resultStatus
+    }
 }

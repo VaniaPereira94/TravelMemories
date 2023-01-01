@@ -37,8 +37,9 @@ class AuthRepository {
         return user!!.updateEmail(email)
     }
 
-    fun updatePassword() {
-
+    fun updatePassword(newPassword: String): Task<Void> {
+        val user = getUser()
+        return user!!.updatePassword(newPassword)
     }
 
     fun delete() {

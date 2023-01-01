@@ -32,7 +32,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // carregar os dados do utilizador cas caixas de texto
+        // carregar os dados do utilizador nas caixas de texto
         viewModel.getUserFromFirebase().observe(viewLifecycleOwner) { response ->
             response.onSuccess {
                 user = it
@@ -79,7 +79,17 @@ class ProfileFragment : Fragment() {
 
         // ao clicar em atualizar senha
         binding.buttonProfileUpdatePassword.setOnClickListener {
+            val newPassword = binding.editTextProfileEmail.text.toString()
 
+            viewModel.editUserPasswordFromFirebase(newPassword).observe(viewLifecycleOwner) { response ->
+                // ir para o ecrã principal
+                response.onSuccess {
+                    findNavController().navigate(R.id.fragment_navigationFooter_home)
+                }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

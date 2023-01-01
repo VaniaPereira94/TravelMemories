@@ -26,7 +26,6 @@
             android:ems="10"
             android:hint="Nome"
             android:inputType="textPersonName"
-            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_profile_title" />
