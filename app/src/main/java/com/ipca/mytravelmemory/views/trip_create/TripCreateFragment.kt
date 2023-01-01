@@ -2,7 +2,6 @@ package com.ipca.mytravelmemory.views.trip_create
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -19,7 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentTripCreateBinding
 import com.ipca.mytravelmemory.views.home.HomeFragment
-import com.ipca.mytravelmemory.views.photo_create.PhotoCreateFragment
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -91,14 +89,25 @@ class TripCreateFragment : Fragment() {
             // adicionar viagem na base de dados
             viewModel.addTripToFirebase(country, cities, startDate, endDate)
                 .observe(viewLifecycleOwner) { response ->
-                    // ir para a tela das viagens e enviar os dados da viagem criada
-                    response.onSuccess {
-                        val bundle = Bundle()
-                        bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
-                        findNavController().navigate(
-                            R.id.action_tripCreate_to_home,
-                            bundle
-                        )
+                    response.onSuccess { trip ->
+                        // guardar foto no storage
+                        viewModel.uploadFile(viewModel.currentPhotoPath, trip.id!!) { filePath ->
+                            trip.coverPath = filePath
+
+                            // ir para a tela das viagens e enviar os dados da viagem criada
+                            response.onSuccess {
+                                val bundle = Bundle()
+                                bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
+                                findNavController().navigate(
+                                    R.id.action_tripCreate_to_home,
+                                    bundle
+                                )
+                            }
+                            // mostrar erro
+                            response.onFailure {
+                                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
                     // mostrar erro
                     response.onFailure {
@@ -110,14 +119,11 @@ class TripCreateFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // quando é tirada uma foto com sucesso apartir da câmara
-        if (requestCode == PhotoCreateFragment.REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
-            // mostrar imagem origina
-            //viewModel.currentPhotoPath.observe() {
-
-            //}
-            //BitmapFactory.decodeFile(viewModel.currentPhotoPath).apply {
-                //binding.imageViewPhotoCreatePhoto.setImageBitmap(this)
-            //}
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
+            // mostrar imagem
+            BitmapFactory.decodeFile(viewModel.currentPhotoPath).apply {
+                binding.imageViewTripCreateCover.setImageBitmap(this)
+            }
         }
     }
 
@@ -148,8 +154,9 @@ class TripCreateFragment : Fragment() {
                     )
 
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent,
-                        PhotoCreateFragment.REQUEST_TAKE_PHOTO
+                    startActivityForResult(
+                        takePictureIntent,
+                        REQUEST_TAKE_PHOTO
                     )
                 }
             }

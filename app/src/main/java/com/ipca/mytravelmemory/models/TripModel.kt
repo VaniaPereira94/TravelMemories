@@ -11,13 +11,22 @@ class TripModel : Serializable {
     var cities: String? = null
     var startDate: Date? = null
     var endDate: Date? = null
+    var coverPath: String? = null
 
-    constructor(id: String?, country: String?, cities: String?, startDate: Date?, endDate: Date?) {
+    constructor(
+        id: String?,
+        country: String?,
+        cities: String?,
+        startDate: Date?,
+        endDate: Date?,
+        coverPath: String?
+    ) {
         this.id = id
         this.country = country
         this.cities = cities
         this.startDate = startDate
         this.endDate = endDate
+        this.coverPath = coverPath
     }
 
     fun convertToHashMap(): HashMap<String, Any?> {
@@ -25,7 +34,8 @@ class TripModel : Serializable {
             "country" to country,
             "cities" to cities,
             "startDate" to Timestamp(startDate!!),
-            "endDate" to Timestamp(endDate!!)
+            "endDate" to Timestamp(endDate!!),
+            "coverPath" to coverPath!!
         )
     }
 
@@ -37,6 +47,7 @@ class TripModel : Serializable {
                 hashMap["cities"] as String?,
                 ParserUtil.convertTimestampToString(hashMap["startDate"] as Timestamp),
                 ParserUtil.convertTimestampToString(hashMap["endDate"] as Timestamp),
+                hashMap["coverPath"] as String
             )
         }
     }

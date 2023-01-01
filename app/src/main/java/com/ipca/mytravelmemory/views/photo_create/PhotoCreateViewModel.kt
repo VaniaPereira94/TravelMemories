@@ -10,9 +10,9 @@ import com.google.firebase.storage.ktx.storageMetadata
 import com.ipca.mytravelmemory.models.PhotoModel
 import com.ipca.mytravelmemory.repositories.AuthRepository
 import com.ipca.mytravelmemory.repositories.PhotoRepository
+import com.ipca.mytravelmemory.utils.ParserUtil
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
 import java.util.*
 
 class PhotoCreateViewModel : ViewModel() {
@@ -48,8 +48,8 @@ class PhotoCreateViewModel : ViewModel() {
 
     @Throws(IOException::class)
     fun createImageFile(context: Context): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        // nome do ficheiro
+        val timeStamp: String = ParserUtil.convertDateToString(Date(), "yyyyMMdd_HHmmss")
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
         return File.createTempFile(

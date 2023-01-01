@@ -1,8 +1,13 @@
 package com.ipca.mytravelmemory.views.trip_create
 
 import android.content.Context
+import android.net.Uri
 import android.os.Environment
 import androidx.lifecycle.*
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.google.firebase.storage.ktx.storageMetadata
 import com.ipca.mytravelmemory.models.TripModel
 import com.ipca.mytravelmemory.repositories.AuthRepository
 import com.ipca.mytravelmemory.repositories.TripRepository
@@ -18,20 +23,34 @@ class TripCreateViewModel : ViewModel() {
     private var tripRepository = TripRepository()
     private var authRepository = AuthRepository()
 
-     // var currentPhotoPath: MutableLiveData<String>()
+    lateinit var currentPhotoPath: String
+    private lateinit var filename: String
+    private lateinit var fullPath: String
+
+    private fun setFullPath(userID: String, tripID: String): String {
+        fullPath = "/${userID}/${tripID}/${filename}.jpg"
+        return fullPath
+    }
+
+    private fun getFullPath(): String {
+        return fullPath
+    }
 
     private fun setTrip(
+        id: String,
         country: String,
         cities: String,
         startDate: String,
-        endDate: String
+        endDate: String,
+        coverPath: String
     ): TripModel {
         return TripModel(
-            null,
+            id,
             country,
             cities,
             ParserUtil.convertStringToDate(startDate, "dd-MM-yyyy"),
-            ParserUtil.convertStringToDate(endDate, "dd-MM-yyyy")
+            ParserUtil.convertStringToDate(endDate, "dd-MM-yyyy"),
+            coverPath
         )
     }
 
@@ -41,10 +60,17 @@ class TripCreateViewModel : ViewModel() {
         startDate: String,
         endDate: String
     ): LiveData<Result<TripModel>> {
+        // criar novo documento no firebase onde será guardada a nova viagem
         val userID = authRepository.getUserID()
-        val trip = setTrip(country, cities, startDate, endDate)
+        val documentReference = tripRepository.setDocumentBeforeCreate(userID)
 
-        tripRepository.create(userID, trip.convertToHashMap())
+        // criar viagem
+        val tripID = documentReference.id
+        val coverPath = setFullPath(userID, tripID)
+        val trip = setTrip(tripID, country, cities, startDate, endDate, coverPath)
+
+        // adicionar à base de dados
+        tripRepository.create(documentReference, trip.convertToHashMap())
             .addOnSuccessListener {
                 result.value = Result.success(trip)
             }
@@ -55,19 +81,40 @@ class TripCreateViewModel : ViewModel() {
         return result
     }
 
+    fun uploadFile(currentPhotoPath: String, tripID: String, callback: (String?) -> Unit) {
+        var storage = Firebase.storage
+        val storageRef = storage.reference
+        val file = Uri.fromFile(File(currentPhotoPath))
+
+        var metadata = storageMetadata {
+            contentType = "image/jpg"
+        }
+
+        val ref = storageRef.child(getFullPath())
+        val uploadTask = ref.putFile(file)
+
+        uploadTask.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                callback.invoke(ref.path)
+            } else {
+                callback.invoke(null)
+            }
+        }
+    }
+
     @Throws(IOException::class)
     fun createImageFile(context: Context): File {
         // nome do ficheiro
-        val timeStamp: String = ParserUtil.convertDateToString(Date(), "dd-MM-yyyy")
+        filename = ParserUtil.convertDateToString(Date(), "yyyyMMdd_HHmmss")
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
         return File.createTempFile(
-            timeStamp, /* prefix */
+            filename, /* prefix */
             ".jpg", /* suffix */
             storageDir /* directory */
         ).apply {
             // Save a file: path for use with ACTION_VIEW intents
-            //currentPhotoPath = absolutePath
+            currentPhotoPath = this.absolutePath
         }
     }
 }

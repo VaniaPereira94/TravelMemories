@@ -6,7 +6,7 @@ import java.util.*
 
 class PhotoModel : Serializable {
     var id: String? = null
-    var filePath: String? = null  // caminho no storage do firebase
+    var filePath: String? = null  // caminho do ficheiro no storage
     var description: String? = null
 
     constructor(id: String?, filePath: String?, description: String?) {
