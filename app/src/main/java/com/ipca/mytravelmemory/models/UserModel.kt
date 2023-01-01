@@ -1,8 +1,17 @@
 package com.ipca.mytravelmemory.models
 
 class UserModel {
-    private var name: String? = null
-    private var country: String? = null
+    var id: String? = null
+    var email: String? = null
+    var name: String? = null
+    var country: String? = null
+
+    constructor(id: String?, email: String?, name: String?, country: String?) {
+        this.id = id
+        this.email = email
+        this.name = name
+        this.country = country
+    }
 
     constructor(name: String?, country: String?) {
         this.name = name
@@ -14,5 +23,20 @@ class UserModel {
             "name" to name,
             "country" to country
         )
+    }
+
+    companion object {
+        fun convertToUserModel(
+            id: String,
+            email: String,
+            hashMap: MutableMap<String, Any>
+        ): UserModel {
+            return UserModel(
+                id,
+                email,
+                hashMap["name"] as String,
+                hashMap["country"] as String?
+            )
+        }
     }
 }
