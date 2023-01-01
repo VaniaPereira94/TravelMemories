@@ -9,6 +9,10 @@ object ParserUtil {
         return SimpleDateFormat(format).parse(text)
     }
 
+    fun convertDateToString(date: Date, format: String): String {
+        return SimpleDateFormat(format).format(date)
+    }
+
     fun convertTimestampToString(timestamp: Timestamp): Date {
         return timestamp.toDate()
     }

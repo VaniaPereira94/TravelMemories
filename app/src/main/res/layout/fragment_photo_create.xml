@@ -16,12 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView_photoCreate_description"
+    <EditText
+        android:id="@+id/editText_photoCreate_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:layout_marginTop="140dp"
-        android:text="TextView"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_photoCreate_photo" />
@@ -33,7 +35,6 @@
         android:layout_marginTop="50dp"
         android:text="Guardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_photoCreate_description" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_photoCreate_description" />
 </androidx.constraintlayout.widget.ConstraintLayout>

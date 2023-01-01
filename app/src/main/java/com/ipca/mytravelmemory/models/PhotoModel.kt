@@ -1,31 +1,24 @@
 package com.ipca.mytravelmemory.models
 
-import com.google.firebase.Timestamp
-import com.ipca.mytravelmemory.utils.ParserUtil
+import android.graphics.Bitmap
 import java.io.Serializable
 import java.util.*
 
 class PhotoModel : Serializable {
     var id: String? = null
-    var country: String? = null
-    var cities: String? = null
-    var startDate: Date? = null
-    var endDate: Date? = null
+    var filePath: String? = null  // caminho no storage do firebase
+    var description: String? = null
 
-    constructor(id: String?, country: String?, cities: String?, startDate: Date?, endDate: Date?) {
+    constructor(id: String?, filePath: String?, description: String?) {
         this.id = id
-        this.country = country
-        this.cities = cities
-        this.startDate = startDate
-        this.endDate = endDate
+        this.filePath = filePath
+        this.description = description
     }
 
     fun convertToHashMap(): HashMap<String, Any?> {
         return hashMapOf(
-            "country" to country,
-            "cities" to cities,
-            "startDate" to Timestamp(startDate!!),
-            "endDate" to Timestamp(endDate!!)
+            "filePath" to filePath,
+            "description" to description
         )
     }
 
@@ -33,10 +26,8 @@ class PhotoModel : Serializable {
         fun convertToTripModel(id: String, hashMap: MutableMap<String, Any>): PhotoModel {
             return PhotoModel(
                 id,
-                hashMap["country"] as String,
-                hashMap["cities"] as String?,
-                ParserUtil.convertTimestampToString(hashMap["startDate"] as Timestamp),
-                ParserUtil.convertTimestampToString(hashMap["endDate"] as Timestamp),
+                hashMap["filePath"] as String,
+                hashMap["description"] as String?
             )
         }
     }

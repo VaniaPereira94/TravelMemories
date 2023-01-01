@@ -1,17 +1,27 @@
 package com.ipca.mytravelmemory.views.trip_create
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentTripCreateBinding
 import com.ipca.mytravelmemory.views.home.HomeFragment
+import com.ipca.mytravelmemory.views.photo_create.PhotoCreateFragment
+import java.io.File
+import java.io.IOException
 import java.util.*
 
 class TripCreateFragment : Fragment() {
@@ -66,6 +76,11 @@ class TripCreateFragment : Fragment() {
             ).show()
         }
 
+        // ao clicar no botão de escolher uma foto de capa
+        binding.imageViewTripCreateCover.setOnClickListener {
+            openCameraAndTakePhoto()
+        }
+
         // ao clicar no botão de criar viagem
         binding.buttonTripCreateSave.setOnClickListener {
             val country = binding.editTextTripCreateCountry.text.toString()
@@ -93,8 +108,55 @@ class TripCreateFragment : Fragment() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // quando é tirada uma foto com sucesso apartir da câmara
+        if (requestCode == PhotoCreateFragment.REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
+            // mostrar imagem origina
+            //viewModel.currentPhotoPath.observe() {
+
+            //}
+            //BitmapFactory.decodeFile(viewModel.currentPhotoPath).apply {
+                //binding.imageViewPhotoCreatePhoto.setImageBitmap(this)
+            //}
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun openCameraAndTakePhoto() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            // Ensure that there's a camera activity to handle the intent
+            takePictureIntent.resolveActivity(requireContext().packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    viewModel.createImageFile(requireContext())
+                } catch (ex: IOException) {
+                    Toast.makeText(context, "Error ao criar ficheiro da foto.", Toast.LENGTH_SHORT)
+                        .show()
+                    null
+                }
+
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        requireContext(),
+                        "com.ipca.mytravelmemory.fileprovider",
+                        it
+                    )
+
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent,
+                        PhotoCreateFragment.REQUEST_TAKE_PHOTO
+                    )
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val REQUEST_TAKE_PHOTO = 1
     }
 }

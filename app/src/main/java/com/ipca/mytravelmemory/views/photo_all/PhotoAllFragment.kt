@@ -1,13 +1,18 @@
 package com.ipca.mytravelmemory.views.photo_all
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentPhotoAllBinding
 import com.ipca.mytravelmemory.models.PhotoModel
@@ -34,6 +39,17 @@ class PhotoAllFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // atualizar view com a lista das fotos
+        val tripID = getSharedTripID()
+
+        viewModel.getPhotosDataFromFirebase(tripID!!).observe(viewLifecycleOwner) { response ->
+            response.onSuccess {
+                photos = it as ArrayList
+                adapter.notifyDataSetChanged()
+            }
+            response.onFailure {
+                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            }
+        }
 
         binding.listViewPhotoAllPhotos.adapter = adapter
 
@@ -57,7 +73,24 @@ class PhotoAllFragment : Fragment() {
         }
 
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-            val rootView = layoutInflater.inflate(R.layout.row_diary, parent, false)
+            val rootView = layoutInflater.inflate(R.layout.row_photo, parent, false)
+
+            val textViewDescription =
+                rootView.findViewById<TextView>(R.id.textView_photoAll_description)
+            textViewDescription.text = photos[position].description
+
+            // fazer download da foto e visualizá-la na imageView
+            val imageViewPhoto = rootView.findViewById<ImageView>(R.id.imageView_photoAll_photo)
+            viewModel.getPhotoURI(photos[position].filePath!!) { response ->
+                    response!!.onSuccess { uri ->
+                        Glide.with(requireContext())
+                            .load(uri)
+                            .into(imageViewPhoto)
+                    }
+                    response!!.onFailure {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
 
             return rootView
         }
@@ -68,7 +101,8 @@ class PhotoAllFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        const val EXTRA_PHOTO_CREATED = "EXTRA_PHOTO_CREATED"
+    private fun getSharedTripID(): String? {
+        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
+        return sharedPreference.getString(getString(R.string.shared_trip_id), "")
     }
 }
