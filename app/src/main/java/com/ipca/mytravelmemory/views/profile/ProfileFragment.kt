@@ -32,6 +32,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // carregar os dados do utilizador cas caixas de texto
         viewModel.getUserFromFirebase().observe(viewLifecycleOwner) { response ->
             response.onSuccess {
                 user = it
@@ -46,17 +47,29 @@ class ProfileFragment : Fragment() {
 
         // ao clicar em atualizar dados
         binding.buttonProfileUpdateData.setOnClickListener {
+            val name = binding.editTextProfileName.text.toString()
+            val country = binding.editTextProfileCountry.text.toString()
 
-
-            // ir para o ecrã principal
-            findNavController().navigate(R.id.fragment_navigationFooter_home)
+            viewModel.editUserDataFromFirebase(name, country).observe(viewLifecycleOwner) { response ->
+                // ir para o ecrã principal
+                response.onSuccess {
+                    findNavController().navigate(R.id.fragment_navigationFooter_home)
+                }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // ao clicar em atualizar email
+        binding.buttonProfileUpdateEmail.setOnClickListener {
 
+        }
 
         // ao clicar em atualizar senha
+        binding.buttonProfileUpdatePassword.setOnClickListener {
 
+        }
     }
 
     override fun onDestroyView() {

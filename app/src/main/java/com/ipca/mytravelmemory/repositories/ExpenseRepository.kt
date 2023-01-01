@@ -8,7 +8,7 @@ class ExpenseRepository {
     var db = FirebaseFirestore.getInstance()
 
     fun create(userID: String, expense: HashMap<String, Any?>): Task<Void> {
-        var documentReference = db.collection("users")
+        val documentReference = db.collection("users")
             .document(userID)
             .collection("expenses")
             .document()

@@ -5,8 +5,9 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
+// para lidar com utilizadores na autenticação do firebase
 class AuthRepository {
-    var auth = FirebaseAuth.getInstance()
+    private var auth = FirebaseAuth.getInstance()
 
     fun signUp(email: String, password: String): Task<AuthResult> {
         val result = auth.createUserWithEmailAndPassword(email, password)
@@ -28,5 +29,17 @@ class AuthRepository {
 
     fun getUserID(): String {
         return auth.currentUser!!.uid
+    }
+
+    fun updateEmail() {
+
+    }
+
+    fun updatePassword() {
+
+    }
+
+    fun delete() {
+
     }
 }

@@ -10,7 +10,7 @@ class TripRepository {
     var db = FirebaseFirestore.getInstance()
 
     fun setDocumentBeforeCreate(userID: String): DocumentReference {
-        var documentReference = db.collection("users")
+        val documentReference = db.collection("users")
             .document(userID)
             .collection("trips")
             .document()

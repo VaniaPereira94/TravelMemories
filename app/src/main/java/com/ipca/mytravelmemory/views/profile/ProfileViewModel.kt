@@ -6,7 +6,8 @@ import com.ipca.mytravelmemory.repositories.AuthRepository
 import com.ipca.mytravelmemory.repositories.UserRepository
 
 class ProfileViewModel : ViewModel() {
-    private var result: MutableLiveData<Result<UserModel>> = MutableLiveData()
+    private var resultUser: MutableLiveData<Result<UserModel>> = MutableLiveData()
+    private var resultStatus: MutableLiveData<Result<Boolean>> = MutableLiveData()
 
     private var userRepository = UserRepository()
     private var authRepository = AuthRepository()
@@ -22,18 +23,38 @@ class ProfileViewModel : ViewModel() {
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         val user = UserModel.convertToUserModel(userID, email!!, document.data!!)
-                        result.value = Result.success(user)
+                        resultUser.value = Result.success(user)
                     } else {
-                        result.value =
+                        resultUser.value =
                             Result.failure(Throwable("Erro ao obter o utilizador autenticado."))
                     }
                 }
                 .addOnFailureListener {
-                    result.value =
+                    resultUser.value =
                         Result.failure(Throwable("Erro ao obter o utilizador autenticado."))
                 }
         }
 
-        return result
+        return resultUser
+    }
+
+    fun editUserDataFromFirebase(name: String, country: String?): LiveData<Result<Boolean>> {
+        val userID = authRepository.getUserID()
+
+        if (name == "" ) {
+            resultStatus.value =
+                Result.failure(Throwable("O nome é obrigatório."))
+        }
+
+        userRepository.updateData(userID, name, country)
+            .addOnSuccessListener {
+                resultStatus.value = Result.success(true)
+            }
+            .addOnFailureListener {
+                resultStatus.value =
+                    Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+            }
+
+        return resultStatus
     }
 }

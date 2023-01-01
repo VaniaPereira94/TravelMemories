@@ -9,7 +9,7 @@ class DiaryDayRepository {
     var db = FirebaseFirestore.getInstance()
 
     fun create(userID: String, tripID: String, trip: HashMap<String, Any?>): Task<Void> {
-        var documentReference = db.collection("users")
+        val documentReference = db.collection("users")
             .document(userID)
             .collection("trips")
             .document(tripID)

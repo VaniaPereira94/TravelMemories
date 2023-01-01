@@ -10,7 +10,7 @@ class PhotoRepository {
     var db = FirebaseFirestore.getInstance()
 
     fun setDocumentBeforeCreate(userID: String, tripID: String): DocumentReference {
-        var documentReference = db.collection("users")
+        val documentReference = db.collection("users")
             .document(userID)
             .collection("trips")
             .document(tripID)
@@ -24,7 +24,7 @@ class PhotoRepository {
     }
 
     fun selectAll(userID: String, tripID: String): CollectionReference {
-        var collectionReference = db.collection("users")
+        val collectionReference = db.collection("users")
             .document(userID)
             .collection("trips")
             .document(tripID)
