@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import androidx.lifecycle.*
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.firebase.storage.ktx.storageMetadata
@@ -14,7 +13,6 @@ import com.ipca.mytravelmemory.repositories.TripRepository
 import com.ipca.mytravelmemory.utils.ParserUtil
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
 import java.util.*
 
 class TripCreateViewModel : ViewModel() {
@@ -23,13 +21,12 @@ class TripCreateViewModel : ViewModel() {
     private var tripRepository = TripRepository()
     private var authRepository = AuthRepository()
 
-    lateinit var currentPhotoPath: String
+    lateinit var pathInDevice: String
     private lateinit var filename: String
     private lateinit var fullPath: String
 
     private fun setFullPath(userID: String, tripID: String): String {
-        fullPath = "/${userID}/${tripID}/${filename}.jpg"
-        return fullPath
+        return "/${userID}/${tripID}/${filename}.jpg"
     }
 
     private fun getFullPath(): String {
@@ -66,8 +63,8 @@ class TripCreateViewModel : ViewModel() {
 
         // criar viagem
         val tripID = documentReference.id
-        val coverPath = setFullPath(userID, tripID)
-        val trip = setTrip(tripID, country, cities, startDate, endDate, coverPath)
+        fullPath = setFullPath(userID, tripID)
+        val trip = setTrip(tripID, country, cities, startDate, endDate, fullPath)
 
         // adicionar à base de dados
         tripRepository.create(documentReference, trip.convertToHashMap())
@@ -81,10 +78,10 @@ class TripCreateViewModel : ViewModel() {
         return result
     }
 
-    fun uploadFile(currentPhotoPath: String, tripID: String, callback: (String?) -> Unit) {
-        var storage = Firebase.storage
+    fun uploadFile(callback: (String?) -> Unit) {
+        val storage = Firebase.storage
         val storageRef = storage.reference
-        val file = Uri.fromFile(File(currentPhotoPath))
+        val file = Uri.fromFile(File(pathInDevice))
 
         var metadata = storageMetadata {
             contentType = "image/jpg"
@@ -109,12 +106,12 @@ class TripCreateViewModel : ViewModel() {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
         return File.createTempFile(
-            filename, /* prefix */
-            ".jpg", /* suffix */
-            storageDir /* directory */
+            filename, /* prefixo */
+            ".jpg", /* sufixo */
+            storageDir /* diretório */
         ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            currentPhotoPath = this.absolutePath
+            // guardar um ficheiro: caminho para uso com intents ACTION_VIEW
+            pathInDevice = this.absolutePath
         }
     }
 }

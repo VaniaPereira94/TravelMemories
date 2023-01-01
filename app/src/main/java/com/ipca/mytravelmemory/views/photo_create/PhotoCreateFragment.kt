@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentPhotoCreateBinding
+import com.ipca.mytravelmemory.views.home.HomeFragment
 import java.io.File
 import java.io.IOException
 
@@ -43,24 +44,32 @@ class PhotoCreateFragment : Fragment() {
         // ao clicar em guardar foto
         binding.buttonPhotoCreateSave.setOnClickListener {
             val tripID = getSharedTripID()
+            val description = binding.editTextPhotoCreateDescription.text.toString()
 
-            viewModel.uploadFile(viewModel.currentPhotoPath, tripID!!) { filePath ->
-                filePath?.let {
-                    viewModel.addPhotoToDatabase(
-                        tripID,
-                        filePath,
-                        binding.editTextPhotoCreateDescription.text.toString()
-                    )
-                        .observe(viewLifecycleOwner) { response ->
-                            response.onSuccess {
-                                findNavController().popBackStack()
+            viewModel.addPhotoToDatabase(tripID!!, description)
+                .observe(viewLifecycleOwner) { response ->
+                    response.onSuccess {
+                        // guardar foto no storage
+                        viewModel.uploadFile { pathInDevice ->
+                            pathInDevice?.let {
+                                // ir para a tela das viagens e enviar os dados da viagem criada
+                                response.onSuccess {
+                                    val bundle = Bundle()
+                                    bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
+                                    findNavController().popBackStack()
+                                }
                             }
+                            // mostrar erro
                             response.onFailure {
                                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                             }
                         }
+                    }
+                    // mostrar erro
+                    response.onFailure {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
         }
     }
 
@@ -68,7 +77,7 @@ class PhotoCreateFragment : Fragment() {
         // quando é tirada uma foto com sucesso apartir da câmara
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
             // mostrar imagem original
-            BitmapFactory.decodeFile(viewModel.currentPhotoPath).apply {
+            BitmapFactory.decodeFile(viewModel.pathInDevice).apply {
                 binding.imageViewPhotoCreatePhoto.setImageBitmap(this)
             }
         }

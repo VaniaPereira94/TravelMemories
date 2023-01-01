@@ -89,19 +89,19 @@ class TripCreateFragment : Fragment() {
             // adicionar viagem na base de dados
             viewModel.addTripToFirebase(country, cities, startDate, endDate)
                 .observe(viewLifecycleOwner) { response ->
-                    response.onSuccess { trip ->
+                    response.onSuccess {
                         // guardar foto no storage
-                        viewModel.uploadFile(viewModel.currentPhotoPath, trip.id!!) { filePath ->
-                            trip.coverPath = filePath
-
-                            // ir para a tela das viagens e enviar os dados da viagem criada
-                            response.onSuccess {
-                                val bundle = Bundle()
-                                bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
-                                findNavController().navigate(
-                                    R.id.action_tripCreate_to_home,
-                                    bundle
-                                )
+                        viewModel.uploadFile { pathInDevice ->
+                            pathInDevice?.let {
+                                // ir para a tela das viagens e enviar os dados da viagem criada
+                                response.onSuccess {
+                                    val bundle = Bundle()
+                                    bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
+                                    findNavController().navigate(
+                                        R.id.action_tripCreate_to_home,
+                                        bundle
+                                    )
+                                }
                             }
                             // mostrar erro
                             response.onFailure {
@@ -121,7 +121,7 @@ class TripCreateFragment : Fragment() {
         // quando é tirada uma foto com sucesso apartir da câmara
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             // mostrar imagem
-            BitmapFactory.decodeFile(viewModel.currentPhotoPath).apply {
+            BitmapFactory.decodeFile(viewModel.pathInDevice).apply {
                 binding.imageViewTripCreateCover.setImageBitmap(this)
             }
         }
