@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_tripCreate"
         android:name="com.ipca.mytravelmemory.views.trip_create.TripCreateFragment"
-        android:label="Trip Create"
+        android:label="Criar Viagem"
         tools:layout="@layout/fragment_trip_create">
         <action
             android:id="@+id/action_tripCreate_to_home"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_tripDetail"
         android:name="com.ipca.mytravelmemory.views.trip_detail.TripDetailFragment"
-        android:label="fragment_trip_detail"
+        android:label="Viagem"
         tools:layout="@layout/fragment_trip_detail">
         <action
             android:id="@+id/action_tripDetail_to_diaryDayAll"
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_photoAll"
         android:name="com.ipca.mytravelmemory.views.photo_all.PhotoAllFragment"
-        android:label="fragment_photo_all"
+        android:label="Fotos"
         tools:layout="@layout/fragment_photo_all" >
         <action
             android:id="@+id/action__photoAll_to_photoCreate"
@@ -52,12 +52,12 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_photoCreate"
         android:name="com.ipca.mytravelmemory.views.photo_create.PhotoCreateFragment"
-        android:label="fragment_photo_create"
+        android:label="Criar Foto"
         tools:layout="@layout/fragment_photo_create" />
     <fragment
         android:id="@+id/fragment_navigationFooter_expenseCreate"
         android:name="com.ipca.mytravelmemory.views.expense_create.ExpenseCreateFragment"
-        android:label="fragment_expense_create"
+        android:label="Criar Despesa"
         tools:layout="@layout/fragment_expense_create">
         <action
             android:id="@+id/action_expenseCreate_to_expenseAll"
@@ -66,7 +66,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_expenseAll"
         android:name="com.ipca.mytravelmemory.views.expense_all.ExpenseAllFragment"
-        android:label="fragment_expense_all"
+        android:label="Despesas"
         tools:layout="@layout/fragment_expense_all">
         <action
             android:id="@+id/action_expenseAll_to_expenseCreate"
@@ -75,7 +75,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayAll"
         android:name="com.ipca.mytravelmemory.views.diary_day_all.DiaryDayAllFragment"
-        android:label="fragment_diary_day_all"
+        android:label="Diário"
         tools:layout="@layout/fragment_diary_day_all">
         <action
             android:id="@+id/action_diaryDayAll_to_diaryDayCreate"
@@ -84,7 +84,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayCreate"
         android:name="com.ipca.mytravelmemory.views.diary_day_create.DiaryDayCreateFragment"
-        android:label="fragment_diary_day_create"
+        android:label="Criar Dia do Diário"
         tools:layout="@layout/fragment_diary_day_create">
         <action
             android:id="@+id/action_diaryDayCreate_to_diaryDayAll"
