@@ -35,7 +35,7 @@ class TripModel : Serializable {
             "cities" to cities,
             "startDate" to Timestamp(startDate!!),
             "endDate" to Timestamp(endDate!!),
-            "coverPath" to coverPath!!
+            "coverPath" to coverPath
         )
     }
 
@@ -47,7 +47,7 @@ class TripModel : Serializable {
                 hashMap["cities"] as String?,
                 ParserUtil.convertTimestampToString(hashMap["startDate"] as Timestamp),
                 ParserUtil.convertTimestampToString(hashMap["endDate"] as Timestamp),
-                hashMap["coverPath"] as String
+                hashMap["coverPath"] as String?
             )
         }
     }

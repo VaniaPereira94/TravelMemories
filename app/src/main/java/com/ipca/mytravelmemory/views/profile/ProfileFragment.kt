@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.ipca.mytravelmemory.MainActivity
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentProfileBinding
 import com.ipca.mytravelmemory.models.UserModel
@@ -97,7 +96,7 @@ class ProfileFragment : Fragment() {
         }
 
         // ao clicar em apagar conta do utilizador
-        binding.buttonProfileRemoveUser.setOnClickListener {
+        binding.buttonProfileRemove.setOnClickListener {
             viewModel.removerUserFromFirebase().observe(viewLifecycleOwner) { response ->
                 // ir para o ecrã de login e registo
                 response.onSuccess {

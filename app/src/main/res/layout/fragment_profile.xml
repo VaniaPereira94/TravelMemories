@@ -109,7 +109,7 @@
             app:layout_constraintTop_toBottomOf="@+id/button_profile_updatePassword" />
 
         <Button
-            android:id="@+id/button_profile_removeUser"
+            android:id="@+id/button_profile_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"

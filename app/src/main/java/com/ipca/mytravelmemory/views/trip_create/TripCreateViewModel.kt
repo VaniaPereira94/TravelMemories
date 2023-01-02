@@ -58,7 +58,7 @@ class TripCreateViewModel : ViewModel() {
         endDate: String
     ): LiveData<Result<TripModel>> {
         // criar novo documento no firebase onde será guardada a nova viagem
-        val userID = authRepository.getUserID()
+        val userID = authRepository.getUserID()!!
         val documentReference = tripRepository.setDocumentBeforeCreate(userID)
 
         // criar viagem

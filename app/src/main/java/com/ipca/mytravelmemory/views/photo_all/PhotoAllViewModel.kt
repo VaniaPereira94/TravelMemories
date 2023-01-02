@@ -15,7 +15,7 @@ class PhotoAllViewModel : ViewModel() {
     private var authRepository = AuthRepository()
 
     fun getPhotosDataFromFirebase(tripID: String): LiveData<Result<List<PhotoModel>>> {
-        val userID = authRepository.getUserID()
+        val userID = authRepository.getUserID()!!
 
         photoRepository.selectAll(userID, tripID)
             .addSnapshotListener(EventListener { documents, error ->

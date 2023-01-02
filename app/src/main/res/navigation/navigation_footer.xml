@@ -48,12 +48,20 @@
         <action
             android:id="@+id/action__photoAll_to_photoCreate"
             app:destination="@id/fragment_navigationFooter_photoCreate" />
+        <action
+            android:id="@+id/action_photoAll_to_photoDetail"
+            app:destination="@id/fragment_navigationFooter_photoDetail" />
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_photoCreate"
         android:name="com.ipca.mytravelmemory.views.photo_create.PhotoCreateFragment"
         android:label="Criar Foto"
         tools:layout="@layout/fragment_photo_create" />
+    <fragment
+        android:id="@+id/fragment_navigationFooter_photoDetail"
+        android:name="com.ipca.mytravelmemory.views.photo_detail.PhotoDetailFragment"
+        android:label="Foto"
+        tools:layout="@layout/fragment_photo_detail" />
     <fragment
         android:id="@+id/fragment_navigationFooter_expenseCreate"
         android:name="com.ipca.mytravelmemory.views.expense_create.ExpenseCreateFragment"
@@ -104,11 +112,4 @@
         android:name="com.ipca.mytravelmemory.views.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-
-
-    <fragment
-        android:id="@+id/fragment_navigationFooter_settings"
-        android:name="com.ipca.mytravelmemory.views.settings.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
 </navigation>

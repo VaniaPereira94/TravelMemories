@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentPhotoAllBinding
 import com.ipca.mytravelmemory.models.PhotoModel
+import com.ipca.mytravelmemory.views.photo_detail.PhotoDetailFragment
 
 class PhotoAllFragment : Fragment() {
     private var _binding: FragmentPhotoAllBinding? = null
@@ -91,6 +92,13 @@ class PhotoAllFragment : Fragment() {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     }
                 }
+
+            // ao clicar numa foto, ir para a tela da individual da foto e enviar os dados dessa foto
+            rootView.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable(PhotoDetailFragment.EXTRA_PHOTO_DETAILS, photos[position])
+                findNavController().navigate(R.id.action_photoAll_to_photoDetail, bundle)
+            }
 
             return rootView
         }

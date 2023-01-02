@@ -39,7 +39,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun editUserDataFromFirebase(name: String, country: String?): LiveData<Result<Boolean>> {
-        val userID = authRepository.getUserID()
+        val userID = authRepository.getUserID()!!
 
         if (name == "") {
             resultStatus.value =

@@ -26,7 +26,7 @@ class DiaryDayCreateViewModel : ViewModel() {
         body: String,
         date: String
     ): LiveData<Result<Boolean>> {
-        val userID = authRepository.getUserID()
+        val userID = authRepository.getUserID()!!
         val diaryDay = setDiaryDay(title, body, date)
 
         diaryDayRepository.create(userID, tripID, diaryDay.convertToHashMap())

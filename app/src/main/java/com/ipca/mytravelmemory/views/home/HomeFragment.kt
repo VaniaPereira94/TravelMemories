@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
         // atualizar view com a lista das viagens
         viewModel.getTripsFromFirebase().observe(viewLifecycleOwner) { response ->
             response.onSuccess {
+                println(it.size)
                 trips = it as ArrayList<TripModel>
                 adapter.notifyDataSetChanged()
             }
@@ -90,14 +91,16 @@ class HomeFragment : Fragment() {
 
             // fazer download da foto e visualizá-la na imageView
             val imageViewPhoto = rootView.findViewById<ImageView>(R.id.imageView_home_cover)
-            viewModel.getPhotoURI(trips[position].coverPath!!) { response ->
-                response!!.onSuccess { uri ->
-                    Glide.with(requireContext())
-                        .load(uri)
-                        .into(imageViewPhoto)
-                }
-                response!!.onFailure {
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            trips[position].coverPath?.let { coverPath ->
+                viewModel.getPhotoURI(coverPath) { response ->
+                    response!!.onSuccess { uri ->
+                        Glide.with(requireContext())
+                            .load(uri)
+                            .into(imageViewPhoto)
+                    }
+                    response!!.onFailure {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 

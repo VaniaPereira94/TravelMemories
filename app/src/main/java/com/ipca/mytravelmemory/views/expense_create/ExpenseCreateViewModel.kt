@@ -29,7 +29,7 @@ class ExpenseCreateViewModel : ViewModel() {
         description: String,
         date: String
     ): LiveData<Result<ExpenseModel>> {
-        val userID = authRepository.getUserID()
+        val userID = authRepository.getUserID()!!
         val expense = setExpense(category, price, description, date)
 
        expenseRepository.create(userID, expense.convertToHashMap())

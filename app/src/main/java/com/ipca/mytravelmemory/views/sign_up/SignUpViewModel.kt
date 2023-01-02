@@ -27,7 +27,7 @@ class SignUpViewModel : ViewModel() {
                 val user = setUser(name)
 
                 // adicionar utilizador na base de dados
-                userRepository.create(authRepository.getUserID(), user.convertToHashMap())
+                userRepository.create(authRepository.getUserID()!!, user.convertToHashMap())
                     .addOnSuccessListener {
                         result.value = Result.success(true)
                     }

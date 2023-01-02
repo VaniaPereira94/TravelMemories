@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.fragment_navigationFooter_home,
                 R.id.fragment_navigationFooter_profile,
-                R.id.fragment_navigationFooter_notifications,
-                R.id.fragment_navigationFooter_settings
+                R.id.fragment_navigationFooter_notifications
             )
         )
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentTripDetailBinding
@@ -13,6 +14,8 @@ import com.ipca.mytravelmemory.models.TripModel
 class TripDetailFragment : Fragment() {
     private var _binding: FragmentTripDetailBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: TripDetailViewModel by viewModels()
 
     private lateinit var trip: TripModel
 

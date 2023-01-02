@@ -13,7 +13,7 @@ class DiaryDayAllViewModel : ViewModel() {
     private var authRepository = AuthRepository()
 
     fun getDiaryDaysFromFirebase(tripID: String): LiveData<Result<List<DiaryDayModel>>> {
-        val userID = authRepository.getUserID()
+        val userID = authRepository.getUserID()!!
 
         diaryDayRepository.selectAll(userID, tripID)
             .addSnapshotListener(EventListener { documents, error ->

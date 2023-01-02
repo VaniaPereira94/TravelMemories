@@ -42,7 +42,7 @@ class PhotoCreateViewModel : ViewModel() {
         description: String
     ): LiveData<Result<Boolean>> {
         // criar novo documento no firebase onde será guardada a nova foto
-        val userID = authRepository.getUserID()
+        val userID = authRepository.getUserID()!!
         val documentReference = photoRepository.setDocumentBeforeCreate(userID, tripID)
 
         // criar foto

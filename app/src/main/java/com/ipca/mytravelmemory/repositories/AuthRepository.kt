@@ -27,8 +27,8 @@ class AuthRepository {
         return auth.currentUser
     }
 
-    fun getUserID(): String {
-        return auth.currentUser!!.uid
+    fun getUserID(): String? {
+        return auth.currentUser?.uid
     }
 
     fun updateEmail(email: String): Task<Void> {
