@@ -17,16 +17,16 @@ class TripDetailViewModel : ViewModel() {
 
         tripRepository.delete(userID, tripID)
             .addOnSuccessListener {
-                // remover foto da capa da viagem
+                // remover ficheiro da foto da capa da viagem
                 val storage = Firebase.storage
-                val coverRef = storage.reference.child(coverPath)
+                val coverReference = storage.reference.child(coverPath)
 
-                coverRef.delete()
+                coverReference.delete()
                     .addOnFailureListener {
                         result.value = Result.failure(Throwable("Erro ao apagar viagem."))
                     }
 
-                // remover fotos associadas à viagem
+                // remover ficheiros das fotos associadas à viagem
                 val photosRef = storage.reference.child("${userID}/${tripID}/photos")
 
                 photosRef.listAll()

@@ -23,7 +23,7 @@ class PhotoModel : Serializable {
     }
 
     companion object {
-        fun convertToTripModel(id: String, hashMap: MutableMap<String, Any>): PhotoModel {
+        fun convertToPhotoModel(id: String, hashMap: MutableMap<String, Any>): PhotoModel {
             return PhotoModel(
                 id,
                 hashMap["filePath"] as String,

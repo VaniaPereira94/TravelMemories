@@ -1,5 +1,6 @@
 package com.ipca.mytravelmemory.views.photo_detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentPhotoDetailBinding
 import com.ipca.mytravelmemory.models.PhotoModel
 
@@ -54,11 +57,34 @@ class PhotoDetailFragment : Fragment() {
                 }
             }
         }
+
+        // ao clicar no botão de apagar viagem
+        binding.buttonPhotoDetailRemove.setOnClickListener {
+            val tripID = getSharedTripID()
+
+            photo.filePath?.let { filePath ->
+                viewModel.removePhotoFromFirebase(tripID!!, photo.id!!, filePath)
+                    .observe(viewLifecycleOwner) { response ->
+                        // ir para a página principal
+                        response.onSuccess {
+                            findNavController().popBackStack()
+                        }
+                        response.onFailure {
+                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getSharedTripID(): String? {
+        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
+        return sharedPreference.getString(getString(R.string.shared_trip_id), "")
     }
 
     companion object {

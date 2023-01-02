@@ -26,7 +26,7 @@ class PhotoAllViewModel : ViewModel() {
 
                 val photos: MutableList<PhotoModel> = mutableListOf()
                 for (document in documents!!) {
-                    val photo = PhotoModel.convertToTripModel(document.id, document.data)
+                    val photo = PhotoModel.convertToPhotoModel(document.id, document.data)
                     photos.add(photo)
                 }
 
