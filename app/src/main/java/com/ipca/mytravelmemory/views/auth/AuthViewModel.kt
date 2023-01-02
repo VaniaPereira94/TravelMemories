@@ -19,7 +19,7 @@ class AuthViewModel : ViewModel() {
                 result.value = Result.success(true)
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao registar utilizador."))
+                result.value = Result.failure(Throwable("Erro ao fazer login."))
             }
 
         return result

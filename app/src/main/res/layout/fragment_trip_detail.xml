@@ -24,18 +24,16 @@
         android:layout_marginTop="16dp"
         android:text="Cidades"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_country" />
 
     <Button
-        android:id="@+id/button_tripDetail_diary"
+        android:id="@+id/button_tripDetail_photos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="Diário"
+        android:layout_marginTop="52dp"
+        android:text="Fotografias"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_cities" />
 
@@ -47,16 +45,15 @@
         android:text="Despesas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_diary" />
+        app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_photos" />
 
     <Button
-        android:id="@+id/button_tripDetail_photos"
+        android:id="@+id/button_tripDetail_diary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="Fotografias"
+        android:text="Diário"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_expenses" />
 </androidx.constraintlayout.widget.ConstraintLayout>

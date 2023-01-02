@@ -1,6 +1,6 @@
 package com.ipca.mytravelmemory.views.diary_day_all
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
@@ -37,7 +36,9 @@ class DiaryDayAllFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // atualizar view com a lista dos dias do diário
-        viewModel.getDiaryDaysFromFirebase().observe(viewLifecycleOwner) { response ->
+        val tripID = getSharedTripID()
+
+        viewModel.getDiaryDaysFromFirebase(tripID!!).observe(viewLifecycleOwner) { response ->
             response.onSuccess {
                 diaryDays = it as ArrayList<DiaryDayModel>
                 adapter.notifyDataSetChanged()
@@ -51,8 +52,8 @@ class DiaryDayAllFragment : Fragment() {
 
         // ao clicar no botão de adicionar dia ao diário
         binding.buttonDiaryDayAllAddDiaryDay.setOnClickListener {
-            // ir para a tela de adicionar dia ao diário
-            findNavController().navigate(R.id.action_diaryDayAllFragment_to_diaryDayCreateFragment)
+            // ir para a tela de adicionar dia ao diário e enviar o ID da viagem
+            findNavController().navigate(R.id.action_diaryDayAll_to_diaryDayCreate)
         }
     }
 
@@ -73,13 +74,23 @@ class DiaryDayAllFragment : Fragment() {
             val rootView = layoutInflater.inflate(R.layout.row_diary, parent, false)
 
             val textViewName = rootView.findViewById<TextView>(R.id.textView_diaryAll_title)
-            textViewName.text = diaryDays[position].title
+            textViewName.text = diaryDays[position].body
 
             return rootView
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun getSharedTripID(): String? {
+        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
+        return sharedPreference.getString(getString(R.string.shared_trip_id), "")
+    }
+
     companion object {
-        const val EXTRA_DIARY_DAY_CREATE = "EXTRA_DIARY_DAY_CREATE"
+        const val EXTRA_DIARY_DAY_CREATED = "EXTRA_DIARY_DAY_CREATED"
     }
 }

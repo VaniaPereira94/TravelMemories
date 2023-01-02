@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ipca.mytravelmemory.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,14 +17,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-
+        // definir itens do menu
         val navController = findNavController(R.id.fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_footer)
+            setOf(
+                R.id.fragment_navigationFooter_home,
+                R.id.fragment_navigationFooter_profile,
+                R.id.fragment_navigationFooter_notifications
+            )
         )
 
+        // definir mudança do separador atual, ao clicar neles
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        binding.bottomNavigationView.setupWithNavController(navController)
     }
 }

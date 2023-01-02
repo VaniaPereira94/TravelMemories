@@ -7,10 +7,10 @@ import java.util.*
 
 class DiaryDayModel : Serializable {
     var title: String? = null
-    var body: String
-    var date: Date
+    var body: String? = null
+    var date: Date? = null
 
-    constructor(title: String?, body: String, date: Date) {
+    constructor(title: String?, body: String?, date: Date?) {
         this.title = title
         this.body = body
         this.date = date
@@ -20,7 +20,7 @@ class DiaryDayModel : Serializable {
         return hashMapOf(
             "title" to title,
             "body" to body,
-            "date" to Timestamp(Date())
+            "date" to Timestamp(date!!)
         )
     }
 
