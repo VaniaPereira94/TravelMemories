@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
@@ -39,6 +41,16 @@ class ExpenseCreateFragment : Fragment() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
+        binding.spinnerExpenseCreateCategory
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.expense_categories,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerExpenseCreateCategory.adapter = adapter
+        }
+
         // ao clicar no botão de selecionar data de início
         binding.buttonExpenseCreateDate.setOnClickListener {
             DatePickerDialog(
@@ -58,7 +70,7 @@ class ExpenseCreateFragment : Fragment() {
         binding.buttonExpenseCreateSave.setOnClickListener {
             // definir viagem
             val tripID = getSharedTripID()
-            val category = binding.editTextExpenseCreateCategory.text.toString()
+            val category = binding.spinnerExpenseCreateCategory.selectedItem.toString()
             val price = binding.editTextExpenseCreatePrice.text.toString().toDouble()
             val description = binding.editTextExpenseCreateDescription.text.toString()
             val date = binding.textViewExpenseCreateDate.text.toString()
