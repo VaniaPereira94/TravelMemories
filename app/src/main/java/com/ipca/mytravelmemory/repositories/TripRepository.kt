@@ -27,4 +27,12 @@ class TripRepository {
             .collection("trips")
         return collectionReference
     }
+
+    fun delete(userID: String, tripID: String): Task<Void> {
+        val documentReference = db.collection("users")
+            .document(userID)
+            .collection("trips")
+            .document(tripID)
+        return documentReference.delete()
+    }
 }

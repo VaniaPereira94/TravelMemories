@@ -97,7 +97,7 @@ class ProfileFragment : Fragment() {
 
         // ao clicar em apagar conta do utilizador
         binding.buttonProfileRemove.setOnClickListener {
-            viewModel.removerUserFromFirebase().observe(viewLifecycleOwner) { response ->
+            viewModel.removeUserFromFirebase().observe(viewLifecycleOwner) { response ->
                 // ir para o ecrã de login e registo
                 response.onSuccess {
                     val intent = Intent(requireContext(), AuthActivity::class.java)

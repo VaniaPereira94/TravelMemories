@@ -1,15 +1,18 @@
 package com.ipca.mytravelmemory.views.trip_detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentTripDetailBinding
 import com.ipca.mytravelmemory.models.TripModel
+import com.ipca.mytravelmemory.views.auth.AuthActivity
 
 class TripDetailFragment : Fragment() {
     private var _binding: FragmentTripDetailBinding? = null
@@ -55,6 +58,22 @@ class TripDetailFragment : Fragment() {
         // ao clicar no botão de ir para o ecrã do diário
         binding.buttonTripDetailDiary.setOnClickListener {
             findNavController().navigate(R.id.action_tripDetail_to_diaryDayAll)
+        }
+
+        // ao clicar no botão de apagar viagem
+        binding.buttonTripDetailRemove.setOnClickListener {
+            trip.coverPath?.let { coverPath ->
+                viewModel.removeTripFromFirebase(trip.id!!, coverPath)
+                    .observe(viewLifecycleOwner) { response ->
+                        // ir para a página principal
+                        response.onSuccess {
+                            findNavController().navigate(R.id.fragment_navigationFooter_home)
+                        }
+                        response.onFailure {
+                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
         }
     }
 

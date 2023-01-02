@@ -35,12 +35,13 @@ class ExpenseCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // dados dos selecionadores de datas
+        // dados do selecionador da data da despesa
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
+        // definir itens da dropdown da categoria da despesa
         binding.spinnerExpenseCreateCategory
         ArrayAdapter.createFromResource(
             requireContext(),

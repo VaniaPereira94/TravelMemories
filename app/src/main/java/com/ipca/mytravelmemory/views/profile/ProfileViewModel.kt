@@ -46,7 +46,7 @@ class ProfileViewModel : ViewModel() {
                 Result.failure(Throwable("O nome é obrigatório."))
         }
 
-        userRepository.updateData(userID, name, country)
+        userRepository.update(userID, name, country)
             .addOnSuccessListener {
                 resultStatus.value = Result.success(true)
             }
@@ -84,10 +84,19 @@ class ProfileViewModel : ViewModel() {
         return resultStatus
     }
 
-    fun removerUserFromFirebase(): LiveData<Result<Boolean>> {
+    fun removeUserFromFirebase(): LiveData<Result<Boolean>> {
+        val userID = authRepository.getUserID()!!
+
         authRepository.delete()
             .addOnSuccessListener {
-                resultStatus.value = Result.success(true)
+                userRepository.delete(userID)
+                    .addOnSuccessListener {
+                        resultStatus.value = Result.success(true)
+                    }
+                    .addOnFailureListener {
+                        resultStatus.value =
+                            Result.failure(Throwable("Erro ao apagar conta do utilizador."))
+                    }
             }
             .addOnFailureListener {
                 resultStatus.value =

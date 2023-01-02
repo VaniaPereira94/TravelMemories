@@ -104,6 +104,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:text="Atenção: para conseguir alterar o email ou a palavra-passe é necessário re-autenticar-se na aplicação."
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_profile_updatePassword" />

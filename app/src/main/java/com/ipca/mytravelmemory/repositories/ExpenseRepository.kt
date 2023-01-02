@@ -26,4 +26,14 @@ class ExpenseRepository {
             .collection("expenses")
         return collectionReference
     }
+
+    fun delete(userID: String, tripID: String, expenseID: String): Task<Void> {
+        val documentReference = db.collection("users")
+            .document(userID)
+            .collection("trips")
+            .document(tripID)
+            .collection("expenses")
+            .document(expenseID)
+        return documentReference.delete()
+    }
 }

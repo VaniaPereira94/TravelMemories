@@ -26,4 +26,14 @@ class DiaryDayRepository {
             .collection("diary")
         return collectionReference
     }
+
+    fun delete(userID: String, tripID: String, diaryDayID: String): Task<Void> {
+        val documentReference = db.collection("users")
+            .document(userID)
+            .collection("trips")
+            .document(tripID)
+            .collection("diary")
+            .document(diaryDayID)
+        return documentReference.delete()
+    }
 }

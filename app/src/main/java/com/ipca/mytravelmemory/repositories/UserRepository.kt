@@ -21,7 +21,7 @@ class UserRepository {
         return documentReference.get()
     }
 
-    fun updateData(userID: String, name: String, country: String?): Task<Void> {
+    fun update(userID: String, name: String, country: String?): Task<Void> {
         val documentReference = db.collection("users")
             .document(userID)
         return documentReference.update(
@@ -30,5 +30,11 @@ class UserRepository {
                 "country" to country
             )
         )
+    }
+
+    fun delete(userID: String): Task<Void> {
+        val documentReference = db.collection("users")
+            .document(userID)
+        return documentReference.delete()
     }
 }
