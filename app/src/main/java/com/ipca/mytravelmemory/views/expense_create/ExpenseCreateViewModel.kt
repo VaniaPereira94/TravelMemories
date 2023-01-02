@@ -24,6 +24,7 @@ class ExpenseCreateViewModel : ViewModel() {
     }
 
     fun addExpensesToFirebase(
+        tripID: String,
         category: String,
         price: Double,
         description: String,
@@ -32,7 +33,7 @@ class ExpenseCreateViewModel : ViewModel() {
         val userID = authRepository.getUserID()!!
         val expense = setExpense(category, price, description, date)
 
-       expenseRepository.create(userID, expense.convertToHashMap())
+       expenseRepository.create(userID, tripID, expense.convertToHashMap())
             .addOnSuccessListener {
                 result.value = Result.success(expense)
             }

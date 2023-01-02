@@ -47,8 +47,8 @@
 
     <TextView
         android:id="@+id/textView_expenseCreate_date"
-        android:layout_width="201dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:hint="Data"
         app:layout_constraintEnd_toEndOf="parent"

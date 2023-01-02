@@ -23,15 +23,15 @@ class ExpenseModel : Serializable {
             "category" to category,
             "price" to price,
             "description" to description,
-            "date" to Timestamp(Date())
+            "date" to Timestamp(date!!)
         )
     }
 
     companion object {
-        fun convertToExpensesModel(hashMap: MutableMap<String, Any>): ExpenseModel {
+        fun convertToExpenseModel(hashMap: MutableMap<String, Any>): ExpenseModel {
             return ExpenseModel(
-                hashMap["category"] as String?,
-                hashMap["price"] as Double?,
+                hashMap["category"] as String,
+                hashMap["price"] as Double,
                 hashMap["description"] as String?,
                 ParserUtil.convertTimestampToString(hashMap["date"] as Timestamp),
             )

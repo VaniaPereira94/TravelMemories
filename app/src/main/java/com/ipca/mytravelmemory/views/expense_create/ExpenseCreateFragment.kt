@@ -65,9 +65,9 @@ class ExpenseCreateFragment : Fragment() {
             val date = binding.textViewExpenseCreateDate.text.toString()
 
             // adicionar despesa na base de dados
-            viewModel.addExpensesToFirebase(category, price, description, date)
+            viewModel.addExpensesToFirebase(tripID!!, category, price, description, date)
                 .observe(viewLifecycleOwner) { response ->
-                    // ir para a tela das viagens e enviar os dados da viagem criada
+                    // ir para a tela das despesas e enviar os dados da despesa criada
                     response.onSuccess {
                         val bundle = Bundle()
                         bundle.putSerializable(ExpenseAllFragment.EXTRA_EXPENSE_CREATED, it)
