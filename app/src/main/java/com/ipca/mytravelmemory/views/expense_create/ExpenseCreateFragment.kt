@@ -54,7 +54,6 @@ class ExpenseCreateFragment : Fragment() {
             ).show()
         }
 
-
         // ao clicar no botão de criar despesa
         binding.buttonExpenseCreateSave.setOnClickListener {
             // definir viagem

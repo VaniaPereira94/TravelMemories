@@ -1,5 +1,6 @@
 package com.ipca.mytravelmemory.views.expense_all
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +22,7 @@ class ExpenseAllFragment : Fragment() {
     private val viewModel: ExpenseAllViewModel by viewModels()
 
     private var expenses = arrayListOf<ExpenseModel>()
-    private val adapter = ExpensesAdapter()
+    private val adapter = ExpenseAdapter()
 
 
     override fun onCreateView(
@@ -35,7 +36,9 @@ class ExpenseAllFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // atualizar view com a lista das despesas
-        viewModel.getExpensesFromFirebase().observe(viewLifecycleOwner) { response ->
+        val tripID = getSharedTripID()
+
+        viewModel.getExpensesFromFirebase(tripID!!).observe(viewLifecycleOwner) { response ->
             response.onSuccess {
                 expenses = it as ArrayList<ExpenseModel>
                 adapter.notifyDataSetChanged()
@@ -54,7 +57,7 @@ class ExpenseAllFragment : Fragment() {
         }
     }
 
-    inner class ExpensesAdapter : BaseAdapter() {
+    inner class ExpenseAdapter : BaseAdapter() {
         override fun getCount(): Int {
             return expenses.size
         }
@@ -70,7 +73,7 @@ class ExpenseAllFragment : Fragment() {
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             val rootView = layoutInflater.inflate(R.layout.row_expense, parent, false)
 
-            val textViewName = rootView.findViewById<TextView>(R.id.textView_expenseAll_title)
+            val textViewName = rootView.findViewById<TextView>(R.id.textView_expenseAll_price)
             textViewName.text = expenses[position].category
 
             return rootView
@@ -80,6 +83,11 @@ class ExpenseAllFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getSharedTripID(): String? {
+        val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
+        return sharedPreference.getString(getString(R.string.shared_trip_id), "")
     }
 
     companion object {

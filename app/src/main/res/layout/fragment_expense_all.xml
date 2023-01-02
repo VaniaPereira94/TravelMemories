@@ -20,8 +20,10 @@
 
     <ListView
         android:id="@+id/listView_expenseAll_expenses"
-        android:layout_width="411dp"
-        android:layout_height="649dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_expenseAll_addExpense" />
 </androidx.constraintlayout.widget.ConstraintLayout>
