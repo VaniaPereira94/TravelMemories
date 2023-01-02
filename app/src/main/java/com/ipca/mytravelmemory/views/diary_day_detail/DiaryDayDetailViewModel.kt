@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory.views.diary_day_create
+package com.ipca.mytravelmemory.views.diary_day_detail
 
 import androidx.lifecycle.*
 import com.ipca.mytravelmemory.models.DiaryDayModel
@@ -6,24 +6,20 @@ import com.ipca.mytravelmemory.repositories.AuthRepository
 import com.ipca.mytravelmemory.repositories.DiaryDayRepository
 import com.ipca.mytravelmemory.utils.ParserUtil
 
-class DiaryDayCreateViewModel : ViewModel() {
+class DiaryDayDetailViewModel : ViewModel() {
     private var result: MutableLiveData<Result<Boolean>> = MutableLiveData()
 
     private var diaryDayRepository = DiaryDayRepository()
     private var authRepository = AuthRepository()
 
-    fun addDiaryDayToFirebase(
+    fun editDiaryDayFromFirebase(
         tripID: String,
-        title: String?,
+        diaryDayID: String,
+        title: String,
         body: String,
         date: String
     ): LiveData<Result<Boolean>> {
-        // criar novo documento no firebase onde será guardada o nova dia do diário
         val userID = authRepository.getUserID()!!
-        val documentReference = diaryDayRepository.setDocumentBeforeCreate(userID, tripID)
-
-        // criar dia do diário
-        val diaryDayID = documentReference.id
         val diaryDay = DiaryDayModel(
             diaryDayID,
             title,
@@ -31,13 +27,29 @@ class DiaryDayCreateViewModel : ViewModel() {
             ParserUtil.convertStringToDate(date, "dd-MM-yyyy")
         )
 
-        // adicionar à base de dados
-        diaryDayRepository.create(documentReference, diaryDay.convertToHashMap())
+        diaryDayRepository.update(userID, tripID, diaryDayID, diaryDay.convertToHashMap())
             .addOnSuccessListener {
                 result.value = Result.success(true)
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao adicionar dia ao diário."))
+                result.value = Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+            }
+
+        return result
+    }
+
+    fun removeDiaryDayFromFirebase(
+        tripID: String,
+        diaryDayID: String
+    ): LiveData<Result<Boolean>> {
+        val userID = authRepository.getUserID()!!
+
+        diaryDayRepository.delete(userID, tripID, diaryDayID)
+            .addOnSuccessListener {
+                result.value = Result.success(true)
+            }
+            .addOnFailureListener {
+                result.value = Result.failure(Throwable("Erro ao apagar dia do diário."))
             }
 
         return result

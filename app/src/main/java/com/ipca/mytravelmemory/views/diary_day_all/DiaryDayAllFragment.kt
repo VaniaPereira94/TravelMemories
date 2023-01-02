@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.ipca.mytravelmemory.R
 import com.ipca.mytravelmemory.databinding.FragmentDiaryDayAllBinding
 import com.ipca.mytravelmemory.models.DiaryDayModel
+import com.ipca.mytravelmemory.views.diary_day_detail.DiaryDayDetailFragment
+import com.ipca.mytravelmemory.views.photo_detail.PhotoDetailFragment
 
 class DiaryDayAllFragment : Fragment() {
     private var _binding: FragmentDiaryDayAllBinding? = null
@@ -75,6 +77,16 @@ class DiaryDayAllFragment : Fragment() {
 
             val textViewName = rootView.findViewById<TextView>(R.id.textView_diaryAll_title)
             textViewName.text = diaryDays[position].body
+
+            // ao clicar num dia do diário, ir para o ecrã individual do dia e enviar os dados desse dia
+            rootView.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable(
+                    DiaryDayDetailFragment.EXTRA_DIARY_DAY_DETAILS,
+                    diaryDays[position]
+                )
+                findNavController().navigate(R.id.action_diaryDayAll_to_diaryDayDetail, bundle)
+            }
 
             return rootView
         }

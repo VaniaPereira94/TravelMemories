@@ -58,14 +58,14 @@ class PhotoDetailFragment : Fragment() {
             }
         }
 
-        // ao clicar no botão de apagar viagem
+        // ao clicar no botão de apagar foto
         binding.buttonPhotoDetailRemove.setOnClickListener {
             val tripID = getSharedTripID()
 
             photo.filePath?.let { filePath ->
                 viewModel.removePhotoFromFirebase(tripID!!, photo.id!!, filePath)
                     .observe(viewLifecycleOwner) { response ->
-                        // ir para a página principal
+                        // voltar à página da lista de fotos
                         response.onSuccess {
                             findNavController().popBackStack()
                         }

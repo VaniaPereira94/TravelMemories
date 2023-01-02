@@ -15,6 +15,7 @@ class PhotoModel : Serializable {
         this.description = description
     }
 
+    // dados que serão armazenados no documento da base de dados pertencente à foto
     fun convertToHashMap(): HashMap<String, Any?> {
         return hashMapOf(
             "filePath" to filePath,

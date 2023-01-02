@@ -18,6 +18,7 @@ class UserModel {
         this.country = country
     }
 
+    // dados que serão armazenados no documento da base de dados pertencente ao utilizador
     fun convertToHashMap(): HashMap<String, Any?> {
         return hashMapOf(
             "name" to name,
@@ -26,6 +27,7 @@ class UserModel {
     }
 
     companion object {
+        // dados que serão recuperados da base de dados através do ID do documento e os dados dentro deste
         fun convertToUserModel(
             id: String,
             email: String,

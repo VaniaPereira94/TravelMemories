@@ -59,15 +59,6 @@ class HomeFragment : Fragment() {
         binding.buttonHomeAddTrip.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_tripCreate)
         }
-
-        // ao clicar no botão de terminar sessão, terminar sessão do utilizador e ir para a tela de autenticação
-        binding.buttonHomeLogOut.setOnClickListener {
-            viewModel.signOutFromFirebase()
-
-            val intent = Intent(this@HomeFragment.requireContext(), AuthActivity::class.java)
-            startActivity(intent)
-            activity?.finish();
-        }
     }
 
     inner class TripsAdapter : BaseAdapter() {

@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.HashMap
 
 class TripRepository {
-    var db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     fun setDocumentBeforeCreate(userID: String): DocumentReference {
         val documentReference = db.collection("users")

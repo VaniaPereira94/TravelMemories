@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseUser
 
 // para lidar com utilizadores na autenticação do firebase
 class AuthRepository {
-    private var auth = FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     fun signUp(email: String, password: String): Task<AuthResult> {
         val result = auth.createUserWithEmailAndPassword(email, password)

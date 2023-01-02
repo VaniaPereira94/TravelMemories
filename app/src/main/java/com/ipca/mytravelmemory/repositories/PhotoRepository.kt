@@ -8,7 +8,7 @@ import java.util.HashMap
 
 // para lidar com fotos na base de dados
 class PhotoRepository {
-    var db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     fun setDocumentBeforeCreate(userID: String, tripID: String): DocumentReference {
         val documentReference = db.collection("users")

@@ -95,6 +95,15 @@ class ProfileFragment : Fragment() {
                 }
         }
 
+        // ao clicar no botão de terminar sessão, terminar sessão do utilizador e ir para a tela de login/registo
+        binding.buttonProfileSignOut.setOnClickListener {
+            viewModel.signOutFromFirebase()
+
+            val intent = Intent(requireContext(), AuthActivity::class.java)
+            startActivity(intent)
+            activity?.finish();
+        }
+
         // ao clicar em apagar conta do utilizador
         binding.buttonProfileRemove.setOnClickListener {
             viewModel.removeUserFromFirebase().observe(viewLifecycleOwner) { response ->

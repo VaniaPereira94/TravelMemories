@@ -46,7 +46,9 @@ class ProfileViewModel : ViewModel() {
                 Result.failure(Throwable("O nome é obrigatório."))
         }
 
-        userRepository.update(userID, name, country)
+        val user = UserModel(name, country)
+
+        userRepository.update(userID, user.convertToHashMap())
             .addOnSuccessListener {
                 resultStatus.value = Result.success(true)
             }
@@ -104,5 +106,9 @@ class ProfileViewModel : ViewModel() {
             }
 
         return resultStatus
+    }
+
+    fun signOutFromFirebase() {
+        authRepository.signOut()
     }
 }

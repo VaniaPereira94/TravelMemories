@@ -110,16 +110,26 @@
             app:layout_constraintTop_toBottomOf="@+id/button_profile_updatePassword" />
 
         <Button
-            android:id="@+id/button_profile_remove"
+            android:id="@+id/button_profile_signOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
+            android:text="Terminar sessão"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_profile_warning" />
+
+        <Button
+            android:id="@+id/button_profile_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:layout_marginBottom="96dp"
             android:backgroundTint="#F81F1F"
             android:text="Apagar Conta"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_profile_warning" />
+            app:layout_constraintTop_toBottomOf="@+id/button_profile_signOut" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

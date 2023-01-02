@@ -46,7 +46,7 @@
         android:label="Fotos"
         tools:layout="@layout/fragment_photo_all" >
         <action
-            android:id="@+id/action__photoAll_to_photoCreate"
+            android:id="@+id/action_photoAll_to_photoCreate"
             app:destination="@id/fragment_navigationFooter_photoCreate" />
         <action
             android:id="@+id/action_photoAll_to_photoDetail"
@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_diaryDayAll_to_diaryDayCreate"
             app:destination="@id/fragment_navigationFooter_diaryDayCreate" />
+        <action
+            android:id="@+id/action_diaryDayAll_to_diaryDayDetail"
+            app:destination="@id/diaryDayDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayCreate"
@@ -98,6 +101,11 @@
             android:id="@+id/action_diaryDayCreate_to_diaryDayAll"
             app:destination="@id/fragment_navigationFooter_diaryDayAll" />
     </fragment>
+    <fragment
+        android:id="@+id/diaryDayDetailFragment"
+        android:name="com.ipca.mytravelmemory.views.diary_day_detail.DiaryDayDetailFragment"
+        android:label="fragment_diary_day_detail"
+        tools:layout="@layout/fragment_diary_day_detail" />
 
 
     <fragment

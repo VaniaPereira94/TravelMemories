@@ -69,8 +69,4 @@ class HomeViewModel : ViewModel() {
 
         return resultStatus
     }
-
-    fun signOutFromFirebase() {
-        authRepository.signOut()
-    }
 }

@@ -29,6 +29,7 @@ class TripModel : Serializable {
         this.coverPath = coverPath
     }
 
+    // dados que serão armazenados no documento da base de dados pertencente à viagem
     fun convertToHashMap(): HashMap<String, Any?> {
         return hashMapOf(
             "country" to country,
@@ -40,6 +41,7 @@ class TripModel : Serializable {
     }
 
     companion object {
+        // dados que serão recuperados da base de dados através do ID do documento e os dados dentro deste
         fun convertToTripModel(id: String, hashMap: MutableMap<String, Any>): TripModel {
             return TripModel(
                 id,

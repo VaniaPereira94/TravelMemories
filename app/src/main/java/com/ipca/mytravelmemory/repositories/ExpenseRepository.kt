@@ -6,7 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.HashMap
 
 class ExpenseRepository {
-    var db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     fun create(userID: String, tripID: String, expense: HashMap<String, Any?>): Task<Void> {
         val documentReference = db.collection("users")

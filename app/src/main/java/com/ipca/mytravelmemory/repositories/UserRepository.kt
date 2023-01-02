@@ -7,7 +7,7 @@ import java.util.HashMap
 
 // para lidar com utilizadores na base de dados
 class UserRepository {
-    private var db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     fun create(userID: String, user: HashMap<String, Any?>): Task<Void> {
         val documentReference = db.collection("users")
@@ -21,15 +21,10 @@ class UserRepository {
         return documentReference.get()
     }
 
-    fun update(userID: String, name: String, country: String?): Task<Void> {
+    fun update(userID: String, user: HashMap<String, Any?>): Task<Void> {
         val documentReference = db.collection("users")
             .document(userID)
-        return documentReference.update(
-            mapOf(
-                "name" to name,
-                "country" to country
-            )
-        )
+        return documentReference.update(user)
     }
 
     fun delete(userID: String): Task<Void> {

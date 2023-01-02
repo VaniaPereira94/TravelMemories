@@ -18,6 +18,7 @@ class ExpenseModel : Serializable {
         this.date = date
     }
 
+    // dados que serão armazenados no documento da base de dados pertencente à despesa
     fun convertToHashMap(): HashMap<String, Any?> {
         return hashMapOf(
             "category" to category,
@@ -28,6 +29,7 @@ class ExpenseModel : Serializable {
     }
 
     companion object {
+        // dados que serão recuperados da base de dados através do ID do documento e os dados dentro deste
         fun convertToExpenseModel(hashMap: MutableMap<String, Any>): ExpenseModel {
             return ExpenseModel(
                 hashMap["category"] as String,

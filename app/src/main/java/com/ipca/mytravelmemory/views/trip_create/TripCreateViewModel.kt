@@ -33,24 +33,6 @@ class TripCreateViewModel : ViewModel() {
         return fullPath
     }
 
-    private fun setTrip(
-        id: String,
-        country: String,
-        cities: String,
-        startDate: String,
-        endDate: String,
-        coverPath: String
-    ): TripModel {
-        return TripModel(
-            id,
-            country,
-            cities,
-            ParserUtil.convertStringToDate(startDate, "dd-MM-yyyy"),
-            ParserUtil.convertStringToDate(endDate, "dd-MM-yyyy"),
-            coverPath
-        )
-    }
-
     fun addTripToFirebase(
         country: String,
         cities: String,
@@ -64,7 +46,14 @@ class TripCreateViewModel : ViewModel() {
         // criar viagem
         val tripID = documentReference.id
         fullPath = setFullPath(userID, tripID)
-        val trip = setTrip(tripID, country, cities, startDate, endDate, fullPath)
+        val trip = TripModel(
+            tripID,
+            country,
+            cities,
+            ParserUtil.convertStringToDate(startDate, "dd-MM-yyyy"),
+            ParserUtil.convertStringToDate(endDate, "dd-MM-yyyy"),
+            fullPath
+        )
 
         // adicionar à base de dados
         tripRepository.create(documentReference, trip.convertToHashMap())

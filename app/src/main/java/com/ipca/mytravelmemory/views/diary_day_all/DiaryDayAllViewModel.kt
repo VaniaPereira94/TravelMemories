@@ -24,7 +24,7 @@ class DiaryDayAllViewModel : ViewModel() {
 
                 val diaryDays: MutableList<DiaryDayModel> = mutableListOf()
                 for (document in documents!!) {
-                    val diaryDay = DiaryDayModel.convertToDiaryDayModel(document.data)
+                    val diaryDay = DiaryDayModel.convertToDiaryDayModel(document.id, document.data)
                     diaryDays.add(diaryDay)
                 }
 

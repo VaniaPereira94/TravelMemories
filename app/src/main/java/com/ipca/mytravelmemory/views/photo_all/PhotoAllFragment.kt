@@ -56,7 +56,7 @@ class PhotoAllFragment : Fragment() {
 
         // ao clicar no botão de adicionar foto. ir para o ecrã de abrir a câmara
         binding.buttonPhotoAllAddPhoto.setOnClickListener {
-            findNavController().navigate(R.id.action__photoAll_to_photoCreate)
+            findNavController().navigate(R.id.action_photoAll_to_photoCreate)
         }
     }
 
@@ -83,17 +83,17 @@ class PhotoAllFragment : Fragment() {
             // fazer download da foto e visualizá-la na imageView
             val imageViewPhoto = rootView.findViewById<ImageView>(R.id.imageView_photoAll_photo)
             viewModel.getPhotoURI(photos[position].filePath!!) { response ->
-                    response!!.onSuccess { uri ->
-                        Glide.with(requireContext())
-                            .load(uri)
-                            .into(imageViewPhoto)
-                    }
-                    response!!.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+                response!!.onSuccess { uri ->
+                    Glide.with(requireContext())
+                        .load(uri)
+                        .into(imageViewPhoto)
                 }
+                response!!.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
 
-            // ao clicar numa foto, ir para a tela da individual da foto e enviar os dados dessa foto
+            // ao clicar numa foto, ir para o ecrã individual da foto e enviar os dados dessa foto
             rootView.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putSerializable(PhotoDetailFragment.EXTRA_PHOTO_DETAILS, photos[position])
