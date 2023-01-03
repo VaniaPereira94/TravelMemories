@@ -31,14 +31,14 @@
         android:label="Viagem"
         tools:layout="@layout/fragment_trip_detail">
         <action
-            android:id="@+id/action_tripDetail_to_diaryDayAll"
-            app:destination="@id/fragment_navigationFooter_diaryDayAll" />
+            android:id="@+id/action_tripDetail_to_photoAll"
+            app:destination="@id/fragment_navigationFooter_photoAll" />
         <action
             android:id="@+id/action_tripDetail_to_expenseAll"
             app:destination="@id/fragment_navigationFooter_expenseAll" />
         <action
-            android:id="@+id/action_tripDetail_to_photoAll"
-            app:destination="@id/fragment_navigationFooter_photoAll" />
+            android:id="@+id/action_tripDetail_to_diaryDayAll"
+            app:destination="@id/fragment_navigationFooter_diaryDayAll" />
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_photoAll"
@@ -64,7 +64,7 @@
         tools:layout="@layout/fragment_photo_detail" />
     <fragment
         android:id="@+id/fragment_navigationFooter_expenseCreate"
-        android:name="com.ipca.mytravelmemory.views.expense_create.ExpenseCreateFragment"
+        android:name="com.ipca.mytravelmemory.expense_create.ExpenseCreateFragment"
         android:label="Criar Despesa"
         tools:layout="@layout/fragment_expense_create">
         <action
@@ -79,7 +79,15 @@
         <action
             android:id="@+id/action_expenseAll_to_expenseCreate"
             app:destination="@id/fragment_navigationFooter_expenseCreate" />
+        <action
+            android:id="@+id/action_expenseAll_to_expenseDetail"
+            app:destination="@id/fragment_navigationFooter_expenseDetail" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_navigationFooter_expenseDetail"
+        android:name="com.ipca.mytravelmemory.views.expense_detail.ExpenseDetailFragment"
+        android:label="fragment_expense_detail"
+        tools:layout="@layout/fragment_expense_detail" />
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayAll"
         android:name="com.ipca.mytravelmemory.views.diary_day_all.DiaryDayAllFragment"
@@ -90,7 +98,7 @@
             app:destination="@id/fragment_navigationFooter_diaryDayCreate" />
         <action
             android:id="@+id/action_diaryDayAll_to_diaryDayDetail"
-            app:destination="@id/diaryDayDetailFragment" />
+            app:destination="@id/fragment_navigationFooter_diaryDayDetail" />
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayCreate"
@@ -102,7 +110,7 @@
             app:destination="@id/fragment_navigationFooter_diaryDayAll" />
     </fragment>
     <fragment
-        android:id="@+id/diaryDayDetailFragment"
+        android:id="@+id/fragment_navigationFooter_diaryDayDetail"
         android:name="com.ipca.mytravelmemory.views.diary_day_detail.DiaryDayDetailFragment"
         android:label="fragment_diary_day_detail"
         tools:layout="@layout/fragment_diary_day_detail" />

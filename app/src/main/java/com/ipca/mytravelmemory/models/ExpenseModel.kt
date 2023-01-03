@@ -6,12 +6,14 @@ import java.io.Serializable
 import java.util.*
 
 class ExpenseModel : Serializable {
+    var id: String? = null
     var category: String? = null
     var price: Double? = null
     var description: String? = null
     var date: Date? = null
 
-    constructor(category: String?, price: Double?, description: String?, date: Date?) {
+    constructor(id: String, category: String?, price: Double?, description: String?, date: Date?) {
+        this.id = id
         this.category = category
         this.price = price
         this.description = description
@@ -30,8 +32,9 @@ class ExpenseModel : Serializable {
 
     companion object {
         // dados que serão recuperados da base de dados através do ID do documento e os dados dentro deste
-        fun convertToExpenseModel(hashMap: MutableMap<String, Any>): ExpenseModel {
+        fun convertToExpenseModel(id: String, hashMap: MutableMap<String, Any>): ExpenseModel {
             return ExpenseModel(
+                id,
                 hashMap["category"] as String,
                 hashMap["price"] as Double,
                 hashMap["description"] as String?,

@@ -14,7 +14,7 @@ class ExpenseAllViewModel : ViewModel() {
     private var expenseRepository = ExpenseRepository()
     private var authRepository = AuthRepository()
 
-    fun getExpensesFromFirebase(tripID:String): LiveData<Result<List<ExpenseModel>>> {
+    fun getExpensesFromFirebase(tripID: String): LiveData<Result<List<ExpenseModel>>> {
         val userID = authRepository.getUserID()!!
 
         expenseRepository.selectAll(userID, tripID)
@@ -26,7 +26,7 @@ class ExpenseAllViewModel : ViewModel() {
 
                 val expenses: MutableList<ExpenseModel> = mutableListOf()
                 for (document in documents!!) {
-                    val expense = ExpenseModel.convertToExpenseModel(document.data)
+                    val expense = ExpenseModel.convertToExpenseModel(document.id, document.data)
                     expenses.add(expense)
                 }
 

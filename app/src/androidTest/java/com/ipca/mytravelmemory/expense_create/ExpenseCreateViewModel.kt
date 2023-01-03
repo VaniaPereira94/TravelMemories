@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory.views.expense_create
+package com.ipca.mytravelmemory.expense_create
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,15 +14,6 @@ class ExpenseCreateViewModel : ViewModel() {
     private var expenseRepository = ExpenseRepository()
     private var authRepository = AuthRepository()
 
-    private fun setExpense(category: String, price: Double, description: String, date: String): ExpenseModel {
-        return ExpenseModel(
-            category,
-            price,
-            description,
-            ParserUtil.convertStringToDate(date, "dd-MM-yyyy")
-        )
-    }
-
     fun addExpensesToFirebase(
         tripID: String,
         category: String,
@@ -30,10 +21,22 @@ class ExpenseCreateViewModel : ViewModel() {
         description: String,
         date: String
     ): LiveData<Result<ExpenseModel>> {
+        // criar novo documento no firebase onde será guardada o nova dia do diário
         val userID = authRepository.getUserID()!!
-        val expense = setExpense(category, price, description, date)
+        val documentReference = expenseRepository.setDocumentBeforeCreate(userID, tripID)
 
-       expenseRepository.create(userID, tripID, expense.convertToHashMap())
+        // criar dia do diário
+        val expenseID = documentReference.id
+        val expense = ExpenseModel(
+            expenseID,
+            category,
+            price,
+            description,
+            ParserUtil.convertStringToDate(date, "dd-MM-yyyy")
+        )
+
+        // adicionar à base de dados
+        expenseRepository.create(documentReference, expense.convertToHashMap())
             .addOnSuccessListener {
                 result.value = Result.success(expense)
             }

@@ -1,4 +1,4 @@
-package com.ipca.mytravelmemory.views.expense_create
+package com.ipca.mytravelmemory.expense_create
 
 import android.app.DatePickerDialog
 import android.content.Context

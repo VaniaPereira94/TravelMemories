@@ -2,13 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".expense_create.ExpenseCreateFragment">
+    tools:context=".views.expense_detail.ExpenseDetailFragment">
 
     <Spinner
-        android:id="@+id/spinner_expenseCreate_category"
+        android:id="@+id/spinner_expenseDetail_category"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -17,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText_expenseCreate_price"
+        android:id="@+id/editText_expenseDetail_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -26,10 +25,10 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_expenseCreate_category" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_expenseDetail_category" />
 
     <EditText
-        android:id="@+id/editText_expenseCreate_description"
+        android:id="@+id/editText_expenseDetail_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -39,35 +38,46 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_expenseCreate_price" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_expenseDetail_price" />
 
     <TextView
-        android:id="@+id/textView_expenseCreate_date"
+        android:id="@+id/textView_expenseDetail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:hint="Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_expenseCreate_description" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_expenseDetail_description" />
 
     <Button
-        android:id="@+id/button_expenseCreate_date"
+        android:id="@+id/button_expenseDetail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Selecionar Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_expenseCreate_date" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_expenseDetail_date" />
 
     <Button
-        android:id="@+id/button_expenseCreate_save"
+        android:id="@+id/button_expenseDetail_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Criar despesa"
+        android:layout_marginTop="60dp"
+        android:text="Atualizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_expenseCreate_date" />
+        app:layout_constraintTop_toBottomOf="@+id/button_expenseDetail_date" />
+
+    <Button
+        android:id="@+id/button_expenseDetail_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#F81F1F"
+        android:text="Remover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_expenseDetail_update" />
 </androidx.constraintlayout.widget.ConstraintLayout>
