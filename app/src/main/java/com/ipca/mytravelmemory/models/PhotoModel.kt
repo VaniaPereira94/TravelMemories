@@ -1,6 +1,5 @@
 package com.ipca.mytravelmemory.models
 
-import android.graphics.Bitmap
 import java.io.Serializable
 import java.util.*
 
@@ -24,6 +23,7 @@ class PhotoModel : Serializable {
     }
 
     companion object {
+        // dados que serão recuperados da base de dados através do ID do documento e os dados dentro deste
         fun convertToPhotoModel(id: String, hashMap: MutableMap<String, Any>): PhotoModel {
             return PhotoModel(
                 id,

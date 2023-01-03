@@ -14,12 +14,13 @@ class AuthViewModel : ViewModel() {
             return result
         }
 
+        // autenticar utilizador
         authRepository.signIn(email, password)
             .addOnSuccessListener {
                 result.value = Result.success(true)
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao fazer login."))
+                result.value = Result.failure(Throwable("Erro ao fazer login na aplicação."))
             }
 
         return result

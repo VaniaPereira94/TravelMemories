@@ -9,9 +9,9 @@ class SplashScreenViewModel : ViewModel() {
     private var authRepository = AuthRepository()
 
     fun isLoggedFromFirebase(): (LiveData<Result<Boolean>>) {
-        val userID = authRepository.getUserID()
+        val currentUserID = authRepository.getUserID()
 
-        if (userID != null) {
+        if (currentUserID != null) {
             result.value = Result.success(true)
         } else {
             result.value = Result.failure(Throwable("Não existe utilizador logado."))
