@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".expense_create.ExpenseCreateFragment">
+    tools:context=".views.expense_create.ExpenseCreateFragment">
 
     <Spinner
         android:id="@+id/spinner_expenseCreate_category"

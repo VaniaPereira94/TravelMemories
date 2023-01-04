@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace 'com.ipca.mytravelmemory'
+    namespace 'com.ipca.travelmemories'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.ipca.mytravelmemory"
+        applicationId "com.ipca.travelmemories"
         minSdk 21
         targetSdk 32
         versionCode 1
