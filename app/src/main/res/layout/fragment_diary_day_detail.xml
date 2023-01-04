@@ -2,72 +2,72 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.expense_create.ExpenseCreateFragment">
+    tools:context=".views.diary_day_detail.DiaryDayDetailFragment">
 
-    <Spinner
-        android:id="@+id/spinner_expenseCreate_category"
-        android:layout_width="212dp"
+    <EditText
+        android:id="@+id/editText_diaryDayDetail_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
+        android:ems="16"
+        android:inputType="textPersonName"
+        android:text="Título"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText_expenseCreate_price"
+        android:id="@+id/editText_diaryDayDetail_body"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp"
-        android:ems="10"
-        android:hint="Preço"
-        android:inputType="numberDecimal"
+        android:ems="16"
+        android:inputType="textPersonName"
+        android:text="O que fizeste hoje?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_expenseCreate_category" />
-
-    <EditText
-        android:id="@+id/editText_expenseCreate_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Descrição"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_expenseCreate_price" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_diaryDayDetail_title" />
 
     <TextView
-        android:id="@+id/textView_expenseCreate_date"
+        android:id="@+id/textView_diaryDayDetail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:hint="Data"
+        android:text="Data do dia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_expenseCreate_description" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_diaryDayDetail_body" />
 
     <Button
-        android:id="@+id/button_expenseCreate_date"
+        android:id="@+id/button_diaryDayDetail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Selecionar Data"
+        android:layout_marginTop="20dp"
+        android:text="Selecionar data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_expenseCreate_date" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_diaryDayDetail_date" />
 
     <Button
-        android:id="@+id/button_expenseCreate_save"
+        android:id="@+id/button_diaryDayDetail_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Criar despesa"
+        android:layout_marginTop="60dp"
+        android:text="Atualizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_expenseCreate_date" />
+        app:layout_constraintTop_toBottomOf="@+id/button_diaryDayDetail_date" />
+
+    <Button
+        android:id="@+id/button_diaryDayDetail_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#F81F1F"
+        android:text="Remover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_diaryDayDetail_update" />
 </androidx.constraintlayout.widget.ConstraintLayout>

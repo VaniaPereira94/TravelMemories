@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_navigationFooter_home"
-        android:name="com.ipca.mytravelmemory.views.home.HomeFragment"
+        android:name="com.ipca.travelmemories.views.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_tripCreate"
-        android:name="com.ipca.mytravelmemory.views.trip_create.TripCreateFragment"
+        android:name="com.ipca.travelmemories.views.trip_create.TripCreateFragment"
         android:label="Criar Viagem"
         tools:layout="@layout/fragment_trip_create">
         <action
@@ -27,26 +27,26 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_tripDetail"
-        android:name="com.ipca.mytravelmemory.views.trip_detail.TripDetailFragment"
+        android:name="com.ipca.travelmemories.views.trip_detail.TripDetailFragment"
         android:label="Viagem"
         tools:layout="@layout/fragment_trip_detail">
         <action
-            android:id="@+id/action_tripDetail_to_diaryDayAll"
-            app:destination="@id/fragment_navigationFooter_diaryDayAll" />
+            android:id="@+id/action_tripDetail_to_photoAll"
+            app:destination="@id/fragment_navigationFooter_photoAll" />
         <action
             android:id="@+id/action_tripDetail_to_expenseAll"
             app:destination="@id/fragment_navigationFooter_expenseAll" />
         <action
-            android:id="@+id/action_tripDetail_to_photoAll"
-            app:destination="@id/fragment_navigationFooter_photoAll" />
+            android:id="@+id/action_tripDetail_to_diaryDayAll"
+            app:destination="@id/fragment_navigationFooter_diaryDayAll" />
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_photoAll"
-        android:name="com.ipca.mytravelmemory.views.photo_all.PhotoAllFragment"
+        android:name="com.ipca.travelmemories.views.photo_all.PhotoAllFragment"
         android:label="Fotos"
         tools:layout="@layout/fragment_photo_all" >
         <action
-            android:id="@+id/action__photoAll_to_photoCreate"
+            android:id="@+id/action_photoAll_to_photoCreate"
             app:destination="@id/fragment_navigationFooter_photoCreate" />
         <action
             android:id="@+id/action_photoAll_to_photoDetail"
@@ -54,17 +54,17 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_photoCreate"
-        android:name="com.ipca.mytravelmemory.views.photo_create.PhotoCreateFragment"
+        android:name="com.ipca.travelmemories.views.photo_create.PhotoCreateFragment"
         android:label="Criar Foto"
         tools:layout="@layout/fragment_photo_create" />
     <fragment
         android:id="@+id/fragment_navigationFooter_photoDetail"
-        android:name="com.ipca.mytravelmemory.views.photo_detail.PhotoDetailFragment"
+        android:name="com.ipca.travelmemories.views.photo_detail.PhotoDetailFragment"
         android:label="Foto"
         tools:layout="@layout/fragment_photo_detail" />
     <fragment
         android:id="@+id/fragment_navigationFooter_expenseCreate"
-        android:name="com.ipca.mytravelmemory.views.expense_create.ExpenseCreateFragment"
+        android:name="com.ipca.travelmemories.views.expense_create.ExpenseCreateFragment"
         android:label="Criar Despesa"
         tools:layout="@layout/fragment_expense_create">
         <action
@@ -73,43 +73,59 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_expenseAll"
-        android:name="com.ipca.mytravelmemory.views.expense_all.ExpenseAllFragment"
+        android:name="com.ipca.travelmemories.views.expense_all.ExpenseAllFragment"
         android:label="Despesas"
         tools:layout="@layout/fragment_expense_all">
         <action
             android:id="@+id/action_expenseAll_to_expenseCreate"
             app:destination="@id/fragment_navigationFooter_expenseCreate" />
+        <action
+            android:id="@+id/action_expenseAll_to_expenseDetail"
+            app:destination="@id/fragment_navigationFooter_expenseDetail" />
     </fragment>
     <fragment
+        android:id="@+id/fragment_navigationFooter_expenseDetail"
+        android:name="com.ipca.travelmemories.views.expense_detail.ExpenseDetailFragment"
+        android:label="fragment_expense_detail"
+        tools:layout="@layout/fragment_expense_detail" />
+    <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayAll"
-        android:name="com.ipca.mytravelmemory.views.diary_day_all.DiaryDayAllFragment"
+        android:name="com.ipca.travelmemories.views.diary_day_all.DiaryDayAllFragment"
         android:label="Diário"
         tools:layout="@layout/fragment_diary_day_all">
         <action
             android:id="@+id/action_diaryDayAll_to_diaryDayCreate"
             app:destination="@id/fragment_navigationFooter_diaryDayCreate" />
+        <action
+            android:id="@+id/action_diaryDayAll_to_diaryDayDetail"
+            app:destination="@id/fragment_navigationFooter_diaryDayDetail" />
     </fragment>
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayCreate"
-        android:name="com.ipca.mytravelmemory.views.diary_day_create.DiaryDayCreateFragment"
+        android:name="com.ipca.travelmemories.views.diary_day_create.DiaryDayCreateFragment"
         android:label="Criar Dia do Diário"
         tools:layout="@layout/fragment_diary_day_create">
         <action
             android:id="@+id/action_diaryDayCreate_to_diaryDayAll"
             app:destination="@id/fragment_navigationFooter_diaryDayAll" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_navigationFooter_diaryDayDetail"
+        android:name="com.ipca.travelmemories.views.diary_day_detail.DiaryDayDetailFragment"
+        android:label="fragment_diary_day_detail"
+        tools:layout="@layout/fragment_diary_day_detail" />
 
 
     <fragment
         android:id="@+id/fragment_navigationFooter_profile"
-        android:name="com.ipca.mytravelmemory.views.profile.ProfileFragment"
+        android:name="com.ipca.travelmemories.views.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
 
     <fragment
         android:id="@+id/fragment_navigationFooter_notifications"
-        android:name="com.ipca.mytravelmemory.views.notifications.NotificationsFragment"
+        android:name="com.ipca.travelmemories.views.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
