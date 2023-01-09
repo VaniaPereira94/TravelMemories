@@ -7,12 +7,14 @@ import com.ipca.travelmemories.repositories.AuthRepository
 import com.ipca.travelmemories.repositories.TripRepository
 
 class TripDetailViewModel : ViewModel() {
-    private var result = MutableLiveData<Result<Boolean>>()
-
     private var tripRepository = TripRepository()
     private var authRepository = AuthRepository()
 
-    fun removeTripFromFirebase(tripID: String, coverPath: String): LiveData<Result<Boolean>> {
+    fun removeTripFromFirebase(
+        tripID: String,
+        coverPath: String,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         val userID = authRepository.getUserID()!!
 
         tripRepository.delete(userID, tripID)
@@ -23,7 +25,7 @@ class TripDetailViewModel : ViewModel() {
 
                 coverReference.delete()
                     .addOnFailureListener {
-                        result.value = Result.failure(Throwable("Erro ao apagar viagem."))
+                        callback.invoke(Result.failure(Throwable("Erro ao apagar viagem.")))
                     }
 
                 // remover ficheiros das fotos associadas à viagem
@@ -34,16 +36,14 @@ class TripDetailViewModel : ViewModel() {
                         task.items.forEach { item ->
                             item.delete()
                         }
-                        result.value = Result.success(true)
+                        callback.invoke(Result.success(true))
                     }
                     .addOnFailureListener {
-                        result.value = Result.failure(Throwable("Erro ao apagar viagem."))
+                        callback.invoke(Result.failure(Throwable("Erro ao apagar viagem.")))
                     }
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao apagar viagem."))
+                callback.invoke(Result.failure(Throwable("Erro ao apagar viagem.")))
             }
-
-        return result
     }
 }

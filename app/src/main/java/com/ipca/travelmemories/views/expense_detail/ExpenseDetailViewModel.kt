@@ -1,7 +1,5 @@
 package com.ipca.travelmemories.views.expense_detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ipca.travelmemories.models.ExpenseModel
 import com.ipca.travelmemories.repositories.AuthRepository
@@ -9,8 +7,6 @@ import com.ipca.travelmemories.repositories.ExpenseRepository
 import com.ipca.travelmemories.utils.ParserUtil
 
 class ExpenseDetailViewModel : ViewModel() {
-    private var result: MutableLiveData<Result<Boolean>> = MutableLiveData()
-
     private var expenseRepository = ExpenseRepository()
     private var authRepository = AuthRepository()
 
@@ -20,8 +16,9 @@ class ExpenseDetailViewModel : ViewModel() {
         category: String,
         price: Double,
         description: String,
-        date: String
-    ): LiveData<Result<Boolean>> {
+        date: String,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         val userID = authRepository.getUserID()!!
         val expense = ExpenseModel(
             expenseID,
@@ -33,29 +30,26 @@ class ExpenseDetailViewModel : ViewModel() {
 
         expenseRepository.update(userID, tripID, expenseID, expense.convertToHashMap())
             .addOnSuccessListener {
-                result.value = Result.success(true)
+                callback(Result.success(true))
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+                callback(Result.failure(Throwable("Erro ao atualizar dados da despesa.")))
             }
-
-        return result
     }
 
     fun removeExpenseFromFirebase(
         tripID: String,
-        expenseID: String
-    ): LiveData<Result<Boolean>> {
+        expenseID: String,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         val userID = authRepository.getUserID()!!
 
         expenseRepository.delete(userID, tripID, expenseID)
             .addOnSuccessListener {
-                result.value = Result.success(true)
+                callback(Result.success(true))
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao apagar dia do diário."))
+                callback(Result.failure(Throwable("Erro ao apagar despesa.")))
             }
-
-        return result
     }
 }

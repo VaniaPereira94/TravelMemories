@@ -28,7 +28,7 @@ class SplashScreenActivity : AppCompatActivity() {
             // após concluir 3 segundos
             launch {
                 // verificar se existe utilizador logado ao iniciar aplicação
-                viewModel.isLoggedFromFirebase().observe(this@SplashScreenActivity) { response ->
+                viewModel.isLoggedFromFirebase { response ->
                     // ir para a página principal
                     response.onSuccess {
                         // ir para a página inicial

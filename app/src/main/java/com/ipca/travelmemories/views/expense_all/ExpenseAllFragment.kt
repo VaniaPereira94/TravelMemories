@@ -25,7 +25,6 @@ class ExpenseAllFragment : Fragment() {
     private var expenses = arrayListOf<ExpenseModel>()
     private val adapter = ExpenseAdapter()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

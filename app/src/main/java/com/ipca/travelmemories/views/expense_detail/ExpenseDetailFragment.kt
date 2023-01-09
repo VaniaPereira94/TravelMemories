@@ -104,32 +104,30 @@ class ExpenseDetailFragment : Fragment() {
                 price,
                 description,
                 date
-            )
-                .observe(viewLifecycleOwner) { response ->
-                    // voltar à página da lista de fotos
-                    response.onSuccess {
-                        findNavController().popBackStack()
-                    }
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+            ) { response ->
+                // voltar à página da lista de fotos
+                response.onSuccess {
+                    findNavController().popBackStack()
                 }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // ao clicar no botão de apagar dia do diário
         binding.buttonExpenseDetailRemove.setOnClickListener {
             val tripID = getSharedTripID()
 
-            viewModel.removeExpenseFromFirebase(tripID!!, expense.id!!)
-                .observe(viewLifecycleOwner) { response ->
-                    // voltar à página da lista de despesas
-                    response.onSuccess {
-                        findNavController().popBackStack()
-                    }
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+            viewModel.removeExpenseFromFirebase(tripID!!, expense.id!!) { response ->
+                // voltar à página da lista de despesas
+                response.onSuccess {
+                    findNavController().popBackStack()
                 }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

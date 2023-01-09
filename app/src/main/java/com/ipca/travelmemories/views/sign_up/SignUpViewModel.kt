@@ -6,8 +6,6 @@ import com.ipca.travelmemories.repositories.AuthRepository
 import com.ipca.travelmemories.repositories.UserRepository
 
 class SignUpViewModel : ViewModel() {
-    private val result = MutableLiveData<Result<Boolean>>()
-
     private var userRepository = UserRepository()
     private var authRepository = AuthRepository()
 
@@ -18,11 +16,12 @@ class SignUpViewModel : ViewModel() {
     fun registerUserToFirebase(
         name: String,
         password: String,
-        email: String
-    ): (LiveData<Result<Boolean>>) {
+        email: String,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         if (name == "" || email == "" || password == "") {
-            result.value = Result.failure(Throwable("Campos vazios."))
-            return result
+            callback.invoke(Result.failure(Throwable("Campos vazios.")))
+            return
         }
 
         // adicionar utilizador na autenticação do firebase
@@ -33,16 +32,14 @@ class SignUpViewModel : ViewModel() {
                 // adicionar utilizador na base de dados
                 userRepository.create(authRepository.getUserID()!!, user.convertToHashMap())
                     .addOnSuccessListener {
-                        result.value = Result.success(true)
+                        callback.invoke(Result.success(true))
                     }
                     .addOnFailureListener {
-                        result.value = Result.failure(Throwable("Erro ao registar utilizador."))
+                        callback.invoke(Result.failure(Throwable("Erro ao registar utilizador.")))
                     }
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao registar utilizador."))
+                callback.invoke(Result.failure(Throwable("Erro ao registar utilizador.")))
             }
-
-        return result
     }
 }

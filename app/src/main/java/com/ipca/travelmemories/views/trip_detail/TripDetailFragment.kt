@@ -59,16 +59,15 @@ class TripDetailFragment : Fragment() {
         // ao clicar no botão de apagar viagem
         binding.buttonTripDetailRemove.setOnClickListener {
             trip.coverPath?.let { coverPath ->
-                viewModel.removeTripFromFirebase(trip.id!!, coverPath)
-                    .observe(viewLifecycleOwner) { response ->
-                        // ir para a página principal
-                        response.onSuccess {
-                            findNavController().navigate(R.id.fragment_navigationFooter_home)
-                        }
-                        response.onFailure {
-                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                        }
+                viewModel.removeTripFromFirebase(trip.id!!, coverPath) { response ->
+                    // ir para a página principal
+                    response.onSuccess {
+                        findNavController().navigate(R.id.fragment_navigationFooter_home)
                     }
+                    response.onFailure {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

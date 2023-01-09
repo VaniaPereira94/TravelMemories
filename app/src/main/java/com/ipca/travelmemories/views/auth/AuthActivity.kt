@@ -28,7 +28,7 @@ class AuthActivity : AppCompatActivity() {
             val password = binding.editTextAuthPassword.text.toString()
 
             // iniciar sessão do utilizador
-            viewModel.loginUserFromFirebase(email, password).observe(this) { response ->
+            viewModel.loginUserFromFirebase(email, password) { response ->
                 // ir para a página inicial
                 response.onSuccess {
                     val intent = Intent(this@AuthActivity, MainActivity::class.java)

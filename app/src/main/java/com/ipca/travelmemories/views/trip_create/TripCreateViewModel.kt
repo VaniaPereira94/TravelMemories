@@ -15,8 +15,6 @@ import java.io.IOException
 import java.util.*
 
 class TripCreateViewModel : ViewModel() {
-    private var result = MutableLiveData<Result<TripModel>>()
-
     private var tripRepository = TripRepository()
     private var authRepository = AuthRepository()
 
@@ -36,8 +34,9 @@ class TripCreateViewModel : ViewModel() {
         country: String,
         cities: String,
         startDate: String,
-        endDate: String
-    ): LiveData<Result<TripModel>> {
+        endDate: String,
+        callback: (Result<TripModel>) -> Unit
+    ) {
         // criar novo documento no firebase onde será guardada a nova viagem
         val userID = authRepository.getUserID()!!
         val documentReference = tripRepository.setDocumentBeforeCreate(userID)
@@ -57,16 +56,14 @@ class TripCreateViewModel : ViewModel() {
         // adicionar à base de dados
         tripRepository.create(documentReference, trip.convertToHashMap())
             .addOnSuccessListener {
-                result.value = Result.success(trip)
+                callback.invoke(Result.success(trip))
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao adicionar viagem."))
+                callback.invoke(Result.failure(Throwable("Erro ao adicionar viagem.")))
             }
-
-        return result
     }
 
-    fun uploadFile(callback: (String?) -> Unit) {
+    fun uploadFileToFirebase(callback: (String?) -> Unit) {
         val storage = Firebase.storage
         val storageRef = storage.reference
         val file = Uri.fromFile(File(pathInDevice))

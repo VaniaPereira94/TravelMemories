@@ -76,32 +76,36 @@ class DiaryDayDetailFragment : Fragment() {
             val body = binding.editTextDiaryDayDetailBody.text.toString()
             val date = binding.textViewDiaryDayDetailDate.text.toString()
 
-            viewModel.editDiaryDayFromFirebase(tripID!!, diaryDay.id!!, title, body, date)
-                .observe(viewLifecycleOwner) { response ->
-                    // voltar à página da lista de fotos
-                    response.onSuccess {
-                        findNavController().popBackStack()
-                    }
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+            viewModel.editDiaryDayFromFirebase(
+                tripID!!,
+                diaryDay.id!!,
+                title,
+                body,
+                date
+            ) { response ->
+                // voltar à página da lista de fotos
+                response.onSuccess {
+                    findNavController().popBackStack()
                 }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // ao clicar no botão de apagar dia do diário
         binding.buttonDiaryDayDetailRemove.setOnClickListener {
             val tripID = getSharedTripID()
 
-            viewModel.removeDiaryDayFromFirebase(tripID!!, diaryDay.id!!)
-                .observe(viewLifecycleOwner) { response ->
-                    // voltar à página da lista de fotos
-                    response.onSuccess {
-                        findNavController().popBackStack()
-                    }
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+            viewModel.removeDiaryDayFromFirebase(tripID!!, diaryDay.id!!) { response ->
+                // voltar à página da lista de fotos
+                response.onSuccess {
+                    findNavController().popBackStack()
                 }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

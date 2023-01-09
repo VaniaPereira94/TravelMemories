@@ -1,14 +1,12 @@
 package com.ipca.travelmemories.views.diary_day_create
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
 import com.ipca.travelmemories.models.DiaryDayModel
 import com.ipca.travelmemories.repositories.AuthRepository
 import com.ipca.travelmemories.repositories.DiaryDayRepository
 import com.ipca.travelmemories.utils.ParserUtil
 
 class DiaryDayCreateViewModel : ViewModel() {
-    private var result: MutableLiveData<Result<Boolean>> = MutableLiveData()
-
     private var diaryDayRepository = DiaryDayRepository()
     private var authRepository = AuthRepository()
 
@@ -16,8 +14,9 @@ class DiaryDayCreateViewModel : ViewModel() {
         tripID: String,
         title: String?,
         body: String,
-        date: String
-    ): LiveData<Result<Boolean>> {
+        date: String,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         // criar novo documento no firebase onde será guardada o nova dia do diário
         val userID = authRepository.getUserID()!!
         val documentReference = diaryDayRepository.setDocumentBeforeCreate(userID, tripID)
@@ -34,12 +33,10 @@ class DiaryDayCreateViewModel : ViewModel() {
         // adicionar à base de dados
         diaryDayRepository.create(documentReference, diaryDay.convertToHashMap())
             .addOnSuccessListener {
-                result.value = Result.success(true)
+                callback(Result.success(true))
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao adicionar dia ao diário."))
+                callback(Result.failure(Throwable("Erro ao adicionar dia ao diário.")))
             }
-
-        return result
     }
 }
