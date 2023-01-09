@@ -41,10 +41,10 @@ class PhotoAllViewModel : ViewModel() {
 
         photoReference.downloadUrl
             .addOnSuccessListener { uri ->
-                callback(Result.success(uri.toString()))
+                callback.invoke(Result.success(uri.toString()))
             }
             .addOnFailureListener {
-                callback(Result.failure(Throwable("Erro ao visualizar foto.")))
+                callback.invoke(Result.failure(Throwable("Erro ao visualizar foto.")))
             }
     }
 }

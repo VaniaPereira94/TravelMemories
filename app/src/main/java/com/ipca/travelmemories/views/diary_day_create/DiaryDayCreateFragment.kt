@@ -60,22 +60,21 @@ class DiaryDayCreateFragment : Fragment() {
             val date = binding.textViewDiaryDayCreateDate.text.toString()
 
             // adicionar viagem na base de dados
-            viewModel.addDiaryDayToFirebase(tripID!!, title, body, date)
-                .observe(viewLifecycleOwner) { response ->
-                    // ir para a tela do diário e enviar os dados do dia criado
-                    response.onSuccess {
-                        val bundle = Bundle()
-                        bundle.putSerializable(DiaryDayAllFragment.EXTRA_DIARY_DAY_CREATED, it)
-                        findNavController().navigate(
-                            R.id.action_diaryDayCreate_to_diaryDayAll,
-                            bundle
-                        )
-                    }
-                    // mostrar erro
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+            viewModel.addDiaryDayToFirebase(tripID!!, title, body, date) { response ->
+                // ir para a tela do diário e enviar os dados do dia criado
+                response.onSuccess {
+                    val bundle = Bundle()
+                    bundle.putSerializable(DiaryDayAllFragment.EXTRA_DIARY_DAY_CREATED, it)
+                    findNavController().navigate(
+                        R.id.action_diaryDayCreate_to_diaryDayAll,
+                        bundle
+                    )
                 }
+                // mostrar erro
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

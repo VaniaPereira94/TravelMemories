@@ -86,7 +86,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_expenseDetail"
         android:name="com.ipca.travelmemories.views.expense_detail.ExpenseDetailFragment"
-        android:label="fragment_expense_detail"
+        android:label="Despesa"
         tools:layout="@layout/fragment_expense_detail" />
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayAll"
@@ -112,7 +112,7 @@
     <fragment
         android:id="@+id/fragment_navigationFooter_diaryDayDetail"
         android:name="com.ipca.travelmemories.views.diary_day_detail.DiaryDayDetailFragment"
-        android:label="fragment_diary_day_detail"
+        android:label="Dia do Diário"
         tools:layout="@layout/fragment_diary_day_detail" />
 
 
@@ -121,11 +121,4 @@
         android:name="com.ipca.travelmemories.views.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
-
-
-    <fragment
-        android:id="@+id/fragment_navigationFooter_notifications"
-        android:name="com.ipca.travelmemories.views.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
 </navigation>

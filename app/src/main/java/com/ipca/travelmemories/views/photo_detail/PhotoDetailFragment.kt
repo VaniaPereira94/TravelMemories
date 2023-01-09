@@ -63,16 +63,15 @@ class PhotoDetailFragment : Fragment() {
             val tripID = getSharedTripID()
 
             photo.filePath?.let { filePath ->
-                viewModel.removePhotoFromFirebase(tripID!!, photo.id!!, filePath)
-                    .observe(viewLifecycleOwner) { response ->
-                        // voltar à página da lista de fotos
-                        response.onSuccess {
-                            findNavController().popBackStack()
-                        }
-                        response.onFailure {
-                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                        }
+                viewModel.removePhotoFromFirebase(tripID!!, photo.id!!, filePath) { response ->
+                    // voltar à página da lista de fotos
+                    response.onSuccess {
+                        findNavController().popBackStack()
                     }
+                    response.onFailure {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

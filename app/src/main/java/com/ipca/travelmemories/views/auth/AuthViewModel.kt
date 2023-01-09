@@ -1,28 +1,28 @@
 package com.ipca.travelmemories.views.auth
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
 import com.ipca.travelmemories.repositories.AuthRepository
 
 class AuthViewModel : ViewModel() {
-    private val result = MutableLiveData<Result<Boolean>>()
-
     private var authRepository = AuthRepository()
 
-    fun loginUserFromFirebase(email: String, password: String): (LiveData<Result<Boolean>>) {
+    fun loginUserFromFirebase(
+        email: String,
+        password: String,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         if (email == "" || password == "") {
-            result.value = Result.failure(Throwable("Campos vazios."))
-            return result
+            callback(Result.failure(Throwable("Campos vazios.")))
+            return
         }
 
         // autenticar utilizador
         authRepository.signIn(email, password)
             .addOnSuccessListener {
-                result.value = Result.success(true)
+                callback(Result.success(true))
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao fazer login na aplicação."))
+                callback(Result.failure(Throwable("Erro ao fazer login na aplicação.")))
             }
-
-        return result
     }
 }

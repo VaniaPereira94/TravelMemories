@@ -90,33 +90,32 @@ class TripCreateFragment : Fragment() {
             val endDate = binding.textViewTripCreateEndDate.text.toString()
 
             // adicionar viagem na base de dados
-            viewModel.addTripToFirebase(country, cities, startDate, endDate)
-                .observe(viewLifecycleOwner) { response ->
-                    response.onSuccess {
-                        // guardar foto no storage
-                        viewModel.uploadFile { pathInDevice ->
-                            pathInDevice?.let {
-                                // ir para a tela das viagens e enviar os dados da viagem criada
-                                response.onSuccess {
-                                    val bundle = Bundle()
-                                    bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
-                                    findNavController().navigate(
-                                        R.id.action_tripCreate_to_home,
-                                        bundle
-                                    )
-                                }
-                            }
-                            // mostrar erro
-                            response.onFailure {
-                                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            viewModel.addTripToFirebase(country, cities, startDate, endDate) { response ->
+                response.onSuccess {
+                    // guardar foto no storage
+                    viewModel.uploadFileToFirebase { pathInDevice ->
+                        pathInDevice?.let {
+                            // ir para a tela das viagens e enviar os dados da viagem criada
+                            response.onSuccess {
+                                val bundle = Bundle()
+                                bundle.putSerializable(HomeFragment.EXTRA_TRIP_CREATED, it)
+                                findNavController().navigate(
+                                    R.id.action_tripCreate_to_home,
+                                    bundle
+                                )
                             }
                         }
-                    }
-                    // mostrar erro
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        // mostrar erro
+                        response.onFailure {
+                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+                // mostrar erro
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

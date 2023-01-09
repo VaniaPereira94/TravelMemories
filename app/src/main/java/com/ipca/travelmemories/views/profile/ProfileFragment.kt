@@ -52,23 +52,7 @@ class ProfileFragment : Fragment() {
             val name = binding.editTextProfileName.text.toString()
             val country = binding.editTextProfileCountry.text.toString()
 
-            viewModel.editUserDataFromFirebase(name, country)
-                .observe(viewLifecycleOwner) { response ->
-                    // ir para o ecrã principal
-                    response.onSuccess {
-                        findNavController().navigate(R.id.fragment_navigationFooter_home)
-                    }
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-        }
-
-        // ao clicar em atualizar email
-        binding.buttonProfileUpdateEmail.setOnClickListener {
-            val email = binding.editTextProfileEmail.text.toString()
-
-            viewModel.editUserEmailFromFirebase(email).observe(viewLifecycleOwner) { response ->
+            viewModel.editUserDataFromFirebase(name, country) { response ->
                 // ir para o ecrã principal
                 response.onSuccess {
                     findNavController().navigate(R.id.fragment_navigationFooter_home)
@@ -79,20 +63,34 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        // ao clicar em atualizar senha
-        binding.buttonProfileUpdatePassword.setOnClickListener {
-            val newPassword = binding.editTextProfileEmail.text.toString()
+        // ao clicar em atualizar email
+        binding.buttonProfileUpdateEmail.setOnClickListener {
+            val email = binding.editTextProfileEmail.text.toString()
 
-            viewModel.editUserPasswordFromFirebase(newPassword)
-                .observe(viewLifecycleOwner) { response ->
-                    // ir para o ecrã principal
-                    response.onSuccess {
-                        findNavController().navigate(R.id.fragment_navigationFooter_home)
-                    }
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+            viewModel.editUserEmailFromFirebase(email) { response ->
+                // ir para o ecrã principal
+                response.onSuccess {
+                    findNavController().navigate(R.id.fragment_navigationFooter_home)
                 }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // ao clicar em atualizar palavra-passe
+        binding.buttonProfileUpdatePassword.setOnClickListener {
+            val newPassword = binding.editTextProfilePassword.text.toString()
+
+            viewModel.editUserPasswordFromFirebase(newPassword) { response ->
+                // ir para o ecrã principal
+                response.onSuccess {
+                    findNavController().navigate(R.id.fragment_navigationFooter_home)
+                }
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // ao clicar no botão de terminar sessão, terminar sessão do utilizador e ir para a tela de login/registo
@@ -106,7 +104,7 @@ class ProfileFragment : Fragment() {
 
         // ao clicar em apagar conta do utilizador
         binding.buttonProfileRemove.setOnClickListener {
-            viewModel.removeUserFromFirebase().observe(viewLifecycleOwner) { response ->
+            viewModel.removeUserFromFirebase { response ->
                 // ir para o ecrã de login e registo
                 response.onSuccess {
                     val intent = Intent(requireContext(), AuthActivity::class.java)

@@ -15,8 +15,6 @@ import java.io.IOException
 import java.util.*
 
 class PhotoCreateViewModel : ViewModel() {
-    private var result: MutableLiveData<Result<Boolean>> = MutableLiveData()
-
     private var photoRepository = PhotoRepository()
     private var authRepository = AuthRepository()
 
@@ -38,8 +36,9 @@ class PhotoCreateViewModel : ViewModel() {
 
     fun addPhotoToDatabase(
         tripID: String,
-        description: String
-    ): LiveData<Result<Boolean>> {
+        description: String,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         // criar novo documento no firebase onde será guardada a nova foto
         val userID = authRepository.getUserID()!!
         val documentReference = photoRepository.setDocumentBeforeCreate(userID, tripID)
@@ -51,16 +50,14 @@ class PhotoCreateViewModel : ViewModel() {
         // adicionar à base de dados
         photoRepository.create(documentReference, photo.convertToHashMap())
             .addOnSuccessListener {
-                result.value = Result.success(true)
+                callback.invoke(Result.success(true))
             }
             .addOnFailureListener {
-                result.value = Result.failure(Throwable("Erro ao adicionar foto."))
+                callback.invoke(Result.failure(Throwable("Erro ao adicionar foto.")))
             }
-
-        return result
     }
 
-    fun uploadFile(callback: (String?) -> Unit) {
+    fun uploadFileToFirebase(callback: (String?) -> Unit) {
         val storage = Firebase.storage
         val storageRef = storage.reference
         val file = Uri.fromFile(File(pathInDevice))

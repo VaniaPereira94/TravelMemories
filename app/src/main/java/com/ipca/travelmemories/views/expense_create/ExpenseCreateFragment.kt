@@ -76,22 +76,27 @@ class ExpenseCreateFragment : Fragment() {
             val date = binding.textViewExpenseCreateDate.text.toString()
 
             // adicionar despesa na base de dados
-            viewModel.addExpensesToFirebase(tripID!!, category, price, description, date)
-                .observe(viewLifecycleOwner) { response ->
-                    // ir para a tela das despesas e enviar os dados da despesa criada
-                    response.onSuccess {
-                        val bundle = Bundle()
-                        bundle.putSerializable(ExpenseAllFragment.EXTRA_EXPENSE_CREATED, it)
-                        findNavController().navigate(
-                            R.id.action_expenseCreate_to_expenseAll,
-                            bundle
-                        )
-                    }
-                    // mostrar erro
-                    response.onFailure {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    }
+            viewModel.addExpensesToFirebase(
+                tripID!!,
+                category,
+                price,
+                description,
+                date
+            ) { response ->
+                // ir para a tela das despesas e enviar os dados da despesa criada
+                response.onSuccess {
+                    val bundle = Bundle()
+                    bundle.putSerializable(ExpenseAllFragment.EXTRA_EXPENSE_CREATED, it)
+                    findNavController().navigate(
+                        R.id.action_expenseCreate_to_expenseAll,
+                        bundle
+                    )
                 }
+                // mostrar erro
+                response.onFailure {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

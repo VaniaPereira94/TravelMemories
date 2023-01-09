@@ -26,7 +26,7 @@ class SignUpActivity : AppCompatActivity() {
             val password = binding.editTextSignUpPassword.text.toString()
 
             // criar conta com os dados inseridos pelo utilizador
-            viewModel.registerUserToFirebase(name, password, email).observe(this) { response ->
+            viewModel.registerUserToFirebase(name, password, email) { response ->
                 // ir para a página principal
                 response.onSuccess {
                     val intent = Intent(this@SignUpActivity, MainActivity::class.java)

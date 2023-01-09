@@ -6,8 +6,7 @@ import com.ipca.travelmemories.repositories.AuthRepository
 import com.ipca.travelmemories.repositories.UserRepository
 
 class ProfileViewModel : ViewModel() {
-    private var resultUser: MutableLiveData<Result<UserModel>> = MutableLiveData()
-    private var resultStatus: MutableLiveData<Result<Boolean>> = MutableLiveData()
+    private var userLiveData: MutableLiveData<Result<UserModel>> = MutableLiveData()
 
     private var userRepository = UserRepository()
     private var authRepository = AuthRepository()
@@ -23,89 +22,89 @@ class ProfileViewModel : ViewModel() {
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         val user = UserModel.convertToUserModel(userID, email!!, document.data!!)
-                        resultUser.value = Result.success(user)
+                        userLiveData.value = Result.success(user)
                     } else {
-                        resultUser.value =
+                        userLiveData.value =
                             Result.failure(Throwable("Erro ao obter o utilizador autenticado."))
                     }
                 }
                 .addOnFailureListener {
-                    resultUser.value =
+                    userLiveData.value =
                         Result.failure(Throwable("Erro ao obter o utilizador autenticado."))
                 }
         }
 
-        return resultUser
+        return userLiveData
     }
 
-    fun editUserDataFromFirebase(name: String, country: String?): LiveData<Result<Boolean>> {
-        val userID = authRepository.getUserID()!!
-
+    fun editUserDataFromFirebase(
+        name: String,
+        country: String?,
+        callback: (Result<Boolean>) -> Unit
+    ) {
         if (name == "") {
-            resultStatus.value =
-                Result.failure(Throwable("O nome é obrigatório."))
+            callback.invoke(Result.failure(Throwable("O nome de utilizador é obrigatório.")))
+            return
         }
 
+        val userID = authRepository.getUserID()!!
         val user = UserModel(name, country)
 
         userRepository.update(userID, user.convertToHashMap())
             .addOnSuccessListener {
-                resultStatus.value = Result.success(true)
+                callback.invoke(Result.success(true))
             }
             .addOnFailureListener {
-                resultStatus.value =
-                    Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+                callback.invoke(Result.failure(Throwable("Erro ao atualizar dados do utilizador.")))
             }
-
-        return resultStatus
     }
 
-    fun editUserEmailFromFirebase(email: String): LiveData<Result<Boolean>> {
+    fun editUserEmailFromFirebase(email: String, callback: (Result<Boolean>) -> Unit) {
+        if (email == "") {
+            callback.invoke(Result.failure(Throwable("O email é obrigatório.")))
+            return
+        }
+
         authRepository.updateEmail(email)
             .addOnSuccessListener {
-                resultStatus.value = Result.success(true)
+                callback.invoke(Result.success(true))
             }
             .addOnFailureListener {
-                resultStatus.value =
-                    Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+                callback.invoke(Result.failure(Throwable("Erro ao atualizar email do utilizador.")))
             }
-
-        return resultStatus
     }
 
-    fun editUserPasswordFromFirebase(newPassword: String): LiveData<Result<Boolean>> {
+    fun editUserPasswordFromFirebase(newPassword: String, callback: (Result<Boolean>) -> Unit) {
+        if (newPassword.length < 6) {
+            callback.invoke(Result.failure(Throwable("A palavra-passe deve ter no mínimo 6 caracteres.")))
+            return
+        }
+
         authRepository.updatePassword(newPassword)
             .addOnSuccessListener {
-                resultStatus.value = Result.success(true)
+                callback.invoke(Result.success(true))
             }
             .addOnFailureListener {
-                resultStatus.value =
-                    Result.failure(Throwable("Erro ao atualizar dados do utilizador."))
+                callback.invoke(Result.failure(Throwable("Erro ao atualizar a palavra-passe do utilizador.")))
             }
-
-        return resultStatus
     }
 
-    fun removeUserFromFirebase(): LiveData<Result<Boolean>> {
+    fun removeUserFromFirebase(callback: (Result<Boolean>) -> Unit) {
         val userID = authRepository.getUserID()!!
 
         authRepository.delete()
             .addOnSuccessListener {
                 userRepository.delete(userID)
                     .addOnSuccessListener {
-                        resultStatus.value = Result.success(true)
+                        callback.invoke(Result.success(true))
                     }
                     .addOnFailureListener {
-                        resultStatus.value =
-                            Result.failure(Throwable("Erro ao apagar conta do utilizador."))
+                        callback.invoke(Result.failure(Throwable("Erro ao apagar conta do utilizador.")))
                     }
             }
             .addOnFailureListener {
-                resultStatus.value =
-                    Result.failure(Throwable("Erro ao apagar conta do utilizador."))
+                callback.invoke(Result.failure(Throwable("Erro ao apagar conta do utilizador.")))
             }
-
-        return resultStatus
     }
 
     fun signOutFromFirebase() {
