@@ -6,5 +6,12 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="black_2">#FF333333</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="green_water">#4CD4AD</color>
+    <color name="blue_sky">#40B8E2</color>
+    <color name="green_success">#21FA90</color>
+    <color name="purple_error">#e096c4</color>
+    <color name="yellow_warning">#ebe77c</color>
 </resources>

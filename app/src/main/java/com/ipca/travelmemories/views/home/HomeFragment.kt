@@ -2,9 +2,7 @@ package com.ipca.travelmemories.views.home
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
@@ -26,6 +24,11 @@ class HomeFragment : Fragment() {
 
     private var trips = arrayListOf<TripModel>()
     private val adapter = TripsAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -104,6 +107,23 @@ class HomeFragment : Fragment() {
             return rootView
         }
     }
+
+    /*
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_top, menu);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                requireActivity().onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    */
 
     override fun onDestroyView() {
         super.onDestroyView()
