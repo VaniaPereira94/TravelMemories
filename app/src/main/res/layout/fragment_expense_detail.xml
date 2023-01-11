@@ -6,23 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".views.expense_detail.ExpenseDetailFragment">
 
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/satisfy"
+        android:text="Despesa"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/spinner_expenseDetail_category"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
         android:id="@+id/editText_expenseDetail_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Preço"
         android:inputType="numberDecimal"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_expenseDetail_category" />
@@ -31,11 +46,11 @@
         android:id="@+id/editText_expenseDetail_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
-        android:gravity="start|top"
         android:hint="Descrição"
         android:inputType="textMultiLine"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_expenseDetail_price" />
@@ -44,7 +59,7 @@
         android:id="@+id/textView_expenseDetail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:hint="Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +69,7 @@
         android:id="@+id/button_expenseDetail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/button_background"
         android:foregroundTint="#1B1B1B"
         android:text="Selecionar Data"
@@ -68,7 +83,7 @@
         android:id="@+id/button_expenseDetail_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/button_background"
         android:foregroundTint="#1B1B1B"
         android:text="Atualizar"
@@ -82,7 +97,7 @@
         android:id="@+id/button_expenseDetail_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="64dp"
         android:backgroundTint="#F81F1F"
         android:foregroundTint="#1B1B1B"
         android:text="Remover"

@@ -24,7 +24,6 @@ import java.io.File
 import java.io.IOException
 import java.util.*
 
-
 class TripCreateFragment : Fragment() {
     private var _binding: FragmentTripCreateBinding? = null
     private val binding get() = _binding!!

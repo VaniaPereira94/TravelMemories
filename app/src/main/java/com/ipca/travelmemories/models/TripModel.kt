@@ -40,6 +40,15 @@ class TripModel : Serializable {
         )
     }
 
+    fun convertToHashMapWithoutCover(): HashMap<String, Any?> {
+        return hashMapOf(
+            "country" to country,
+            "cities" to cities,
+            "startDate" to Timestamp(startDate!!),
+            "endDate" to Timestamp(endDate!!)
+        )
+    }
+
     companion object {
         // dados que serão recuperados da base de dados através do ID do documento e os dados dentro deste
         fun convertToTripModel(id: String, hashMap: MutableMap<String, Any>): TripModel {

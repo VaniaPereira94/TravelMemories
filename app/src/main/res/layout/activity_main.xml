@@ -4,17 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/fundo1"
+    android:orientation="vertical"
     android:textSize="16dp"
-
-    >
-
+    tools:context=".MainActivity">
 
     <include
         layout="@layout/toolbar_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
     <fragment
         android:id="@+id/fragment_activity_main"
@@ -26,7 +30,6 @@
         app:navGraph="@navigation/navigation_footer" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-
         android:id="@+id/bottomNavigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,5 +40,4 @@
         app:itemHorizontalTranslationEnabled="false"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_footer" />
-
 </LinearLayout>

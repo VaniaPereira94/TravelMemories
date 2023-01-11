@@ -25,11 +25,6 @@ class HomeFragment : Fragment() {
     private var trips = arrayListOf<TripModel>()
     private val adapter = TripsAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -108,23 +103,6 @@ class HomeFragment : Fragment() {
             return rootView
         }
     }
-
-    /*
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_top, menu);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                requireActivity().onBackPressed()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-    */
 
     override fun onDestroyView() {
         super.onDestroyView()

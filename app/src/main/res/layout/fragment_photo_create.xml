@@ -10,7 +10,7 @@
         android:id="@+id/imageView_photoCreate_photo"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="120dp"
         android:src="@drawable/ic_add_photo_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +20,11 @@
         android:id="@+id/editText_photoCreate_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:ems="10"
+        android:hint="Descrição da Foto"
         android:inputType="textPersonName"
-        android:layout_marginTop="140dp"
-        android:text="Name"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_photoCreate_photo" />
@@ -37,8 +38,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_photoCreate_description"
-        app:strokeColor="@color/button_background"
+        app:strokeColor="@color/button_border"
         app:strokeWidth="2dp"
-        android:backgroundTint="@color/button_border"
+        android:backgroundTint="@color/button_background"
         android:foregroundTint="#1B1B1B"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
