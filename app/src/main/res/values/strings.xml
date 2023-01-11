@@ -16,4 +16,6 @@
         <item>Presentes</item>
         <item>Outro</item>
     </string-array>
+    <dimen name="button_width">180dp</dimen>
+    <dimen name="button_height">45dp</dimen>
 </resources>

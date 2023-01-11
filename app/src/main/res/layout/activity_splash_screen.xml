@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/satisfy"
         android:text="Travel Memories"
-        android:textColor="@color/textcol"
+        android:textColor="@color/button_border"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView_splashScreen_logo"
         app:layout_constraintEnd_toEndOf="parent"

@@ -45,28 +45,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/button_background"
+        android:foregroundTint="#1B1B1B"
         android:text="Selecionar data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_diaryDayDetail_date"
-        app:strokeColor="@color/textcol"
-        app:strokeWidth="2dp"
-        android:backgroundTint="@color/teste"
-        android:foregroundTint="#1B1B1B"/>
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/button_diaryDayDetail_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:backgroundTint="@color/button_background"
+        android:foregroundTint="#1B1B1B"
         android:text="Atualizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_diaryDayDetail_date"
-        app:strokeColor="@color/textcol"
-        app:strokeWidth="2dp"
-        android:backgroundTint="@color/teste"
-        android:foregroundTint="#1B1B1B"/>
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/button_diaryDayDetail_remove"
@@ -74,11 +74,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="#F81F1F"
+        android:foregroundTint="#1B1B1B"
         android:text="Remover"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_diaryDayDetail_update"
-        app:strokeColor="@color/textcol"
-        app:strokeWidth="2dp"
-        android:foregroundTint="#1B1B1B"/>
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

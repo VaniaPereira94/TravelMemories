@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/satisfy"
         android:text="Travel Memories"
-        android:textColor="@color/textcol"
+        android:textColor="@color/button_border"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/editText_auth_email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,12 +73,12 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/teste"
+        android:backgroundTint="@color/button_background"
         android:text="Iniciar sessão"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_auth_password"
-        app:strokeColor="@color/textcol"
+        app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 
     <Button
@@ -86,11 +86,11 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:backgroundTint="@color/teste"
+        android:backgroundTint="@color/button_background"
         android:text="Criar conta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_auth_signIn"
-        app:strokeColor="@color/textcol"
+        app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

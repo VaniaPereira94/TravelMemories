@@ -29,61 +29,61 @@
 
     <Button
         android:id="@+id/button_tripDetail_photos"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:backgroundTint="@color/button_background"
+        android:foregroundTint="#1B1B1B"
         android:text="Fotografias"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_cities"
-        app:strokeColor="@color/textcol"
-        app:strokeWidth="2dp"
-        android:backgroundTint="@color/teste"
-        android:foregroundTint="#1B1B1B"/>
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/button_tripDetail_expenses"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:backgroundTint="@color/button_background"
+        android:foregroundTint="#1B1B1B"
         android:text="Despesas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_photos"
-        app:strokeColor="@color/textcol"
-        app:strokeWidth="2dp"
-        android:backgroundTint="@color/teste"
-        android:foregroundTint="#1B1B1B"/>
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/button_tripDetail_diary"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
-        android:text="Diário"
         android:layout_marginTop="44dp"
+        android:backgroundTint="@color/button_background"
+        android:foregroundTint="#1B1B1B"
+        android:text="Diário"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_expenses"
-        app:strokeColor="@color/textcol"
-        app:strokeWidth="2dp"
-        android:backgroundTint="@color/teste"
-        android:foregroundTint="#1B1B1B"/>
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/button_tripDetail_remove"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:layout_marginBottom="96dp"
-        android:backgroundTint="#F81F1F"
+        android:backgroundTint="@color/alert"
+        android:foregroundTint="#1B1B1B"
         android:text="Apagar Viagem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_diary"
-        app:strokeColor="@color/textcol"
-        app:strokeWidth="2dp"
-        android:foregroundTint="#1B1B1B"/>
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"

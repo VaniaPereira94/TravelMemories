@@ -10,23 +10,21 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:subtitleTextColor="#1C0404"
-    app:titleTextColor="@color/textcol">
+    app:titleTextColor="@color/button_border">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="center"
         android:fontFamily="@font/satisfy"
         android:includeFontPadding="false"
         android:paddingTop="5dp"
-        android:paddingRight="20dp"
-        android:shadowColor="@color/textcol"
+        android:shadowColor="@color/button_border"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="3"
         android:text="Travel Memories"
-        android:textColor="@color/textcol"
+        android:textColor="@color/button_border"
         android:textSize="26sp" />
-
 </androidx.appcompat.widget.Toolbar>
