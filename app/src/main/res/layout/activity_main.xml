@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/fundo1"
+    android:textSize="16dp"
+
+    >
+
 
     <include
         layout="@layout/toolbar_top"
@@ -20,9 +26,16 @@
         app:navGraph="@navigation/navigation_footer" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+
         android:id="@+id/bottomNavigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:layout_weight="0"
+        android:background="#00FFFFFF"
+        android:visibility="visible"
+        app:elevation="0dp"
+        app:itemHorizontalTranslationEnabled="false"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_footer" />
+
 </LinearLayout>

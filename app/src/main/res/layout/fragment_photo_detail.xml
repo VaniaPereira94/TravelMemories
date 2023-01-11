@@ -36,6 +36,9 @@
         android:text="Remover"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/textcol"
+        app:strokeWidth="2dp"
+        android:foregroundTint="#1B1B1B"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

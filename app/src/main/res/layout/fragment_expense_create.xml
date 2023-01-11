@@ -59,7 +59,11 @@
         android:text="Selecionar Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_expenseCreate_date" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_expenseCreate_date"
+        app:strokeColor="@color/textcol"
+        app:strokeWidth="2dp"
+        android:backgroundTint="@color/teste"
+        android:foregroundTint="#1B1B1B"/>
 
     <Button
         android:id="@+id/button_expenseCreate_save"
@@ -69,5 +73,9 @@
         android:text="Criar despesa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_expenseCreate_date" />
+        app:layout_constraintTop_toBottomOf="@+id/button_expenseCreate_date"
+        app:strokeColor="@color/textcol"
+        app:strokeWidth="2dp"
+        android:backgroundTint="@color/teste"
+        android:foregroundTint="#1B1B1B"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

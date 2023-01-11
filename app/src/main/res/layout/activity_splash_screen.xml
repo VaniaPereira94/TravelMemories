@@ -6,14 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".views.splash_screen.SplashScreenActivity">
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/satisfy"
+        android:text="Travel Memories"
+        android:textColor="@color/textcol"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_splashScreen_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
     <ImageView
         android:id="@+id/imageView_splashScreen_logo"
         android:layout_width="151dp"
         android:layout_height="152dp"
-        android:background="@color/teal_200"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/logo_icon_black_500" />
 </androidx.constraintlayout.widget.ConstraintLayout>

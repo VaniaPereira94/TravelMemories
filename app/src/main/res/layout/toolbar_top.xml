@@ -4,16 +4,29 @@
     android:id="@+id/topToolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="#FF444444"
+    android:background="#00FFFFFF"
     app:layout_collapseMode="pin"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    app:subtitleTextColor="#1C0404"
+    app:titleTextColor="@color/textcol">
 
-    <ImageView
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="7dp"
-        android:src="@drawable/logo_text_white_168" />
+        android:layout_gravity="right"
+        android:fontFamily="@font/satisfy"
+        android:includeFontPadding="false"
+        android:paddingTop="5dp"
+        android:paddingRight="20dp"
+        android:shadowColor="@color/textcol"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:text="Travel Memories"
+        android:textColor="@color/textcol"
+        android:textSize="26sp" />
+
 </androidx.appcompat.widget.Toolbar>

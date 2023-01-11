@@ -36,5 +36,9 @@
         android:text="Guardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_photoCreate_description" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_photoCreate_description"
+        app:strokeColor="@color/textcol"
+        app:strokeWidth="2dp"
+        android:backgroundTint="@color/teste"
+        android:foregroundTint="#1B1B1B"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

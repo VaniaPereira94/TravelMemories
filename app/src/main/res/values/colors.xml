@@ -9,8 +9,18 @@
     <color name="black_2">#FF333333</color>
     <color name="white">#FFFFFFFF</color>
 
+
+
+
+    <color name="textcol">#3b4948</color>
+    ec8c6f
+    <color name="teste">#ec8c6f</color>
+
+
+
+
     <color name="green_water">#4CD4AD</color>
-    <color name="blue_sky">#40B8E2</color>
+    <color name="blue_sky">#70dad3</color>
     <color name="green_success">#21FA90</color>
     <color name="purple_error">#e096c4</color>
     <color name="yellow_warning">#ebe77c</color>

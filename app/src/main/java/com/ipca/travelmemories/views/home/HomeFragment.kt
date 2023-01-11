@@ -78,6 +78,7 @@ class HomeFragment : Fragment() {
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             val rootView = layoutInflater.inflate(R.layout.row_trip, parent, false)
 
+
             val textViewCountry = rootView.findViewById<TextView>(R.id.textView_home_country)
             textViewCountry.text = trips[position].country
 
