@@ -53,7 +53,7 @@ class DiaryDayAllFragment : Fragment() {
         binding.listViewDiaryDayAllDiaryDays.adapter = adapter
 
         // ao clicar no botão de adicionar dia ao diário
-        binding.buttonDiaryDayAllAddDiaryDay.setOnClickListener {
+        binding.buttonDiatyDayAllAddDays.setOnClickListener {
             // ir para a tela de adicionar dia ao diário e enviar o ID da viagem
             findNavController().navigate(R.id.action_diaryDayAll_to_diaryDayCreate)
         }

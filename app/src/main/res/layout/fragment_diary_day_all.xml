@@ -19,27 +19,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_diaryDayAll_addDiaryDay"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_diatyDayAll_addDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/button_background"
-        android:foregroundTint="#1B1B1B"
-        android:text="Adicionar dia ao diário"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/button_border"
-        app:strokeWidth="2dp" />
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
     <ListView
         android:id="@+id/listView_diaryDayAll_diaryDays"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_diaryDayAll_addDiaryDay"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_diatyDayAll_addDays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />

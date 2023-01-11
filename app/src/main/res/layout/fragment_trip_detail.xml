@@ -16,35 +16,40 @@
 
         <ImageView
             android:id="@+id/imageView_tripDetail_cover"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_tripDetail_cities" />
 
         <EditText
             android:id="@+id/editText_tripDetail_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:ems="10"
-            android:enabled="false"
+            android:backgroundTint="#00FFFFFF"
+            android:ems="8"
+            android:fontFamily="@font/satisfy"
             android:inputType="textPersonName"
             android:text="País"
+            android:textAlignment="center"
+            android:textSize="35dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_tripDetail_cover" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editText_tripDetail_cities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:enabled="false"
+            android:backgroundTint="#00FFFFFF"
+            android:ems="15"
+            android:fontFamily="@font/satisfy"
             android:inputType="textPersonName"
             android:text="Cidades"
+            android:textAlignment="center"
+            android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_tripDetail_country" />
@@ -53,23 +58,25 @@
             android:id="@+id/textView_tripDetail_startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
             android:hint="Data Inicial"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/button_tripDetail_startDate"
             app:layout_constraintTop_toBottomOf="@+id/editText_tripDetail_cities" />
 
         <Button
             android:id="@+id/button_tripDetail_startDate"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:backgroundTint="@color/button_background"
-            android:foregroundTint="#1B1B1B"
-            android:text="Selecionar Data"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_startDate"
+            app:icon="@drawable/ic_baseline_calendar_month_24"
+            app:iconPadding="0dp"
+            app:iconTintMode="src_in"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_tripDetail_cover"
+            app:layout_constraintTop_toBottomOf="@+id/editText_tripDetail_cities"
             app:strokeColor="@color/button_border"
             app:strokeWidth="2dp" />
 
@@ -78,22 +85,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:hint="Data Inicial"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_startDate" />
+            android:layout_marginEnd="16dp"
+            android:hint="Data Final"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/button_tripDetail_endDate"
+            app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_startDate" />
 
         <Button
             android:id="@+id/button_tripDetail_endDate"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:backgroundTint="@color/button_background"
-            android:foregroundTint="#1B1B1B"
-            android:text="Selecionar Data"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_tripDetail_endDate"
+            android:clickable="true"
+            android:foregroundTint="#001B1B1B"
+            android:gravity="left"
+            android:letterSpacing="0"
+            android:lineSpacingExtra="0dp"
+            android:scrollbarSize="0dp"
+            android:textSize="1dp"
+            app:icon="@drawable/ic_baseline_calendar_month_24"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_tripDetail_cover"
+            app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_startDate"
             app:strokeColor="@color/button_border"
             app:strokeWidth="2dp" />
 
@@ -141,14 +156,14 @@
 
         <Button
             android:id="@+id/button_tripDetail_edit"
-            android:layout_width="@dimen/button_width"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginBottom="106dp"
             android:backgroundTint="@color/button_background"
             android:foregroundTint="#1B1B1B"
-            android:text="Editar Viagem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:icon="@drawable/ic_baseline_edit_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_diary"
             app:strokeColor="@color/button_border"
@@ -156,18 +171,45 @@
 
         <Button
             android:id="@+id/button_tripDetail_remove"
-            android:layout_width="@dimen/button_width"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="96dp"
+            android:layout_marginEnd="120dp"
             android:backgroundTint="@color/alert"
             android:foregroundTint="#1B1B1B"
-            android:text="Apagar Viagem"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:icon="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="@+id/button_tripDetail_edit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_edit"
+            app:layout_constraintTop_toBottomOf="@+id/button_tripDetail_diary"
             app:strokeColor="@color/button_border"
             app:strokeWidth="2dp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="12dp"
+            android:text="Inicio"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_tripDetail_startDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_tripDetail_cities" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="12dp"
+            android:text="Final"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_tripDetail_endDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
