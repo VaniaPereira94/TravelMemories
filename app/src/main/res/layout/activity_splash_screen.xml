@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".views.splash_screen.SplashScreenActivity">
 
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_splashScreen_titlePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/satisfy"
@@ -25,7 +24,6 @@
         android:id="@+id/imageView_splashScreen_logo"
         android:layout_width="151dp"
         android:layout_height="152dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -11,7 +11,7 @@
         android:id="@+id/editText_tripCreate_country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:ems="8"
         android:hint="Nome do País"
         android:inputType="textPersonName"
@@ -50,23 +50,24 @@
         android:id="@+id/textView_tripCreate_startDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="32dp"
         android:hint="Data de ínicio"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_tripCreate_cities" />
 
+
     <Button
         android:id="@+id/button_tripCreate_startDate"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="120dp"
         android:backgroundTint="@color/button_background"
         android:foregroundTint="#1B1B1B"
-        android:text="Selecionar data"
+        app:icon="@drawable/ic_baseline_calendar_month_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_tripCreate_startDate"
+        app:layout_constraintTop_toBottomOf="@+id/editText_tripCreate_cities"
         app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 
@@ -74,23 +75,23 @@
         android:id="@+id/textView_tripCreate_endDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="60dp"
         android:hint="Data de fim"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_tripCreate_startDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_tripCreate_startDate" />
 
     <Button
         android:id="@+id/button_tripCreate_endDate"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="120dp"
         android:backgroundTint="@color/button_background"
         android:foregroundTint="#1B1B1B"
-        android:text="Selecionar data"
+        app:icon="@drawable/ic_baseline_calendar_month_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_tripCreate_endDate"
+        app:layout_constraintTop_toBottomOf="@+id/button_tripCreate_startDate"
         app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 
@@ -98,7 +99,7 @@
         android:id="@+id/imageView_tripCreate_cover"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:clickable="true"
         android:filterTouchesWhenObscured="true"
         android:focusable="true"
@@ -118,7 +119,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_tripCreate_cover"
-        app:layout_constraintVertical_bias="0.31"
+        app:layout_constraintVertical_bias="0.25"
         app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

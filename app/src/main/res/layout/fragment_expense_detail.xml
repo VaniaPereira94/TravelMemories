@@ -7,7 +7,7 @@
     tools:context=".views.expense_detail.ExpenseDetailFragment">
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textView_expenseDetail_titlePage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,7 +27,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_expenseDetail_titlePage" />
 
     <EditText
         android:id="@+id/editText_expenseDetail_price"
@@ -59,51 +59,52 @@
         android:id="@+id/textView_expenseDetail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="32dp"
         android:hint="Data"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_expenseDetail_description" />
 
     <Button
         android:id="@+id/button_expenseDetail_date"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="120dp"
         android:backgroundTint="@color/button_background"
         android:foregroundTint="#1B1B1B"
-        android:text="Selecionar Data"
+        app:icon="@drawable/ic_baseline_calendar_month_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_expenseDetail_date"
+        app:layout_constraintTop_toBottomOf="@+id/editText_expenseDetail_description"
         app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/button_expenseDetail_update"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginBottom="200dp"
         android:backgroundTint="@color/button_background"
         android:foregroundTint="#1B1B1B"
-        android:text="Atualizar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_expenseDetail_date"
         app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 
+
     <Button
         android:id="@+id/button_expenseDetail_remove"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="#F81F1F"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="200dp"
+        android:backgroundTint="@color/alert"
         android:foregroundTint="#1B1B1B"
-        android:text="Remover"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_expenseDetail_update"
         app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

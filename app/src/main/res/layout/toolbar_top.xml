@@ -13,7 +13,7 @@
     app:titleTextColor="@color/button_border">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_toolbarTop_titlePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

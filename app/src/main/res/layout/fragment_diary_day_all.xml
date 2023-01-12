@@ -7,7 +7,7 @@
     tools:context=".views.diary_day_all.DiaryDayAllFragment">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView6_diatyDayAll_titlePage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -39,5 +39,5 @@
         app:layout_constraintBottom_toTopOf="@+id/button_diatyDayAll_addDays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6_diatyDayAll_titlePage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

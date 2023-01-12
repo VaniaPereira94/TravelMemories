@@ -8,7 +8,7 @@
     tools:context=".views.sign_up.SignUpActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_signUp_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scaleType="centerCrop"
@@ -19,17 +19,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/textView_signUp_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo_circle" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView_signUp_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -37,26 +37,23 @@
         android:text="Registo"
         android:textColor="@color/button_border"
         android:textSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_splashScreen_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_signUp_logo" />
 
     <EditText
         android:id="@+id/editText_signUp_name"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="Username"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText_signUp_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_signUp_title" />
 
     <EditText
         android:id="@+id/editText_signUp_email"
@@ -96,5 +93,4 @@
         app:layout_constraintTop_toBottomOf="@+id/editText_signUp_password"
         app:strokeColor="@color/button_border"
         app:strokeWidth="2dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     tools:context=".views.diary_day_create.DiaryDayCreateFragment">
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/textView_diaryDayCreate_titlePage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,17 +27,21 @@
         android:ems="10"
         android:hint="Título"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_diaryDayCreate_titlePage" />
 
     <EditText
         android:id="@+id/editText_diaryDayCreate_body"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="288dp"
         android:layout_height="0dp"
         android:layout_marginTop="44dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/border_style"
+        android:padding="5dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Descrição"
@@ -56,7 +60,6 @@
         app:layout_constraintBottom_toTopOf="@+id/button_diaryDayCreate_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <Button
         android:id="@+id/button_diaryDayCreate_date"

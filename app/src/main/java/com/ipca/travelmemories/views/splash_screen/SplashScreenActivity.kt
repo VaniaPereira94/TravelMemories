@@ -23,7 +23,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         lifecycleScope.launch {
-            delay(3000)
+            delay(4000)
 
             // após concluir 3 segundos
             launch {

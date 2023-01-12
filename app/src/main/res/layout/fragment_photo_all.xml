@@ -7,7 +7,7 @@
     tools:context=".views.photo_all.PhotoAllFragment">
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView_photoAll_titlePage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -42,6 +42,5 @@
         app:layout_constraintBottom_toTopOf="@+id/button_photoAll_addPhoto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView_photoAll_titlePage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

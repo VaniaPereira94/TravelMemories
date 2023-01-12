@@ -7,7 +7,7 @@
     tools:context=".views.diary_day_detail.DiaryDayDetailFragment">
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textView_diaryDayDetail_titlePage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -31,7 +31,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_diaryDayDetail_titlePage" />
 
     <EditText
         android:id="@+id/editText_diaryDayDetail_body"
@@ -40,20 +40,15 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="34dp"
         android:autoText="false"
-        android:backgroundTint="#00000000"
-        android:backgroundTintMode="multiply"
+        android:background="@drawable/border_style"
         android:elegantTextHeight="false"
         android:ems="16"
         android:fontFamily="sans-serif"
-        android:gravity="top"
         android:inputType="textPersonName"
-        android:padding="1dp"
-        android:shadowColor="#D8000000"
+        android:padding="5dp"
         android:text="O que fizeste hoje?"
-        android:textAlignment="textStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:gravity="start|top"
         android:textSize="16sp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button_diaryDayDetail_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
