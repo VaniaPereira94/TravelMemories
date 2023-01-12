@@ -27,15 +27,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
         android:id="@+id/button_photoDetail_remove"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:backgroundTint="#F81F1F"
-        android:text="Remover"
+        android:backgroundTint="@color/alert"
+        android:foregroundTint="#1B1B1B"
+        app:icon="@drawable/ic_baseline_delete_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/button_photoDetail_remove"
+        app:strokeColor="@color/button_border"
+        app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

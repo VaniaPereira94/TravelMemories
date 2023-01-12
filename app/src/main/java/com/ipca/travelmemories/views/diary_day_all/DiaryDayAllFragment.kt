@@ -15,6 +15,7 @@ import com.ipca.travelmemories.R
 import com.ipca.travelmemories.databinding.FragmentDiaryDayAllBinding
 import com.ipca.travelmemories.models.DiaryDayModel
 import com.ipca.travelmemories.views.diary_day_detail.DiaryDayDetailFragment
+import com.ipca.travelmemories.utils.ParserUtil
 
 class DiaryDayAllFragment : Fragment() {
     private var _binding: FragmentDiaryDayAllBinding? = null
@@ -52,7 +53,7 @@ class DiaryDayAllFragment : Fragment() {
         binding.listViewDiaryDayAllDiaryDays.adapter = adapter
 
         // ao clicar no botão de adicionar dia ao diário
-        binding.buttonDiaryDayAllAddDiaryDay.setOnClickListener {
+        binding.buttonDiatyDayAllAddDays.setOnClickListener {
             // ir para a tela de adicionar dia ao diário e enviar o ID da viagem
             findNavController().navigate(R.id.action_diaryDayAll_to_diaryDayCreate)
         }
@@ -74,8 +75,12 @@ class DiaryDayAllFragment : Fragment() {
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             val rootView = layoutInflater.inflate(R.layout.row_diary, parent, false)
 
-            val textViewName = rootView.findViewById<TextView>(R.id.textView_diaryAll_title)
-            textViewName.text = diaryDays[position].body
+            val textViewTitle = rootView.findViewById<TextView>(R.id.textView_diaryAll_title)
+            textViewTitle.text = diaryDays[position].title
+
+            val textViewDate = rootView.findViewById<TextView>(R.id.textView_diaryAll_Date)
+            textViewDate.text = ParserUtil.convertDateToString(diaryDays[position].date!!, "dd-MM-yyyy")
+
 
             // ao clicar num dia do diário, ir para o ecrã individual do dia e enviar os dados desse dia
             rootView.setOnClickListener {

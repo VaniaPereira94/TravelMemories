@@ -1,11 +1,12 @@
 package com.ipca.travelmemories
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ipca.travelmemories.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,8 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // definir itens do menu
         val navController = findNavController(R.id.fragment_activity_main)
+
+        // definir itens do menu inferior
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.fragment_navigationFooter_home,
@@ -26,8 +28,12 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        // definir mudança do separador atual, ao clicar neles
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.bottomNavigationView.setupWithNavController(navController)
+        // definir menu superior
+        findViewById<Toolbar>(R.id.topToolbar)
+            .setupWithNavController(navController, appBarConfiguration)
+
+        // definir menu inferior
+        val navView: BottomNavigationView = binding.bottomNavigationView
+        navView.setupWithNavController(navController)
     }
 }

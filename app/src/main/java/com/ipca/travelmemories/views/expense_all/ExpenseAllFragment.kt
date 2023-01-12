@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.ipca.travelmemories.R
 import com.ipca.travelmemories.databinding.FragmentExpenseAllBinding
 import com.ipca.travelmemories.models.ExpenseModel
+import com.ipca.travelmemories.utils.ParserUtil
 import com.ipca.travelmemories.views.expense_detail.ExpenseDetailFragment
 
 class ExpenseAllFragment : Fragment() {
@@ -74,8 +75,15 @@ class ExpenseAllFragment : Fragment() {
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             val rootView = layoutInflater.inflate(R.layout.row_expense, parent, false)
 
-            val textViewName = rootView.findViewById<TextView>(R.id.textView_expenseAll_price)
-            textViewName.text = expenses[position].category
+            val textViewCat = rootView.findViewById<TextView>(R.id.textView_expenseAll_cat)
+            textViewCat.text = expenses[position].category
+
+            val textViewPrice = rootView.findViewById<TextView>(R.id.textView_expenseAll_price)
+            textViewPrice.text = expenses[position].price.toString()
+
+            val textViewDate = rootView.findViewById<TextView>(R.id.textView_expenseAll_Data)
+            textViewDate.text = ParserUtil.convertDateToString(expenses[position].date!!, "dd-MM-yyyy")
+
 
             // ao clicar num dia do diário, ir para o ecrã individual do dia e enviar os dados desse dia
             rootView.setOnClickListener {

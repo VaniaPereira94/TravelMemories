@@ -28,6 +28,14 @@ class TripRepository {
         return collectionReference
     }
 
+    fun updateData(userID: String, tripID: String, trip: HashMap<String, Any?>): Task<Void> {
+        val documentReference = db.collection("users")
+            .document(userID)
+            .collection("trips")
+            .document(tripID)
+        return documentReference.update(trip)
+    }
+
     fun delete(userID: String, tripID: String): Task<Void> {
         val documentReference = db.collection("users")
             .document(userID)
