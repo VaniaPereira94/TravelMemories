@@ -1,2 +1,2 @@
 # Travel Memories
-Aplicação de gestão de viagens.
+Aplicação de registo e gestão de viagens.
